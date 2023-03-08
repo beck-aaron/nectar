@@ -1,6 +1,4 @@
-# Nectar Driver
-
-## Developer's Guide
+# Nectar Driver - Developer's Guide
 
 #### Note:
 
