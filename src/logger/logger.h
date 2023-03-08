@@ -45,6 +45,12 @@
 #define WARNING_LEVEL       (uint8_t)1
 #define ERROR_LEVEL         (uint8_t)2
 
+#define DEBUG_COLOR         "\x1b[34m"      // blue debug color
+#define WARNING_COLOR       "\x1b[33m"      // yellow warning color
+#define ERROR_COLOR         "\x1b[31m"      // red error color
+#define HEX_COLOR           "\x1b[35m"      // purple hexdump color
+#define COLOR_RESET         "\x1b[0m"       // reset default color
+
 #define START_MESSAGE "\r\n\
 ************** NECTAR LOGGER **************\r\n\
 *       version:      0.0.1               *\r\n\
@@ -65,12 +71,15 @@ void endl(void);
 #define LOG(LEVEL, ...) \
     log_header(LEVEL); \
     printf(__VA_ARGS__); \
+    printf(COLOR_RESET); \
     endl();
 
 #define LOGHEX(LEVEL, LABEL, BUFFER, LENGTH) \
     log_header(LEVEL); \
     printf(LABEL); \
+    printf(COLOR_RESET HEX_COLOR); \
     log_hexdump(BUFFER, LENGTH); \
+    printf(COLOR_RESET); \
     endl();
 
 #endif // _LOGGER_H_

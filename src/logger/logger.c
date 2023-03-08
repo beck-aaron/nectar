@@ -36,13 +36,13 @@ void log_level(uint8_t loglevel)
     switch(loglevel)
     {
         case DEBUG_LEVEL: default:
-            printf(" [DEBUG] ");
+            printf( DEBUG_COLOR " [DEBUG] ");
             break;
         case WARNING_LEVEL:
-            printf(" [WARNING] ");
+            printf( WARNING_COLOR " [WARNING] ");
             break;
         case ERROR_LEVEL:
-            printf(" [ERROR] ");
+            printf( ERROR_COLOR " [ERROR] ");
             break;
     }
 }
