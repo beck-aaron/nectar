@@ -29,7 +29,7 @@ void coz_ir_init(void)
     // put a null terminating character at the end of our string.
     response[33] = '\0';
     usart_serial_init(COZ_IR_UART, &usart_options);
-    LOG(DEBUG_LEVEL, "initialized telaire-t6615 interface");
+    LOG(DEBUG_LEVEL, "initialized COZ-IR interface");
 }
 
 void coz_ir_read(void)
