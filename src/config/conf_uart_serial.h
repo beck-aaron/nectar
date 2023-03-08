@@ -72,8 +72,8 @@
 #define TELAIRE_UART_STOP_BITS      US_MR_NBSTOP_1_BIT      // Stop bits setting
 
 /* CozIR-A CO2 sensor interface */
-#define COZ_IR_UART                 USART0                  // serial interface
-#define COZ_IR_UART_ID              ID_USART0               // peripheral ID
+#define COZ_IR_UART                 (Usart*)UART3           // serial interface
+#define COZ_IR_UART_ID              ID_UART3                // peripheral ID
 #define COZ_IR_UART_BAUDRATE        (9600UL)                // baudrate
 #define COZ_IR_UART_CHAR_LENGTH     US_MR_CHRL_8_BIT        // character length
 #define COZ_IR_UART_PARITY          US_MR_PAR_NO            // Parity setting
