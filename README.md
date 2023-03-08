@@ -46,13 +46,14 @@ Install by extracting to the directory of your choice.  This install directory i
 
 ### Clone Repository
 
-    $ git clone 
+    $ git clone https://github.com/beck-aaron/nectar.git
 
 ___
 
 ### Build Instructions
-    cd to eval-board
-    connect micro-usb from SAME70 Xplained to computer before uploading firmware.
+    1. cd to root directory of repo
+    2. Connect micro-usb from SAME70 Xplained to computer before uploading firmware.
+    3. Edit makefile GCCLIB variable to the directory where you installed the arm-gcc toolchain.
 
     $ make -j                       // builds ELF file for programming MCU
     $ make upload                   // builds ELF file and uses openocd to program SAME70 flash
