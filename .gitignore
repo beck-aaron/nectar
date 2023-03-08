@@ -1,0 +1,10 @@
+# build files
+.cache/
+build/
+compile_commands.json
+
+# ctags
+tags
+
+# macos files
+.DS_Store
