@@ -10,7 +10,8 @@
 #define _ENCODER_H_
 
 #include <asf.h>
-#include "../util/types.h"
+#include "frames.h"
+#include "../wireless/xbee.h"
 
 #define BITMASK \
     NECTAR_TIMESTAMP | NECTAR_CO2_PPM
@@ -50,22 +51,26 @@ typedef struct
     uint8_t     payload[83];    // array with as many subpayloads as possible
 } payload_t;
 
+void encoder_test(void);
+
 /**
  * @brief 
  */
-void encoder_init(void);
+void encoder_reset(void);
 
 /**
- * @brief Takes a buffer and xbee frame data to format an api payload
- *
- * @return 
+ * @brief Encodes an API frame into the shared encoding buffer
  */
-void encode_frame(uint8_t* buffer);
+void encode_frame(void);
+
+/**
+ * @brief Takes a structure of organized zigbee data to form
+ * an encoded buffer of data
+ */
+void encode_packet(zigbee_packet_t* packet);
 
 /**
  * @brief Formats a nectar payload
- *
- * @return 
  */
 void encode_payload(payload_t payload, uint8_t* buffer);
 
@@ -74,6 +79,27 @@ void encode_payload(payload_t payload, uint8_t* buffer);
  *
  * @return 
  */
-void encode_subpayload(subpayload_t subpayload, byte_vector_t* buffer);
+//void encode_subpayload(subpayload_t subpayload, byte_vector_t* buffer);
+
+/**
+ * @brief Calculate and verify the checksum of an API frame
+ *
+ * Calculate Checksum:
+ * 1. Add all bytes of the packet, except the start delimiter 0x7E and length
+ * 2. Keep only the lowest 8 bits from the result
+ * 3. subtract this quantity from 0xFF
+ *
+ * Verify Checksum:
+ * 1. Add all bytes including the checksum; do not include delimiter and length
+ * 2. If the checksum is valid, the rightmost byte of the sum equals 0xFF.
+ *
+ */
+static void calculate_checksum(zigbee_packet_t* packet)
+{
+}
+
+static void verify_checksum(uint8_t* buffer)
+{
+}
 
 #endif // _ENCODER_H_

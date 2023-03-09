@@ -55,7 +55,7 @@ void xbee_configure(void)
     xbee_write(version_long, sizeof(version_long));
 
     LOGHEX(RX_LEVEL, "received xbee local AT response", response, sizeof(response));
-    LOG(RX_LEVEL, "AT response: %s", &response[9]);
+    //LOG(RX_LEVEL, "AT response: %s", &response[9]);
     response_idx = 0;
     memset(response, '\0', sizeof(response));
 }

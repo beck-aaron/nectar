@@ -12,7 +12,6 @@
 #include <asf.h>
 #include <logger.h>
 
-//#include "frames.h"
 #include "commands.h"
 
 /**
