@@ -84,6 +84,7 @@ OBJECTS = $(BUILDDIR)/common/services/clock/same70/sysclk.o                     
 		  $(BUILDDIR)/sensors/coz-ir.o       										\
 		  $(BUILDDIR)/sensors/telaire-t6615.o										\
 		  $(BUILDDIR)/sensors/trisonica-mini.o										\
+		  $(BUILDDIR)/wireless/xbee.o												\
           $(BUILDDIR)/main.o
 
 .PHONY : clean default upload bear
