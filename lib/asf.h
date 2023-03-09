@@ -117,4 +117,6 @@
 
 #include <stdint.h>
 
+#include <string.h>
+
 #endif // ASF_H
