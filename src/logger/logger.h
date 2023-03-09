@@ -41,15 +41,19 @@
 
 #include <asf.h>
 
-#define DEBUG_LEVEL         (uint8_t)0
-#define WARNING_LEVEL       (uint8_t)1
-#define ERROR_LEVEL         (uint8_t)2
+#define DEBUG_LEVEL         0u
+#define WARNING_LEVEL       1u
+#define ERROR_LEVEL         2u
+#define TX_LEVEL            3u
+#define RX_LEVEL            4u
 
-#define DEBUG_COLOR         "\x1b[34m"      // blue debug color
-#define WARNING_COLOR       "\x1b[33m"      // yellow warning color
-#define ERROR_COLOR         "\x1b[31m"      // red error color
-#define HEX_COLOR           "\x1b[35m"      // purple hexdump color
-#define COLOR_RESET         "\x1b[0m"       // reset default color
+#define DEBUG_COLOR         "\x1b[38;5;48m"     // green debug color
+#define WARNING_COLOR       "\x1b[38;5;11m"     // yellow warning color
+#define ERROR_COLOR         "\x1b[38;5;9m"      // red error color
+#define HEX_COLOR           "\x1b[38;5;140m"    // purple hexdump color
+#define TX_COLOR            "\x1b[38;5;215m"    // orange tx color
+#define RX_COLOR            "\x1b[38;5;221m"    // yellow rx color
+#define COLOR_RESET         "\x1b[0m"           // reset default color
 
 #define START_MESSAGE "\r\n\
 ************** NECTAR LOGGER **************\r\n\
@@ -62,10 +66,7 @@ void logger_init(void);
 void log_level(uint8_t loglevel);
 void log_time(void);
 void log_header(uint8_t loglevel);
-void log_hexdump(void* buffer, size_t size);
-void log_nibble(uint8_t nibble);
-void log_byte(const uint8_t* bitstring);
-void log_uint(void* value, size_t size);
+void log_hexdump(const void* buffer, size_t size);
 void endl(void);
 
 #define LOG(LEVEL, ...) \

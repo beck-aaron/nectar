@@ -44,6 +44,12 @@ void log_level(uint8_t loglevel)
         case ERROR_LEVEL:
             printf( ERROR_COLOR " [ERROR] ");
             break;
+        case TX_LEVEL:
+            printf( TX_COLOR " [TX DATA] ");
+            break;
+        case RX_LEVEL:
+            printf( RX_COLOR " [RX DATA] ");
+            break;
     }
 }
 
@@ -53,42 +59,21 @@ void log_header(uint8_t loglevel)
     log_level(loglevel);
 }
 
-void log_nibble(uint8_t nibble)
-{
-    nibble = (nibble <= 9) ? nibble + '0' : nibble + '7';
-    putchar(nibble);
-}
-
-void log_byte(const uint8_t* bitstring)
-{
-    log_nibble((*bitstring >> 4) & 0xf);
-    log_nibble(*bitstring & 0xf);
-}
-
-void log_uint(void* value, size_t size)
-{
-    uint8_t* data = value;
-    for (size_t i = 0; i < size; ++i)
-    {
-        log_byte(&data[i]);
-    }
-}
-
 void log_time(void)
 {
     printf("%02x:%02x:%02x", 0x00, 0x00, 0x00);
 }
 
-void log_hexdump(void* buffer, size_t size)
+void log_hexdump(const void* buffer, size_t size)
 {
-    uint8_t* data = buffer;
+    const uint8_t* data = buffer;
     uint16_t byte_count = 0;
     for(size_t i = 0; i < size; ++i)
     {
-        if (i % 16 == 0)    
+        if (i % 16 == 0)
         {   // start newline & display count
-            endl(); putchar(' '); putchar(' ');
-            log_uint(&byte_count, sizeof(byte_count)); putchar(' ');
+            endl();
+            printf(" %04X ", byte_count);
             byte_count += 0x10;
         }
 
@@ -97,8 +82,7 @@ void log_hexdump(void* buffer, size_t size)
             putchar(' ');
         }
 
-        log_byte(&data[i]);
-        putchar(' ');
+        printf("%02X ", data[i]);
     }
 
     endl();
