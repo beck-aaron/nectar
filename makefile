@@ -52,11 +52,13 @@ CPPFLAGS_INCLUDES = -I$(ASFDIR) \
 		-I$(GCCLIB)/include              	 						   \
 		-I$(SOURCEDIR)/config										   \
 		-I$(SOURCEDIR)/logger  										   \
+		-I$(SOURCEDIR)/util    										   \
+		-I$(SOURCEDIR)/wireless/codec				   			  	   \
 		-I$(SOURCEDIR)/sensors
 
 CPPFLAGS_DEFINES = -D ARM_MATH_CM7=true -D BOARD=SAME70_XPLAINED -D __SAME70Q21__
 
-CFLAGS_WARNINGS = -Wall -Wstrict-prototypes -Wmissing-prototypes -Werror-implicit-function-declaration -Wpointer-arith -Wchar-subscripts -Wcomment -Wformat=2 -Wimplicit-int -Wmain -Wparentheses -Wsequence-point -Wreturn-type -Wswitch -Wtrigraphs -Wunused -Wuninitialized -Wunknown-pragmas -Wfloat-equal -Wundef -Wshadow -Wbad-function-cast -Wwrite-strings -Wsign-compare -Waggregate-return -Wmissing-declarations -Wformat -Wmissing-format-attribute -Wno-deprecated-declarations -Wpacked -Wredundant-decls -Wnested-externs -Winline -Wlong-long -Wunreachable-code -Wcast-align
+CFLAGS_WARNINGS = -Wall -Wstrict-prototypes -Wmissing-prototypes -Werror-implicit-function-declaration -Wpointer-arith -Wchar-subscripts -Wcomment -Wformat=2 -Wimplicit-int -Wmain -Wparentheses -Wsequence-point -Wreturn-type -Wswitch -Wtrigraphs -Wunused -Wuninitialized -Wunknown-pragmas -Wfloat-equal -Wundef -Wshadow -Wbad-function-cast -Wwrite-strings -Wsign-compare -Wmissing-declarations -Wformat -Wmissing-format-attribute -Wno-deprecated-declarations -Wpacked -Wredundant-decls -Wnested-externs -Winline -Wlong-long -Wunreachable-code -Wcast-align
 
 CFLAGS  = -mcpu=cortex-m7 -mthumb -mfloat-abi=softfp -mfpu=fpv5-sp-d16 -g3 -O1 -std=gnu99 -fno-strict-aliasing -ffunction-sections -fdata-sections --param max-inline-insns-single=500
 
@@ -81,10 +83,12 @@ OBJECTS = $(BUILDDIR)/common/services/clock/same70/sysclk.o                     
           $(BUILDDIR)/sam/utils/cmsis/same70/source/templates/system_same70.o       \
           $(BUILDDIR)/sam/utils/syscalls/gcc/syscalls.o                             \
 		  $(BUILDDIR)/logger/logger.o												\
+		  $(BUILDDIR)/util/vector.o 												\
 		  $(BUILDDIR)/sensors/coz-ir.o       										\
 		  $(BUILDDIR)/sensors/telaire-t6615.o										\
 		  $(BUILDDIR)/sensors/trisonica-mini.o										\
 		  $(BUILDDIR)/wireless/xbee.o												\
+		  $(BUILDDIR)/wireless/codec/encoder.o										\
           $(BUILDDIR)/main.o
 
 .PHONY : clean default upload bear
