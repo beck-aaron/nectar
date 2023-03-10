@@ -43,7 +43,7 @@
 
 typedef struct
 {
-    uint16_t command;
+    uint16_t code;
     uint16_t parameter;
 
 } xbee_at_cmd_t;
@@ -150,7 +150,7 @@ typedef enum
     VP = 0,
 
     /* Diagnostic commands */
-    VR = 0,
+    VR = 0x5652,
     HV = 0,
     AI = 0,
     PV = 0,
@@ -159,7 +159,7 @@ typedef enum
     VL = 0x564C,
 
     /* Execution commands */
-    AC = 0,
+    AC = 0x4143,
     AS = 0,
     WR = 0,
     RE = 0,

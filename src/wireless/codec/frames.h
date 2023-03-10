@@ -25,8 +25,11 @@
 #define _API_FRAMES_H_
 
 #include <asf.h>
+//#include "commands.h"
 
 #define FRAME_DELIMITER 0x7E
+#define FRAME_HEADER_IDX 0x1
+#define FRAME_HEADER_LENGTH 0x3
 
 typedef enum
 {
@@ -66,9 +69,9 @@ typedef enum
  */
 typedef struct
 {
-    uint8_t  frame_id;
-    uint16_t command;
-    uint64_t parameter;
+    uint8_t frame_id;
+    uint16_t code;
+    uint16_t param;
 
 } at_command_t;
 
@@ -86,6 +89,10 @@ typedef struct
 
 } transmit_request_t;
 
+/**
+ * @brief When api frame support is added, define the api frame data struct
+ * above and create the appropriate functions within the encoder and decoder.
+ */
 typedef union
 {
     at_command_t        at_command;
@@ -99,18 +106,18 @@ typedef union
 typedef struct
 {
     uint8_t type; 
-    frame_data_t data;
+    frame_data_t* data;
 
 } api_frame_t;
 
 typedef struct
 {
-    uint8_t         start_delimiter;
+    uint8_t         delimiter;
     uint16_t        length;
     api_frame_t*    frame;
     uint8_t         checksum;
 
-} zigbee_packet_t;
+} xbee_packet_t;
 
 
 #endif /* _API_FRAMES_H_ */

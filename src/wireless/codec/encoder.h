@@ -10,11 +10,19 @@
 #define _ENCODER_H_
 
 #include <asf.h>
+#include <logger.h>
+#include <string.h>
+#include <vector.h>
 #include "frames.h"
-#include "../wireless/xbee.h"
+#include "commands.h"
+
+//#include "../wireless/xbee.h"
+//#include "commands.h"
 
 #define BITMASK \
     NECTAR_TIMESTAMP | NECTAR_CO2_PPM
+
+#define ZERO 0
 
 // Add future data metrics to this bitmask
 enum
@@ -52,6 +60,10 @@ typedef struct
 } payload_t;
 
 void encoder_test(void);
+void encoder_init(void);
+void encoder_destroy(void);
+uint8_t* encoder_get(void);
+size_t encoder_size(void);
 
 /**
  * @brief 
@@ -61,18 +73,32 @@ void encoder_reset(void);
 /**
  * @brief Encodes an API frame into the shared encoding buffer
  */
-void encode_frame(void);
+void encode_frame(const api_frame_t* frame);
 
 /**
  * @brief Takes a structure of organized zigbee data to form
  * an encoded buffer of data
  */
-void encode_packet(zigbee_packet_t* packet);
+void encode_packet(xbee_packet_t* packet);
 
 /**
  * @brief Formats a nectar payload
  */
 void encode_payload(payload_t payload, uint8_t* buffer);
+
+
+/**
+ * @brief Escapes all necessary characters in the encoding buffer
+ * See 
+ */
+void escape_characters(void);
+
+/* AT-Command encoding functions */
+void encode_at_command(const at_command_t* at_command);
+void decode_at_command(const uint8_t* buffer, const at_command_t* at_command);
+
+void encode_transmit_request(const transmit_request_t* transmit_request);
+void decode_transmit_request(const uint8_t* buffer, const transmit_request_t* transmit_request);
 
 /**
  * @brief Formats a nectar subpayload
@@ -81,25 +107,11 @@ void encode_payload(payload_t payload, uint8_t* buffer);
  */
 //void encode_subpayload(subpayload_t subpayload, byte_vector_t* buffer);
 
-/**
- * @brief Calculate and verify the checksum of an API frame
- *
- * Calculate Checksum:
- * 1. Add all bytes of the packet, except the start delimiter 0x7E and length
- * 2. Keep only the lowest 8 bits from the result
- * 3. subtract this quantity from 0xFF
- *
- * Verify Checksum:
- * 1. Add all bytes including the checksum; do not include delimiter and length
- * 2. If the checksum is valid, the rightmost byte of the sum equals 0xFF.
- *
- */
-static void calculate_checksum(zigbee_packet_t* packet)
-{
-}
 
+/*
 static void verify_checksum(uint8_t* buffer)
 {
 }
+*/
 
 #endif // _ENCODER_H_
