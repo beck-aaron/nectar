@@ -40,6 +40,8 @@
 #define _LOGGER_H_
 
 #include <asf.h>
+#include <vector.h>
+#include <ctype.h>
 
 #define DEBUG_LEVEL         0u
 #define WARNING_LEVEL       1u
@@ -55,6 +57,8 @@
 #define RX_COLOR            "\x1b[38;5;221m"    // yellow rx color
 #define COLOR_RESET         "\x1b[0m"           // reset default color
 
+#define LINE_LENGTH 0x10
+
 #define START_MESSAGE "\r\n\
 ************** NECTAR LOGGER **************\r\n\
 *       version:      0.0.1               *\r\n\
@@ -67,6 +71,7 @@ void log_level(uint8_t loglevel);
 void log_time(void);
 void log_header(uint8_t loglevel);
 void log_hexdump(const void* buffer, size_t size);
+void log_ascii(const uint8_t* str);
 void endl(void);
 
 #define LOG(LEVEL, ...) \

@@ -36,19 +36,19 @@ void log_level(uint8_t loglevel)
     switch(loglevel)
     {
         case DEBUG_LEVEL: default:
-            printf( DEBUG_COLOR " [DEBUG] ");
+            printf(" %s  ", DEBUG_COLOR "[DEBUG]");
             break;
         case WARNING_LEVEL:
-            printf( WARNING_COLOR " [WARNING] ");
+            printf(" %s  ", WARNING_COLOR "[WARNING]");
             break;
         case ERROR_LEVEL:
-            printf( ERROR_COLOR " [ERROR] ");
+            printf(" %s  ", ERROR_COLOR "[ERROR]");
             break;
         case TX_LEVEL:
-            printf( TX_COLOR " [TX DATA] ");
+            printf(" %s  ", TX_COLOR "[TX DATA]");
             break;
         case RX_LEVEL:
-            printf( RX_COLOR " [RX DATA] ");
+            printf(" %s  ", RX_COLOR "[RX DATA]");
             break;
     }
 }
@@ -59,31 +59,49 @@ void log_header(uint8_t loglevel)
     log_level(loglevel);
 }
 
+// TODO
 void log_time(void)
 {
     printf("%02x:%02x:%02x", 0x00, 0x00, 0x00);
 }
 
+void log_ascii(const uint8_t* str)
+{
+    putchar(' ');
+
+    for (size_t i = 0; i < LINE_LENGTH; ++i)
+    {
+        if (iscntrl(str[i]))
+        {
+            putchar('.');
+            continue;
+        }
+
+        putchar(str[i]);
+    }
+}
+
 void log_hexdump(const void* buffer, size_t size)
 {
-    const uint8_t* data = buffer;
-    uint16_t byte_count = 0;
-    for(size_t i = 0; i < size; ++i)
-    {
-        if (i % 16 == 0)
-        {   // start newline & display count
-            endl();
-            printf(" %04X ", byte_count);
-            byte_count += 0x10;
-        }
-
-        if (i % 8 == 0)
-        {   // put space between columns
-            putchar(' ');
-        }
-
-        printf("%02X ", data[i]);
-    }
+    vector_t buffer_line = vector(LINE_LENGTH);
 
     endl();
+    for (size_t j = 0; j < size; j += 0x10)
+    {
+        printf(" %04X ", j);
+        for (size_t i = 0; i < LINE_LENGTH; ++i)
+        {
+            if (i % 8 == 0)
+            {
+                putchar(' ');
+            }
+            printf("%02X ", ((uint8_t*)buffer)[i+j]);
+            buffer_line.push(&buffer_line, &((uint8_t*)buffer)[i+j], sizeof(uint8_t));
+        }
+        log_ascii(buffer_line.data);
+        buffer_line.clear(&buffer_line);
+        endl();
+    }
+    endl();
+    buffer_line.destroy(&buffer_line);
 }
