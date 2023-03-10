@@ -485,7 +485,6 @@ void board_init(void)
 #ifdef CONF_BOARD_UART_RXD
     ioport_set_pin_peripheral_mode(UART3_RXD_GPIO, UART3_RXD_FLAGS);
     ioport_set_pin_peripheral_mode(UART4_RXD_GPIO, UART4_RXD_FLAGS);
-	MATRIX->CCFG_SYSIO |= CCFG_SYSIO_SYSIO4;
 #endif
 
 #ifdef CONF_BOARD_UART_TXD
