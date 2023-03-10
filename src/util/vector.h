@@ -4,7 +4,6 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
-//#include <logger.h>
 
 typedef struct vector_t vector_t;
 struct vector_t

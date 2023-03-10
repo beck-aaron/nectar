@@ -36,6 +36,55 @@ size_t encoder_size(void)
     return buffer.size;
 }
 
+/**
+ * @brief Calculate the checksum of an API frame
+ *
+ * Calculate Checksum:
+ * 1. Add all bytes of the packet, except the start delimiter 0x7E and length
+ * 2. Keep only the lowest 8 bits from the result
+ * 3. subtract this quantity from 0xFF
+ *
+ * Verify Checksum: TODO: move verify explanation to decoder
+ * 1. Add all bytes including the checksum; do not include delimiter and length
+ * 2. If the checksum is valid, the rightmost byte of the sum equals 0xFF.
+ *
+ */
+static void calculate_checksum(xbee_packet_t* packet)
+{
+    for (size_t i = FRAME_HEADER_LENGTH; i < buffer.size; ++i)
+        packet->checksum += buffer.data[i];
+
+    packet->checksum = 0xFF - packet->checksum;
+}
+
+
+/**
+ * @brief Encodes a zigbee packet into the local encoding buffer.
+ * 1. push start_delimiter & length
+ *
+ * 2. after frame is encoded into the buffer, total frame_data length is
+ *    length of encoded buffer minus the first 3 bytes;
+ *
+ * 3. flip endianness of length so it gets encoded properly
+ *
+ * 4. calculate checksum & push to encoding buffer.
+ *
+ * @param packet - the zigbee packet data type to be encoded.
+ *
+ */
+void encode_packet(xbee_packet_t* packet)
+{
+    buffer.push(&buffer, &packet->delimiter, sizeof(packet->delimiter));
+    buffer.push(&buffer, &packet->length, sizeof(packet->length));
+
+    encode_frame(packet->frame);
+    packet->length = Swap16(buffer.size - FRAME_HEADER_LENGTH);
+    memcpy(&buffer.data[FRAME_HEADER_IDX], &packet->length, sizeof(packet->length));
+
+    calculate_checksum(packet);
+    buffer.push(&buffer, &packet->checksum, sizeof(packet->checksum));
+}
+ 
 
 /**
  * @brief All encoding functions when implemented should be put here
@@ -58,55 +107,8 @@ void encode_frame(const api_frame_t* frame)
     }
 }
 
-/**
- * @brief Calculate the checksum of an API frame
- *
- * Calculate Checksum:
- * 1. Add all bytes of the packet, except the start delimiter 0x7E and length
- * 2. Keep only the lowest 8 bits from the result
- * 3. subtract this quantity from 0xFF
- *
- * Verify Checksum: TODO: move verify explanation to decoder
- * 1. Add all bytes including the checksum; do not include delimiter and length
- * 2. If the checksum is valid, the rightmost byte of the sum equals 0xFF.
- *
- */
-static void calculate_checksum(xbee_packet_t* packet)
-{
-    for (size_t i = FRAME_HEADER_LENGTH; i < buffer.size; ++i)
-        packet->checksum += buffer.data[i];
-
-    packet->checksum = 0xFF - packet->checksum;
-}
-
-/**
- * @brief Encodes a zigbee packet into the local encoding buffer.
-    // push start_delimiter & length
-    // encodes frame into buffer
-    // when frame is encoded into the buffer, the length is the length
-    // of the encoded buffer minus the first 3 bytes;
-    // flips endianness here so length gets encoded properly
-    // calculate checksum & push checksum
- *
- * @param packet - the zigbee packet data type to be encoded.
- *
- */
-void encode_packet(xbee_packet_t* packet)
-{
-    buffer.push(&buffer, &packet->delimiter, sizeof(packet->delimiter));
-    buffer.push(&buffer, &packet->length, sizeof(packet->length));
-
-    encode_frame(packet->frame);
-    packet->length = Swap16(buffer.size - FRAME_HEADER_LENGTH);
-    memcpy(&buffer.data[FRAME_HEADER_IDX], &packet->length, sizeof(packet->length));
-
-    calculate_checksum(packet);
-    buffer.push(&buffer, &packet->checksum, sizeof(packet->checksum));
-}
-
- 
-// some at_commands have parameters, some don't
-// as a hack rn, if the parameter is 0, we will not encode it.
+// some "at commands" have parameters, some don't.
+// as a quick hack we are not encoding parameters rn.
 void encode_at_command(const at_command_t* at_command)
 {
     buffer.push(&buffer, &at_command->frame_id, sizeof(at_command->frame_id));

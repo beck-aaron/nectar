@@ -13,6 +13,8 @@
 #include <logger.h>
 #include <encoder.h>
 
+#define xbee_uart_handler XBEE_UART_HANDLER
+
 /**
  * @brief Sets up UART interface and configures xbee with needed parameters to
  * join the network.

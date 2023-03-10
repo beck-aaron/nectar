@@ -1,9 +1,10 @@
 /*******************************************************************************
- * File:    trisonica-mini.c
+ * File:    main.c
  * Author:  Aaron Beck
  *
- * Drives the trisonica-mini sensor, attached to a UART interface defined by
- * config/conf_uart_serial.h
+ * Home base for the Nectar driver.  This is where all peripherals will get
+ * initialized, sensors will collect data, and the xbee will transmit out
+ * important information.
  *
  ******************************************************************************/
 #include <asf.h>

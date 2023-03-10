@@ -23,7 +23,7 @@ void logger_init(void)
 
     stdio_serial_init(LOGGER_UART, &uart_serial_options);
     puts(START_MESSAGE);
-    LOG(DEBUG_LEVEL, "initialized logger");
+    LOG(DEBUG_LEVEL, "Initialized logger.");
 }
 
 void endl(void)

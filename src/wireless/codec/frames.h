@@ -25,7 +25,6 @@
 #define _API_FRAMES_H_
 
 #include <asf.h>
-//#include "commands.h"
 
 #define FRAME_DELIMITER 0x7E
 #define FRAME_HEADER_IDX 0x1
@@ -62,14 +61,14 @@ typedef enum
     ROUTE_RECORD_INDICATOR                      = 0xA1,
     MANY_TO_ONE_ROUTE_REQUEST_INDICATOR         = 0xA3,
 
-} api_frame_name;
+} api_frame_type_t;
 
 /**
  * @brief 
  */
 typedef struct
 {
-    uint8_t frame_id;
+    uint8_t  frame_id;
     uint16_t code;
     uint16_t param;
 
@@ -105,8 +104,8 @@ typedef union
  */
 typedef struct
 {
-    uint8_t type; 
-    frame_data_t* data;
+    uint8_t         type; 
+    frame_data_t*   data;
 
 } api_frame_t;
 
