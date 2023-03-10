@@ -10,12 +10,12 @@
 
 #include "xbee.h"
 
-#define COMMAND_MODE "+++"
-#define AT_COMMAND "AT"
-#define AT_COMMAND_SIZE 2
-#define CARRIAGE_RETURN "\r"
-#define COMMAND_MODE_LENGTH 3
-#define RETURN_CODE_LENGTH 3
+//#define COMMAND_MODE "+++"
+//#define AT_COMMAND "AT"
+//#define AT_COMMAND_SIZE 2
+//#define CARRIAGE_RETURN "\r"
+//#define COMMAND_MODE_LENGTH 3
+//#define RETURN_CODE_LENGTH 3
 
 #define xbee_uart_handler XBEE_UART_HANDLER
 
@@ -50,34 +50,35 @@ void xbee_uart_handler(void)
 
 void xbee_configure(void)
 {
-    uint8_t version_long[] = {0x7E, 0x00, 0x04, 0x08, 0x01, 0x56, 0x4C, 0x54};
-    LOGHEX(TX_LEVEL, "sending xbee local AT command", version_long, sizeof(version_long));
-    xbee_write(version_long, sizeof(version_long));
+    // create frame data, set frame data within api frame, store api frame
+    // within zigbee packet
+    frame_data_t frame_data = {.at_command = {0x1, VL, 0}};
+    api_frame_t api_frame = {AT_COMMAND, &frame_data};
+    xbee_packet_t packet = {FRAME_DELIMITER, ZERO, &api_frame, ZERO};
 
+    // when structs are all populated with data, encode to encoder's buffer
+    encoder_init();
+
+    encode_packet(&packet);
+    LOG(DEBUG_LEVEL, "encoding local at command: read version long");
+    xbee_write(encoder_get(), encoder_size());
+
+    // after we receive data, we need to decode into our structs again
     LOGHEX(RX_LEVEL, "received xbee local AT response", response, sizeof(response));
-    //LOG(RX_LEVEL, "AT response: %s", &response[9]);
-    response_idx = 0;
-    memset(response, '\0', sizeof(response));
+    encoder_destroy();
 }
 
 void xbee_read_cmd(const char* cmd)
 {
-    xbee_write(AT_COMMAND, AT_COMMAND_SIZE);
-    xbee_write(cmd, sizeof(cmd));
-    xbee_write(CARRIAGE_RETURN, 1);
-    xbee_read();
 }
 
 void xbee_set_cmd(const char* cmd, uint16_t parameter)
 {
-    xbee_write(AT_COMMAND, AT_COMMAND_SIZE);
-    xbee_write(cmd, sizeof(cmd));
-    xbee_write(&parameter, sizeof(parameter));
-    xbee_write(CARRIAGE_RETURN, 1);
 }
 
 void xbee_write(const void* data, const size_t size)
 {
+    LOGHEX(TX_LEVEL, "sending data to xbee", data, size);
     usart_serial_write_packet(XBEE_UART, (uint8_t*)data, size);
 }
 
@@ -94,7 +95,4 @@ void xbee_read(void)
 
 void xbee_return_code(void)
 {
-    response[RETURN_CODE_LENGTH] = '\0';
-    usart_serial_read_packet(XBEE_UART, response, RETURN_CODE_LENGTH);
-    LOG(WARNING_LEVEL, "xbee return code: %s", response);
 }

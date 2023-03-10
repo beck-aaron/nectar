@@ -11,8 +11,7 @@
 
 #include <asf.h>
 #include <logger.h>
-
-#include "commands.h"
+#include <encoder.h>
 
 /**
  * @brief Sets up UART interface and configures xbee with needed parameters to
