@@ -33,6 +33,7 @@
  * overwrites the stdio fd from the previous peripheral.
  */
 void devices_init(void);
+void init_xbee(void);
 
 /**
  * @brief Initializes a uart device for stdio. This enables
@@ -66,6 +67,7 @@ void devices_init(void);
     }; \
     usart_serial_init(DEVICE##_UART, &DEVICE##_serial_options);
 
+/*
 typedef struct
 {
     // specific data types go here
@@ -106,5 +108,6 @@ typedef struct
 
 } coz_ir_t;
 extern coz_ir_t coz_ir;
+*/
 
 #endif /* DEVICES_H_ */

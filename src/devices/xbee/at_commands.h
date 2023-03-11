@@ -83,7 +83,7 @@ typedef enum
     DD = 0,
     NT = 0,
     NO = 0,
-    NP = 0,
+    NP = 0x4E50,
     CR = 0,
 
     /* zigbee addressing commands */

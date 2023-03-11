@@ -8,6 +8,7 @@
 
 #define XBEE_MAX_TX         256  // arbitrary values for now.
 #define XBEE_MAX_RX         256  // represent tx & rx buffer size for each device
+#define receive_xbee XBEE_UART_HANDLER
 
 void test_xbee(void);
 void encode_xbee(void);
@@ -34,9 +35,8 @@ typedef struct
 
     } api_frame;
 
-    size_t idx;
-    uint8_t tx_data[XBEE_MAX_TX];
-    uint8_t rx_data[XBEE_MAX_RX];
+    vector_t* tx_buffer;
+    vector_t* rx_buffer;
 
     void (*test)(void);
     void (*encode)(void);
@@ -46,19 +46,6 @@ typedef struct
 
 } xbee_t;
 
-//TODO: initialize with callback functions
 extern xbee_t xbee;
-
-
-#define XBEE() \
-{ \
-    .delimiter = API_FRAME_DELIMITER, \
-    .test = test_xbee, \
-    .encode = encode_xbee,       \
-    .decode = decode_xbee,       \
-    .configure = configure_xbee, \
-    .transmit = transmit_xbee    \
-};
-
 
 #endif /* _XBEE_H_ */

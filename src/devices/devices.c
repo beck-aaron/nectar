@@ -23,9 +23,17 @@ void devices_init(void)
     init_serial_uart(COZ_IR);
     LOG(DEBUG_LEVEL, "Initialized CoZ-IR serial interface.");
 
-    // TODO: add interrupts to macro for serial initialization
+    init_xbee();
+}
+
+void init_xbee(void)
+{
+    xbee.tx_buffer = vector_init(XBEE_MAX_TX);
+    xbee.rx_buffer = vector_init(XBEE_MAX_RX);
     usart_enable_interrupt(XBEE_UART, US_IER_RXRDY);
     irq_register_handler(XBEE_UART_IRQ, 1);
     init_serial_uart(XBEE);
+
+    xbee.configure();
     LOG(DEBUG_LEVEL, "Initialized Xbee serial interface.");
 }
