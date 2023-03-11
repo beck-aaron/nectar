@@ -11,8 +11,6 @@
  ******************************************************************************/
 #include "logger.h"
 
-vector_t vector = VECTOR();
-
 // TODO
 void log_time(void)
 {
@@ -41,41 +39,47 @@ void log_level(uint8_t loglevel)
     }
 }
 
-void log_hexdump(const void* hex, size_t size)
+void log_hexdump(void* hex, size_t size)
 {
-    uint8_t buffer[LINE_LENGTH];
-    vector.set(buffer, LINE_LENGTH);
+    uint8_t* byte = hex;
+    vector_t* line = vector_init(LINE_LENGTH);
     log_endl();
 
     for (size_t j = 0; j < size; j += 0x10)
     {
         printf(" %04X ", j);
+
         for (size_t i = 0; i < LINE_LENGTH; ++i)
         {
             if (i % 8 == 0)
-            {
                 putchar(' ');
-            }
-            printf("%02X ", ((uint8_t*)buffer)[i+j]);
-            vector.push(&((uint8_t*)buffer)[i+j], sizeof(uint8_t));
+
+            if (i+j < size) 
+                printf("%02X ", byte[i+j]);
+            else
+                printf("%3s", "");
+
+            vector_push(&(byte)[i+j], sizeof(*byte), line);
         }
+
         putchar(' ');
 
         for (size_t i = 0; i < LINE_LENGTH; ++i)
         {
-            if (iscntrl(vector.data[i]))
+            if (iscntrl(line->data[i]))
             {
                 putchar('.');
                 continue;
             }
 
-            putchar(vector.data[i]);
+            putchar(line->data[i]);
         }
 
-        vector.clear();
+        vector_clear(line);
         log_endl();
     }
 
+    vector_destroy(line);
     log_endl();
 }
 

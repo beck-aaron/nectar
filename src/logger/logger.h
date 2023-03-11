@@ -68,7 +68,7 @@
 
 void log_time(void);
 void log_level(uint8_t loglevel);
-void log_hexdump(const void* hex, size_t size);
+void log_hexdump(void* hex, size_t size);
 void log_endl(void);
 
 #define LOG(LEVEL, ...) \
