@@ -8,22 +8,21 @@
  *
  ******************************************************************************/
 #include <asf.h>
-#include <logger.h>
 #include <devices.h>
+#include <logger.h>
 
-xbee_t xbee = XBEE();
+xbee_t xbee;
 
 int main(void)
 {
     sysclk_init();
     board_init();
 
-    // our device initialization
+    // initialize all external devices
     devices_init();
 
-    LED_On(LED0); // signal initialization is complete
-
-    xbee.test();
+    // signal initialization is complete
+    LED_On(LED0);
 
     while(1)
     {   // main loop
