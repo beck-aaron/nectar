@@ -9,19 +9,21 @@
  ******************************************************************************/
 #include <asf.h>
 #include <logger.h>
-#include <sensors.h>
-//#include "wireless/codec/encoder.h"
+#include <devices.h>
 
-#include "wireless/xbee.h"
+xbee_t xbee = XBEE();
 
 int main(void)
 {
-    sysclk_init();  // necessary for program startup
-    board_init();   // necessary to enable peripherals
-    LED_On(LED0);
+    sysclk_init();
+    board_init();
 
-    logger_init();
-    xbee_init();
+    // our device initialization
+    devices_init();
+
+    LED_On(LED0); // signal initialization is complete
+
+    xbee.test();
 
     while(1)
     {   // main loop
