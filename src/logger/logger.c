@@ -11,24 +11,12 @@
  ******************************************************************************/
 #include "logger.h"
 
-void logger_init(void)
-{
-    const usart_serial_options_t uart_serial_options =
-    {
-        .baudrate   = LOGGER_UART_BAUDRATE,
-        .charlength = LOGGER_UART_CHAR_LENGTH,
-        .paritytype = LOGGER_UART_PARITY,
-        .stopbits   = LOGGER_UART_STOP_BITS
-    };
+vector_t vector = VECTOR();
 
-    stdio_serial_init(LOGGER_UART, &uart_serial_options);
-    puts(START_MESSAGE);
-    LOG(DEBUG_LEVEL, "Initialized logger.");
-}
-
-void endl(void)
+// TODO
+void log_time(void)
 {
-    printf("\r\n");
+    printf("%02x:%02x:%02x", 0x00, 0x00, 0x00);
 }
 
 void log_level(uint8_t loglevel)
@@ -53,39 +41,12 @@ void log_level(uint8_t loglevel)
     }
 }
 
-void log_header(uint8_t loglevel)
+void log_hexdump(const void* hex, size_t size)
 {
-    log_time();
-    log_level(loglevel);
-}
+    uint8_t buffer[LINE_LENGTH];
+    vector.set(buffer, LINE_LENGTH);
+    log_endl();
 
-// TODO
-void log_time(void)
-{
-    printf("%02x:%02x:%02x", 0x00, 0x00, 0x00);
-}
-
-void log_ascii(const uint8_t* str)
-{
-    putchar(' ');
-
-    for (size_t i = 0; i < LINE_LENGTH; ++i)
-    {
-        if (iscntrl(str[i]))
-        {
-            putchar('.');
-            continue;
-        }
-
-        putchar(str[i]);
-    }
-}
-
-void log_hexdump(const void* buffer, size_t size)
-{
-    vector_t buffer_line = vector(LINE_LENGTH);
-
-    endl();
     for (size_t j = 0; j < size; j += 0x10)
     {
         printf(" %04X ", j);
@@ -96,12 +57,29 @@ void log_hexdump(const void* buffer, size_t size)
                 putchar(' ');
             }
             printf("%02X ", ((uint8_t*)buffer)[i+j]);
-            buffer_line.push(&buffer_line, &((uint8_t*)buffer)[i+j], sizeof(uint8_t));
+            vector.push(&((uint8_t*)buffer)[i+j], sizeof(uint8_t));
         }
-        log_ascii(buffer_line.data);
-        buffer_line.clear(&buffer_line);
-        endl();
+        putchar(' ');
+
+        for (size_t i = 0; i < LINE_LENGTH; ++i)
+        {
+            if (iscntrl(vector.data[i]))
+            {
+                putchar('.');
+                continue;
+            }
+
+            putchar(vector.data[i]);
+        }
+
+        vector.clear();
+        log_endl();
     }
-    endl();
-    buffer_line.destroy(&buffer_line);
+
+    log_endl();
+}
+
+void log_endl(void)
+{
+    printf("\r\n");
 }

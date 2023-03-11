@@ -40,8 +40,8 @@
 #define _LOGGER_H_
 
 #include <asf.h>
-#include <vector.h>
 #include <ctype.h>
+#include <vector.h>
 
 #define DEBUG_LEVEL         0u
 #define WARNING_LEVEL       1u
@@ -58,34 +58,33 @@
 #define COLOR_RESET         "\x1b[0m"           // reset default color
 
 #define LINE_LENGTH 0x10
-
-#define START_MESSAGE "\r\n\
+#define LOGGER_START_MESSAGE "\r\n\
 ************** NECTAR LOGGER **************\r\n\
 *       version:      0.0.1               *\r\n\
 *     interface:      USART1              *\r\n\
 *      baudrate:      115200              *\r\n\
+*      compiled:     "__DATE__ "          *\r\n\
 *******************************************\r\n"
 
-void logger_init(void);
-void log_level(uint8_t loglevel);
 void log_time(void);
-void log_header(uint8_t loglevel);
-void log_hexdump(const void* buffer, size_t size);
-void log_ascii(const uint8_t* str);
-void endl(void);
+void log_level(uint8_t loglevel);
+void log_hexdump(const void* hex, size_t size);
+void log_endl(void);
 
 #define LOG(LEVEL, ...) \
-    log_header(LEVEL); \
+    log_time(); \
+    log_level(LEVEL); \
     printf(__VA_ARGS__); \
     printf(COLOR_RESET); \
-    endl();
+    log_endl();
 
 #define LOGHEX(LEVEL, LABEL, BUFFER, LENGTH) \
-    log_header(LEVEL); \
+    log_time(); \
+    log_level(LEVEL); \
     printf(LABEL); \
     printf(COLOR_RESET HEX_COLOR); \
     log_hexdump(BUFFER, LENGTH); \
     printf(COLOR_RESET); \
-    endl();
+    log_endl();
 
 #endif // _LOGGER_H_
