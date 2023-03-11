@@ -5,19 +5,24 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct vector_t vector_t;
-struct vector_t
+void v_set(const uint8_t* byte, size_t size);
+void v_push(const void* byte, size_t size);
+void v_push_bytes(const void* byte, size_t size);
+void v_clear(void);
+
+typedef struct
 {
     uint8_t*    data;
     size_t      size;
     size_t      limit;
-    void (*push)(vector_t* this, const void* byte, size_t size);
-    void (*push_bytes)(vector_t* this, const void* byte, size_t size);
-//  void (*push_array)(vector_t* this, const void* byte, size_t element_size, size_t size);
-    void (*clear)(vector_t* this);
-    void (*destroy)(vector_t* this);
-};
+    void (*set)(const uint8_t* data, size_t size);
+    void (*push)(const void* byte, size_t size);
+    void (*push_bytes)(const void* byte, size_t size);
+    void (*clear)(void);
+} vector_t;
 
-vector_t vector(size_t size);
+extern vector_t vector;
+
+#define VECTOR() {.set = v_set, .push = v_push, .push_bytes = v_push_bytes, .clear = v_clear};
 
 #endif /* _BYTE_VECTOR_H_ */
