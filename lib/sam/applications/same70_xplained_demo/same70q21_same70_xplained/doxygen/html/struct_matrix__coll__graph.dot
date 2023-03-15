@@ -1,0 +1,10 @@
+digraph "Matrix"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{Matrix\n|+ CCFG_CAN0\l+ CCFG_DYNCFG\l+ CCFG_PCCR\l+ CCFG_SMCNFCS\l+ CCFG_SYSIO\l+ MATRIX_MCFG0\l+ MATRIX_MCFG1\l+ MATRIX_MCFG10\l+ MATRIX_MCFG11\l+ MATRIX_MCFG12\land 20 more...\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node2 -> Node1 [color="grey25",style="solid",label=" +MATRIX_PR" ,arrowhead="odiamond"];
+  Node2 [shape=record,label="{MatrixPr\n|+ MATRIX_PRAS\l+ MATRIX_PRBS\l|}",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$struct_matrix_pr.html",tooltip="MatrixPr hardware registers."];
+}

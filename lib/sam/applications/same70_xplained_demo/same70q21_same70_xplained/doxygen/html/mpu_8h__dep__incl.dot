@@ -1,0 +1,10 @@
+digraph "mpu.h"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [label="mpu.h",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="SAMV70/SAMV71/SAME70/SAMS70-XULTRA board mpu config."];
+  Node1 -> Node2 [dir="back",color="steelblue1",style="solid"];
+  Node2 [label="mpu.c",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$mpu_8c.html",tooltip="SAMV70/SAMV71/SAME70/SAMS70-XULTRA board mpu config."];
+}

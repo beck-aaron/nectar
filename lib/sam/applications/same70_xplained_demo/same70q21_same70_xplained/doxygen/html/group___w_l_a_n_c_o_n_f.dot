@@ -1,0 +1,11 @@
+digraph "Configuration"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir=LR;
+  Node2 [label="Functions",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___w_l_a_n_a_p_i.html",tooltip="Here are listed all the functions that implement the Wlan APIs."];
+  Node1 [label="Configuration",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Here are listed all the functions that implement the Wlan Configuration APIs."];
+  Node2->Node1 [shape=plaintext, dir="back", style="solid"];
+}

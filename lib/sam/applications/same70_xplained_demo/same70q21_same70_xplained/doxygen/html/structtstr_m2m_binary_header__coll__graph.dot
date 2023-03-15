@@ -1,0 +1,10 @@
+digraph "tstrM2mBinaryHeader"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{tstrM2mBinaryHeader\n|+ flashOffset\l+ payloadSize\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Structure holding compatibility version info for firmware binaries."];
+  Node2 -> Node1 [color="grey25",style="solid",label=" +binVerInfo" ,arrowhead="odiamond"];
+  Node2 [shape=record,label="{tstrM2mRev\n|+ _PAD16_\l+ _PAD8_\l+ BuildDate\l+ BuildTime\l+ u16FirmwareSvnNum\l+ u32Chipid\l+ u8DriverMajor\l+ u8DriverMinor\l+ u8DriverPatch\l+ u8FirmwareMajor\l+ u8FirmwareMinor\l+ u8FirmwarePatch\l|}",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$structtstr_m2m_rev.html",tooltip="Structure holding firmware version parameters and build date/time."];
+}

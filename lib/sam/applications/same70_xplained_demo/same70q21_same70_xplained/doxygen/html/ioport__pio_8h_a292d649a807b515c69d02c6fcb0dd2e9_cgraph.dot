@@ -1,0 +1,13 @@
+digraph "arch_ioport_init"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [label="arch_ioport_init",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="steelblue1",style="solid"];
+  Node2 [label="sysclk_enable_peripheral\l_clock",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sysclk__group.html#ga97354113454b658bf76596b3580cf195",tooltip="Enable a peripheral's clock."];
+  Node2 -> Node3 [color="steelblue1",style="solid"];
+  Node3 [label="pmc_enable_periph_clk",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__pmc__group.html#gad09de55bb493f4ebdd92305f24f27d62",tooltip="Enable the specified peripheral clock."];
+}

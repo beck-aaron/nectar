@@ -1,0 +1,8 @@
+digraph "tstrEthInitParam"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{tstrEthInitParam\n|+ __PAD8__\l+ au8ethRcvBuf\l+ pfAppEthCb\l+ pfAppWifiCb\l+ u16ethRcvBufSize\l+ u8EthernetEnable\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Structure to hold Ethernet interface parameters. Structure is to be defined and have its attributes s..."];
+}

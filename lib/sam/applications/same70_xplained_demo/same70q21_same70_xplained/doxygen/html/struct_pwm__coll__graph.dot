@@ -1,0 +1,12 @@
+digraph "Pwm"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{Pwm\n|+ PWM_CLK\l+ PWM_CMUPD0\l+ PWM_CMUPD1\l+ PWM_CMUPD2\l+ PWM_CMUPD3\l+ PWM_DIS\l+ PWM_DMAR\l+ PWM_ELMR\l+ PWM_ENA\l+ PWM_ETRG1\land 48 more...\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node2 -> Node1 [color="grey25",style="solid",label=" +PWM_CMP" ,arrowhead="odiamond"];
+  Node2 [shape=record,label="{PwmCmp\n|+ PWM_CMPM\l+ PWM_CMPMUPD\l+ PWM_CMPV\l+ PWM_CMPVUPD\l|}",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$struct_pwm_cmp.html",tooltip="PwmCmp hardware registers."];
+  Node3 -> Node1 [color="grey25",style="solid",label=" +PWM_CH_NUM" ,arrowhead="odiamond"];
+  Node3 [shape=record,label="{PwmCh_num\n|+ PWM_CCNT\l+ PWM_CDTY\l+ PWM_CDTYUPD\l+ PWM_CMR\l+ PWM_CPRD\l+ PWM_CPRDUPD\l+ PWM_DT\l+ PWM_DTUPD\l|}",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$struct_pwm_ch__num.html",tooltip="PwmCh_num hardware registers."];
+}

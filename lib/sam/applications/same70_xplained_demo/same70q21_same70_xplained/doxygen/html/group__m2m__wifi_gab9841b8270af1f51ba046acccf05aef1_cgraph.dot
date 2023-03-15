@@ -1,0 +1,13 @@
+digraph "m2m_wifi_1x_set_option"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [label="m2m_wifi_1x_set_option",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="API to set (write) options relating to Wi-Fi connection using WPA(2) Enterprise authentication."];
+  Node1 -> Node2 [color="steelblue1",style="solid"];
+  Node2 [label="m2m_memcpy",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___c_o_m_m_o_n_a_p_i.html#ga28b094db63be31612f7d2c5af692d3a5",tooltip="Copy specified number of bytes from source buffer to destination buffer."];
+  Node1 -> Node3 [color="steelblue1",style="solid"];
+  Node3 [label="m2m_memset",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___c_o_m_m_o_n_a_p_i.html#ga245e71a174d65f12926883f76752df93",tooltip="Set specified number of data bytes in specified data buffer to specified value."];
+}

@@ -1,0 +1,13 @@
+digraph "m2m_strstr"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [label="m2m_strstr",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Find the occurrence of pcStr string in pcIn string."];
+  Node1 -> Node2 [color="steelblue1",style="solid"];
+  Node2 [label="m2m_strlen",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___c_o_m_m_o_n_a_p_i.html#ga7ab2c19ce29ea364fb1653765732172f",tooltip="Returns the length of a null terminated string buffer."];
+  Node1 -> Node3 [color="steelblue1",style="solid"];
+  Node3 [label="m2m_strncmp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___c_o_m_m_o_n_a_p_i.html#ga58255557664125090eacd890602bfb50",tooltip="Compare specified number of data bytes in string buffers pcS1 and pcS2."];
+}

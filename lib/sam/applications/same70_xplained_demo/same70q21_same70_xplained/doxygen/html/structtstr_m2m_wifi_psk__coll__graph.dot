@@ -1,0 +1,8 @@
+digraph "tstrM2mWifiPsk"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{tstrM2mWifiPsk\n|+ au8Passphrase\l+ au8Psk\l+ au8Rsv\l+ u8PassphraseLen\l+ u8PskCalculated\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Passphrase and PSK for WPA(2) PSK."];
+}

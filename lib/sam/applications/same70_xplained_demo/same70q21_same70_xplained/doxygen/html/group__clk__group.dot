@@ -1,0 +1,17 @@
+digraph "Clock Management"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir=LR;
+  Node1 [label="Clock Management",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node2 [label="Generic Clock Management",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__genclk__group.html",tooltip="Generic clocks are configurable clocks which run outside the system clock domain."];
+  Node3 [label="Oscillator Management",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__osc__group.html",tooltip="This group contains functions and definitions related to configuring and enabling/disabling on-chip o..."];
+  Node4 [label="PLL Management",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__pll__group.html",tooltip="This group contains functions and definitions related to configuring and enabling/disabling on-chip P..."];
+  Node5 [label="System Clock Management",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sysclk__group.html",tooltip="See Quick Start Guide for the System Clock Management."];
+  Node1->Node2 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node3 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node4 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node5 [shape=plaintext, dir="back", style="solid"];
+}

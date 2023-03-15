@@ -1,0 +1,12 @@
+digraph "usart.h"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [label="usart.h",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Universal Synchronous Asynchronous Receiver Transmitter (USART) driver for SAM."];
+  Node1 -> Node2 [dir="back",color="steelblue1",style="solid"];
+  Node2 [label="uart_serial.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$uart__serial_8h.html",tooltip="Uart Serial for SAM."];
+  Node1 -> Node3 [dir="back",color="steelblue1",style="solid"];
+  Node3 [label="usart.c",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$usart_8c.html",tooltip="Universal Synchronous Asynchronous Receiver Transmitter (USART) driver for SAM."];
+}

@@ -1,0 +1,31 @@
+digraph "spi_master_init"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [label="spi_master_init",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Initialize the SPI in master mode."];
+  Node1 -> Node2 [color="steelblue1",style="solid"];
+  Node2 [label="spi_disable_loopback",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$drivers_2spi_2spi_8h.html#ae7b7d093c56b79c19a934cfe24a9d5f4",tooltip="Disable loopback mode."];
+  Node1 -> Node3 [color="steelblue1",style="solid"];
+  Node3 [label="spi_disable_mode_fault\l_detect",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$drivers_2spi_2spi_8h.html#a1498285b5ff73664ad14833e5ce01c6a",tooltip="Disable Mode Fault Detection."];
+  Node1 -> Node4 [color="steelblue1",style="solid"];
+  Node4 [label="spi_disable_peripheral\l_select_decode",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$drivers_2spi_2spi_8h.html#a78a81dd4ff97409c9a09c5d316d29150",tooltip="Disable Peripheral Select Decode."];
+  Node1 -> Node5 [color="steelblue1",style="solid"];
+  Node5 [label="spi_enable_clock",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__spi__group.html#ga717643bb5d2401bed319b2ad8bc41462",tooltip="Enable SPI clock."];
+  Node5 -> Node6 [color="steelblue1",style="solid"];
+  Node6 [label="sysclk_enable_peripheral\l_clock",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sysclk__group.html#ga97354113454b658bf76596b3580cf195",tooltip="Enable a peripheral's clock."];
+  Node6 -> Node7 [color="steelblue1",style="solid"];
+  Node7 [label="pmc_enable_periph_clk",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__pmc__group.html#gad09de55bb493f4ebdd92305f24f27d62",tooltip="Enable the specified peripheral clock."];
+  Node1 -> Node8 [color="steelblue1",style="solid"];
+  Node8 [label="spi_reset",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$drivers_2spi_2spi_8h.html#a678f8e496cc236c912f4105aebffef36",tooltip="Reset SPI and set it to Slave mode."];
+  Node1 -> Node9 [color="steelblue1",style="solid"];
+  Node9 [label="spi_set_delay_between\l_chip_select",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__spi__group.html#gab1a11f2d8808eb355c9b1e43be00da96",tooltip="Set delay between chip selects (in number of MCK clocks)."];
+  Node1 -> Node10 [color="steelblue1",style="solid"];
+  Node10 [label="spi_set_fixed_peripheral\l_select",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$drivers_2spi_2spi_8h.html#a2b847a88e333914fc3495d174c462f24",tooltip="Set Fixed Peripheral Select."];
+  Node1 -> Node11 [color="steelblue1",style="solid"];
+  Node11 [label="spi_set_master_mode",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$drivers_2spi_2spi_8h.html#a837805f2bd2b5f2c0a29e9651e503d34",tooltip="Set SPI to Master mode."];
+  Node1 -> Node12 [color="steelblue1",style="solid"];
+  Node12 [label="spi_set_peripheral\l_chip_select_value",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__spi__group.html#ga71131f0a9772ac93eeb6af52a1101ecc",tooltip="Set Peripheral Chip Select (PCS) value."];
+}

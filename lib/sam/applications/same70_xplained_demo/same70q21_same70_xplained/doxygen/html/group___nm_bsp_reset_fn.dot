@@ -1,0 +1,11 @@
+digraph "nm_bsp_reset"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir=LR;
+  Node2 [label="Functions",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___b_s_p_a_p_i.html",tooltip="Lists the available BSP (Board Support Package) APIs."];
+  Node1 [label="nm_bsp_reset",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Resets the WINC SoC by setting CHIP_EN and RESET_N signals low, then after an appropriate delay,..."];
+  Node2->Node1 [shape=plaintext, dir="back", style="solid"];
+}

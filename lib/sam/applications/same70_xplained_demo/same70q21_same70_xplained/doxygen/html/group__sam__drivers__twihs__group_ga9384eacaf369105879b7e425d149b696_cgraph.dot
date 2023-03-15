@@ -1,0 +1,13 @@
+digraph "twihs_slave_init"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [label="twihs_slave_init",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Initialize TWIHS slave mode."];
+  Node1 -> Node2 [color="steelblue1",style="solid"];
+  Node2 [label="twihs_enable_slave_mode",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__twihs__group.html#ga6edb47fcd2a8a05066db312182eee3b3",tooltip="Enable TWIHS slave mode."];
+  Node1 -> Node3 [color="steelblue1",style="solid"];
+  Node3 [label="twihs_reset",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__twihs__group.html#ga2d338424d0b5e2114ba773223d29014a",tooltip="Reset TWIHS."];
+}

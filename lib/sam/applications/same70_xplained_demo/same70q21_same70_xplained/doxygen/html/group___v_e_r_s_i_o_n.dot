@@ -1,0 +1,15 @@
+digraph "Version"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir=LR;
+  Node1 [label="Version",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Describes the APIs for reading the version information of the WINC firmware."];
+  Node4 [label="Functions",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___v_e_r_s_i_o_n_a_p_i.html",tooltip="Lists the APIs for reading the version information of the WINC firmware."];
+  Node3 [label="Defines",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___v_e_r_s_i_o_n_d_e_f.html",tooltip="Specifies the macros and defines used by the version APIs."];
+  Node2 [label="WLAN",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__m2m__wifi.html",tooltip=" "];
+  Node2->Node1 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node3 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node4 [shape=plaintext, dir="back", style="solid"];
+}

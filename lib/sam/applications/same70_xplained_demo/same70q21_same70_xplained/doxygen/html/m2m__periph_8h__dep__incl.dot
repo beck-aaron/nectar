@@ -1,0 +1,12 @@
+digraph "m2m_periph.h"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [label="m2m_periph.h",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="WINC Peripherals Application Interface."];
+  Node1 -> Node2 [dir="back",color="steelblue1",style="solid"];
+  Node2 [label="m2m_hif.c",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$m2m__hif_8c.html",tooltip="This module contains M2M host interface APIs implementation."];
+  Node1 -> Node3 [dir="back",color="steelblue1",style="solid"];
+  Node3 [label="m2m_periph.c",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$m2m__periph_8c.html",tooltip="NMC1500 Peripherials Application Interface."];
+}

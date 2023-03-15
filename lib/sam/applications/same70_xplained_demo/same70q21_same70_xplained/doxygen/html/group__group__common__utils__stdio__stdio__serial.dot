@@ -1,0 +1,11 @@
+digraph "Standard serial I/O (stdio)"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir=LR;
+  Node2 [label="Standard I/O (stdio)",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__group__common__utils__stdio.html",tooltip="Common standard I/O driver that implements the stdio read and write functions on AVR and SAM devices."];
+  Node1 [label="Standard serial I/O\l (stdio)",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Common standard serial I/O management driver that implements a stdio serial interface on AVR and SAM ..."];
+  Node2->Node1 [shape=plaintext, dir="back", style="solid"];
+}

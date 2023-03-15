@@ -1,0 +1,10 @@
+digraph "Tc"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{Tc\n|+ Reserved1\l+ Reserved2\l+ TC_BCR\l+ TC_BMR\l+ TC_FMR\l+ TC_QIDR\l+ TC_QIER\l+ TC_QIMR\l+ TC_QISR\l+ TC_VER\l+ TC_WPMR\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node2 -> Node1 [color="grey25",style="solid",label=" +TC_CHANNEL" ,arrowhead="odiamond"];
+  Node2 [shape=record,label="{TcChannel\n|+ Reserved1\l+ TC_CCR\l+ TC_CMR\l+ TC_CV\l+ TC_EMR\l+ TC_IDR\l+ TC_IER\l+ TC_IMR\l+ TC_RA\l+ TC_RAB\l+ TC_RB\l+ TC_RC\l+ TC_SMMR\l+ TC_SR\l|}",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$struct_tc_channel.html",tooltip="TcChannel hardware registers."];
+}

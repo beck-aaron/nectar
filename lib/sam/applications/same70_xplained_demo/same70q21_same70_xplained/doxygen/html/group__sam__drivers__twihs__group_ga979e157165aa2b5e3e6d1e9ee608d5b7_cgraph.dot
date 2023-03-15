@@ -1,0 +1,11 @@
+digraph "twihs_master_read"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [label="twihs_master_read",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Read multiple bytes from a TWIHS compatible slave device."];
+  Node1 -> Node2 [color="steelblue1",style="solid"];
+  Node2 [label="twihs_mk_addr",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__twihs__group.html#gaca9e29e230ee2774cfc3dc7ed497f887",tooltip="Construct the TWIHS module address register field."];
+}

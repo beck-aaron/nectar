@@ -1,0 +1,22 @@
+digraph "socket.h"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [label="socket.h",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="WINC BSD compatible Socket Interface."];
+  Node1 -> Node2 [dir="back",color="steelblue1",style="solid"];
+  Node2 [label="m2m_socket_host_if.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$m2m__socket__host__if_8h.html",tooltip="BSD compatible socket interface internal types."];
+  Node2 -> Node3 [dir="back",color="steelblue1",style="solid"];
+  Node3 [label="socket_internal.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$socket__internal_8h.html",tooltip="BSD compatible socket interface internal types."];
+  Node3 -> Node4 [dir="back",color="steelblue1",style="solid"];
+  Node4 [label="socket.c",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$socket_8c.html",tooltip="BSD compatible socket interface."];
+  Node1 -> Node5 [dir="back",color="steelblue1",style="solid"];
+  Node5 [label="m2m_ssl.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$m2m__ssl_8h.html",tooltip="WINC Application Interface Internal Types."];
+  Node5 -> Node6 [dir="back",color="steelblue1",style="solid"];
+  Node6 [label="m2m_ssl.c",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$m2m__ssl_8c.html",tooltip="This module contains M2M Wi-Fi SSL APIs implementation."];
+  Node1 -> Node7 [dir="back",color="steelblue1",style="solid"];
+  Node7 [label="main.c",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$main_8c.html",tooltip="SAME70 Weather Client Demo Example."];
+  Node1 -> Node4 [dir="back",color="steelblue1",style="solid"];
+  Node1 -> Node3 [dir="back",color="steelblue1",style="solid"];
+}

@@ -1,0 +1,19 @@
+digraph "Function"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir=LR;
+  Node2 [label="Spi Flash",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___s_p_i_f_l_a_s_h.html",tooltip=" "];
+  Node1 [label="Function",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node6 [label="spi_flash_erase",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___s_pi_flash_erase.html",tooltip=" "];
+  Node4 [label="spi_flash_get_size",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___s_pi_flash_get_fn.html",tooltip=" "];
+  Node3 [label="spi_flexible_flash\l_find_section",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___s_pi_flash_read.html",tooltip=" "];
+  Node5 [label="spi_flash_write",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___s_pi_flash_write.html",tooltip=" "];
+  Node2->Node1 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node3 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node4 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node5 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node6 [shape=plaintext, dir="back", style="solid"];
+}

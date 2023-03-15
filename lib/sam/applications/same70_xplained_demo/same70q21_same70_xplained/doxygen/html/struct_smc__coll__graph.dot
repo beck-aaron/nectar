@@ -1,0 +1,10 @@
+digraph "Smc"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{Smc\n|+ Reserved1\l+ Reserved2\l+ Reserved3\l+ SMC_KEY1\l+ SMC_KEY2\l+ SMC_OCMS\l+ SMC_VERSION\l+ SMC_WPMR\l+ SMC_WPSR\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node2 -> Node1 [color="grey25",style="solid",label=" +SMC_CS_NUMBER" ,arrowhead="odiamond"];
+  Node2 [shape=record,label="{SmcCs_number\n|+ SMC_CYCLE\l+ SMC_MODE\l+ SMC_PULSE\l+ SMC_SETUP\l|}",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$struct_smc_cs__number.html",tooltip="SmcCs_number hardware registers."];
+}

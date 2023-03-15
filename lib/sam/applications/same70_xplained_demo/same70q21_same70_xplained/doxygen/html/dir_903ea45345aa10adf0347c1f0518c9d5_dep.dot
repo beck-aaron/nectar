@@ -1,0 +1,16 @@
+digraph "cmsis"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  compound=true
+  subgraph clusterdir_7dbb3f8d9b3c7f1bbfe241818c433d10 {
+    graph [ bgcolor="#edf0f7", pencolor="grey25", label="utils", fontname=FreeSans,fontsize=10 style="filled,dashed", URL="dir_7dbb3f8d9b3c7f1bbfe241818c433d10.html",tooltip=""]
+  subgraph clusterdir_903ea45345aa10adf0347c1f0518c9d5 {
+    graph [ bgcolor="#edf0f7", pencolor="grey25", label="", fontname=FreeSans,fontsize=10 style="filled,bold", URL="dir_903ea45345aa10adf0347c1f0518c9d5.html",tooltip=""]
+    dir_903ea45345aa10adf0347c1f0518c9d5 [shape=plaintext, label="cmsis"];
+  dir_ce31852ed2135ff3a989ef6e2cbff7f5 [label="same70", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_ce31852ed2135ff3a989ef6e2cbff7f5.html",tooltip=""];
+  }
+  }
+}

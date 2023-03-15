@@ -1,0 +1,10 @@
+digraph "Gmac"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{Gmac\n|+ GMAC_AE\l+ GMAC_BCFR\l+ GMAC_BCFT\l+ GMAC_BFR64\l+ GMAC_BFT64\l+ GMAC_CBSCR\l+ GMAC_CBSISQA\l+ GMAC_CBSISQB\l+ GMAC_CSE\l+ GMAC_DCFGR\land 171 more...\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node2 -> Node1 [color="grey25",style="solid",label=" +GMAC_SA" ,arrowhead="odiamond"];
+  Node2 [shape=record,label="{GmacSa\n|+ GMAC_SAB\l+ GMAC_SAT\l|}",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$struct_gmac_sa.html",tooltip="GmacSa hardware registers."];
+}

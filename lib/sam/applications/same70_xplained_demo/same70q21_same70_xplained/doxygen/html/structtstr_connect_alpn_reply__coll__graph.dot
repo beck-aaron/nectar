@@ -1,0 +1,10 @@
+digraph "tstrConnectAlpnReply"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{tstrConnectAlpnReply\n|+ __PAD24__\l+ u8AppProtocolIdx\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Connect Reply, contains sock number, error value and index of negotiated application protocol."];
+  Node2 -> Node1 [color="grey25",style="solid",label=" +strConnReply" ,arrowhead="odiamond"];
+  Node2 [shape=record,label="{tstrConnectReply\n|+ @3\l+ s8Error\l+ sock\l+ u16AppDataOffset\l+ u8ErrCode\l+ u8ErrSource\l|}",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$structtstr_connect_reply.html",tooltip="Connect Reply, contains sock number and error value."];
+}

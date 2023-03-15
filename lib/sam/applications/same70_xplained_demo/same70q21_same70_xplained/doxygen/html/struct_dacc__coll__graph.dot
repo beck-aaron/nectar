@@ -1,0 +1,8 @@
+digraph "Dacc"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{Dacc\n|+ DACC_ACR\l+ DACC_CDR\l+ DACC_CHDR\l+ DACC_CHER\l+ DACC_CHSR\l+ DACC_CR\l+ DACC_IDR\l+ DACC_IER\l+ DACC_IMR\l+ DACC_ISR\land 9 more...\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Dacc hardware registers."];
+}

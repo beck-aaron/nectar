@@ -1,0 +1,8 @@
+digraph "Utmi"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{Utmi\n|+ Reserved1\l+ Reserved2\l+ UTMI_CKTRIM\l+ UTMI_OHCIICR\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Utmi hardware registers."];
+}

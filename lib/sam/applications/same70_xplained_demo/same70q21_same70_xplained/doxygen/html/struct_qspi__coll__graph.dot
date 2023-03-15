@@ -1,0 +1,8 @@
+digraph "Qspi"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{Qspi\n|+ QSPI_CR\l+ QSPI_IAR\l+ QSPI_ICR\l+ QSPI_IDR\l+ QSPI_IER\l+ QSPI_IFR\l+ QSPI_IMR\l+ QSPI_MR\l+ QSPI_RDR\l+ QSPI_SCR\land 11 more...\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Qspi hardware registers."];
+}

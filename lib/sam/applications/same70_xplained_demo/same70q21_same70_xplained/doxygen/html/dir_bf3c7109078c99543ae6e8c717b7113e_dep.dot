@@ -1,0 +1,16 @@
+digraph "same70"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  compound=true
+  subgraph clusterdir_410424a981c6afa253b7eef69e83a965 {
+    graph [ bgcolor="#edf0f7", pencolor="grey50", label="clock", fontname=FreeSans,fontsize=10 style="filled,dashed", URL="dir_410424a981c6afa253b7eef69e83a965.html",tooltip=""]
+  dir_bf3c7109078c99543ae6e8c717b7113e [label="same70", fillcolor="#edf0f7", color="grey25", style="filled,bold", URL="dir_bf3c7109078c99543ae6e8c717b7113e.html",tooltip=""];
+  }
+  dir_0436d9f603714fe0a7ad8b8c102355f5 [label="boards", fillcolor="#edf0f7", color="grey50", style="filled", URL="dir_0436d9f603714fe0a7ad8b8c102355f5.html",tooltip=""];
+  dir_23452eaafd74a0dfcbccff24142d67ec [label="drivers", fillcolor="#edf0f7", color="red", style="filled", URL="dir_23452eaafd74a0dfcbccff24142d67ec.html",tooltip=""];
+  dir_bf3c7109078c99543ae6e8c717b7113e->dir_0436d9f603714fe0a7ad8b8c102355f5 [headlabel="1", labeldistance=1.5 headhref="dir_000044_000000.html" color="steelblue1" fontcolor="steelblue1"];
+  dir_bf3c7109078c99543ae6e8c717b7113e->dir_23452eaafd74a0dfcbccff24142d67ec [headlabel="1", labeldistance=1.5 headhref="dir_000044_000014.html" color="steelblue1" fontcolor="steelblue1"];
+}

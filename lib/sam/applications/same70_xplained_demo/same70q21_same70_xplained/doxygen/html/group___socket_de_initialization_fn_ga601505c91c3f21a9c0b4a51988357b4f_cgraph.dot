@@ -1,0 +1,13 @@
+digraph "socketDeinit"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [label="socketDeinit",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="steelblue1",style="solid"];
+  Node2 [label="hif_register_cb",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$m2m__hif_8c.html#a63f14be680fcf28f96912ee6e6f28be9",tooltip=" "];
+  Node1 -> Node3 [color="steelblue1",style="solid"];
+  Node3 [label="m2m_memset",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___c_o_m_m_o_n_a_p_i.html#ga245e71a174d65f12926883f76752df93",tooltip="Set specified number of data bytes in specified data buffer to specified value."];
+}

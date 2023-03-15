@@ -1,0 +1,13 @@
+digraph "flash_init"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [label="flash_init",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Initialize the flash service."];
+  Node1 -> Node2 [color="steelblue1",style="solid"];
+  Node2 [label="efc_init",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__efc__group.html#ga4388e032f274942c2e1c59ad87dd7e6d",tooltip="Initialize the EFC controller."];
+  Node2 -> Node3 [color="steelblue1",style="solid"];
+  Node3 [label="efc_write_fmr",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__efc__group.html#ga3107655bd6525e135e2d89faa4e45a87",tooltip="Set mode register."];
+}

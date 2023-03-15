@@ -1,0 +1,8 @@
+digraph "Afec"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{Afec\n|+ AFEC_ACR\l+ AFEC_CDR\l+ AFEC_CECR\l+ AFEC_CGR\l+ AFEC_CHDR\l+ AFEC_CHER\l+ AFEC_CHSR\l+ AFEC_COCR\l+ AFEC_COSR\l+ AFEC_CR\land 27 more...\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Afec hardware registers."];
+}

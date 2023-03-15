@@ -1,0 +1,10 @@
+digraph "sockaddr_in"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{sockaddr_in\n|+ sin_family\l+ sin_port\l+ sin_zero\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Socket address structure for IPV4 addresses. Used to specify socket address information to connect to..."];
+  Node2 -> Node1 [color="grey25",style="solid",label=" +sin_addr" ,arrowhead="odiamond"];
+  Node2 [shape=record,label="{in_addr\n|+ s_addr\l|}",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$structin__addr.html",tooltip="IPv4 address representation."];
+}

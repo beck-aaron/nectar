@@ -1,0 +1,27 @@
+digraph "xdmac_configure_transfer"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [label="xdmac_configure_transfer",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Configure DMA for a transfer."];
+  Node1 -> Node2 [color="steelblue1",style="solid"];
+  Node2 [label="xdmac_channel_get_interrupt\l_status",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__asfdoc__sam__drivers__xdmac__group.html#gaaa65d650e99426cacf850b28f61a997e",tooltip="Get interrupt status for the relevant channel of given XDMA."];
+  Node1 -> Node3 [color="steelblue1",style="solid"];
+  Node3 [label="xdmac_channel_set_block\l_control",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__asfdoc__sam__drivers__xdmac__group.html#ga8864b90d98ae141f35b982f3c19a31bd",tooltip="Set block length for the relevant channel of given XDMA."];
+  Node1 -> Node4 [color="steelblue1",style="solid"];
+  Node4 [label="xdmac_channel_set_config",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__asfdoc__sam__drivers__xdmac__group.html#ga377ad90016e8f0afa7141bd7dc698dd1",tooltip="Set configuration for the relevant channel of given XDMA."];
+  Node1 -> Node5 [color="steelblue1",style="solid"];
+  Node5 [label="xdmac_channel_set_datastride\l_mempattern",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__asfdoc__sam__drivers__xdmac__group.html#gaf8617103c93e85b6b670b88b3b97162c",tooltip="Set the relevant channel's data stride memory pattern of given XDMA."];
+  Node1 -> Node6 [color="steelblue1",style="solid"];
+  Node6 [label="xdmac_channel_set_destination_addr",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__asfdoc__sam__drivers__xdmac__group.html#gae381953fe27fc0247edd2a974f937483",tooltip="Set destination address for the relevant channel of given XDMA."];
+  Node1 -> Node7 [color="steelblue1",style="solid"];
+  Node7 [label="xdmac_channel_set_destination\l_microblock_stride",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__asfdoc__sam__drivers__xdmac__group.html#gafd7638abda8f7780d8cb567dec370ddb",tooltip="Set the relevant channel's destination microblock stride of given XDMA."];
+  Node1 -> Node8 [color="steelblue1",style="solid"];
+  Node8 [label="xdmac_channel_set_microblock\l_control",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__asfdoc__sam__drivers__xdmac__group.html#ga65b381c2a55b590099c58ab343f72b84",tooltip="Set microblock length for the relevant channel of given XDMA."];
+  Node1 -> Node9 [color="steelblue1",style="solid"];
+  Node9 [label="xdmac_channel_set_source_addr",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__asfdoc__sam__drivers__xdmac__group.html#gaddaf82ea63d2610d09b237c301bd7be7",tooltip="Set source address for the relevant channel of given XDMA."];
+  Node1 -> Node10 [color="steelblue1",style="solid"];
+  Node10 [label="xdmac_channel_set_source\l_microblock_stride",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__asfdoc__sam__drivers__xdmac__group.html#ga366c27d0affcc49459de333e79772a4d",tooltip="Set the relevant channel's source microblock stride of given XDMA."];
+}

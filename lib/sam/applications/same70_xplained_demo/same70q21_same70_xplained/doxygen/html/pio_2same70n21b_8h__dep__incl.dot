@@ -1,0 +1,10 @@
+digraph "same70n21b.h"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [label="same70n21b.h",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Copyright (c) 2018 Microchip Technology Inc."];
+  Node1 -> Node2 [dir="back",color="steelblue1",style="solid"];
+  Node2 [label="same70n21b.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$same70n21b_8h.html",tooltip="Copyright (c) 2017-2019 Microchip Technology Inc."];
+}

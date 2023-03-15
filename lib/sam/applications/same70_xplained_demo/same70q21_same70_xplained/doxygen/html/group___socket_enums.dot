@@ -1,0 +1,13 @@
+digraph "DataTypes"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir=LR;
+  Node3 [label="Asynchronous Events",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___async_callback.html",tooltip="Specific Enumeration used for asynchronous operations."];
+  Node1 [label="DataTypes",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Specific Enumeration-typedefs used for socket operations."];
+  Node2 [label="Socket",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___socket_header.html",tooltip="BSD compatible socket interface between the host layer and the network protocol stacks in the firmwar..."];
+  Node2->Node1 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node3 [shape=plaintext, dir="back", style="solid"];
+}

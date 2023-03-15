@@ -1,0 +1,10 @@
+digraph "spi_master.h"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [label="spi_master.h",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="SPI Master Mode management."];
+  Node1 -> Node2 [color="steelblue1",style="solid"];
+  Node2 [label="parts.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$parts_8h.html",tooltip="Atmel part identification macros."];
+}

@@ -1,0 +1,11 @@
+digraph "pio_toggle_pin"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [label="pio_toggle_pin",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Toggle a GPIO pin."];
+  Node1 -> Node2 [color="steelblue1",style="solid"];
+  Node2 [label="pio_get_pin_group",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__pio__group.html#gaf37309a52c59d5e2116d649f6fdd98c9",tooltip="Return GPIO port for a GPIO pin."];
+}

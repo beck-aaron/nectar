@@ -119,4 +119,6 @@
 
 #include <string.h>
 
+#include <time.h>
+
 #endif // ASF_H

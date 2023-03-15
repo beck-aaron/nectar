@@ -1,0 +1,14 @@
+digraph "sam"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  compound=true
+  subgraph clusterdir_9645825f65c2b6c4f14d3d5165c75afa {
+    graph [ bgcolor="#edf0f7", pencolor="grey50", label="delay", fontname=FreeSans,fontsize=10 style="filled,dashed", URL="dir_9645825f65c2b6c4f14d3d5165c75afa.html",tooltip=""]
+  dir_1ccd00a003bd8f5c648db57d0b7297ce [label="sam", fillcolor="#edf0f7", color="grey25", style="filled,bold", URL="dir_1ccd00a003bd8f5c648db57d0b7297ce.html",tooltip=""];
+  }
+  dir_7dbb3f8d9b3c7f1bbfe241818c433d10 [label="utils", fillcolor="#edf0f7", color="red", style="filled", URL="dir_7dbb3f8d9b3c7f1bbfe241818c433d10.html",tooltip=""];
+  dir_1ccd00a003bd8f5c648db57d0b7297ce->dir_7dbb3f8d9b3c7f1bbfe241818c433d10 [headlabel="1", labeldistance=1.5 headhref="dir_000039_000068.html" color="steelblue1" fontcolor="steelblue1"];
+}

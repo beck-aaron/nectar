@@ -1,0 +1,21 @@
+digraph "Socket"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir=LR;
+  Node7 [label="Byte Order",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___s_o_c_k_e_t_b_y_t_e_o_r_d_e_r.html",tooltip="The following list of macros are used to convert between host representation and network byte order."];
+  Node6 [label="Functions",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___socket_a_p_i.html",tooltip=" "];
+  Node5 [label="Callbacks",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___socket_callbacks.html",tooltip=" "];
+  Node2 [label="Defines",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___socket_defines.html",tooltip=" "];
+  Node4 [label="DataTypes",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___socket_enums.html",tooltip="Specific Enumeration-typedefs used for socket operations."];
+  Node3 [label="Error Codes",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___socket_error_code.html",tooltip="The following list of macros are used to define the possible error codes."];
+  Node1 [label="Socket",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="BSD compatible socket interface between the host layer and the network protocol stacks in the firmwar..."];
+  Node1->Node2 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node3 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node4 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node5 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node6 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node7 [shape=plaintext, dir="back", style="solid"];
+}

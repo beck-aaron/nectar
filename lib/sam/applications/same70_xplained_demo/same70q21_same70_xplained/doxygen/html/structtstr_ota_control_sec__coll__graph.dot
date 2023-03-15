@@ -1,0 +1,8 @@
+digraph "tstrOtaControlSec"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{tstrOtaControlSec\n|+ u32OtaControlSecCrc\l+ u32OtaCortusAppRollbackOffset\l+ u32OtaCortusAppRollbackValidSts\l+ u32OtaCortusAppRollbackVer\l+ u32OtaCortusAppWorkingOffset\l+ u32OtaCortusAppWorkingValidSts\l+ u32OtaCortusAppWorkingVer\l+ u32OtaCurrentworkingImag\lFirmwareVer\l+ u32OtaCurrentworkingImag\lOffset\l+ u32OtaFormatVersion\land 6 more...\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Control Section Structure. The Control Section is used to define the working image and the validity o..."];
+}

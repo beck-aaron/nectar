@@ -1,0 +1,39 @@
+digraph "same70_xplained.h"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [label="same70_xplained.h",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="SAME70-XPLD Board Definition."];
+  Node1 -> Node2 [color="steelblue1",style="solid"];
+  Node2 [label="compiler.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$compiler_8h.html",tooltip="Commonly used includes, types and macros."];
+  Node2 -> Node3 [color="steelblue1",style="solid"];
+  Node3 [label="stddef.h",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+  Node2 -> Node4 [color="steelblue1",style="solid"];
+  Node4 [label="parts.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$parts_8h.html",tooltip="Atmel part identification macros."];
+  Node2 -> Node5 [color="steelblue1",style="solid"];
+  Node5 [label="preprocessor.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$preprocessor_8h.html",tooltip="Preprocessor utils."];
+  Node5 -> Node6 [color="steelblue1",style="solid"];
+  Node6 [label="tpaste.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$tpaste_8h.html",tooltip="Preprocessor token pasting utils."];
+  Node5 -> Node7 [color="steelblue1",style="solid"];
+  Node7 [label="stringz.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$stringz_8h.html",tooltip="Preprocessor stringizing utils."];
+  Node5 -> Node8 [color="steelblue1",style="solid"];
+  Node8 [label="mrepeat.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$mrepeat_8h.html",tooltip="Preprocessor macro repeating utils."];
+  Node8 -> Node5 [color="steelblue1",style="solid"];
+  Node2 -> Node9 [color="steelblue1",style="solid"];
+  Node9 [label="io.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$io_8h.html",tooltip="Arch file for SAM."];
+  Node2 -> Node10 [color="steelblue1",style="solid"];
+  Node10 [label="stdio.h",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+  Node2 -> Node11 [color="steelblue1",style="solid"];
+  Node11 [label="stdbool.h",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+  Node2 -> Node12 [color="steelblue1",style="solid"];
+  Node12 [label="stdint.h",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+  Node2 -> Node13 [color="steelblue1",style="solid"];
+  Node13 [label="stdlib.h",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+  Node2 -> Node14 [color="steelblue1",style="solid"];
+  Node14 [label="interrupt.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$interrupt_8h.html",tooltip="Global interrupt management for 8- and 32-bit AVR."];
+  Node14 -> Node4 [color="steelblue1",style="solid"];
+  Node1 -> Node15 [color="steelblue1",style="solid"];
+  Node15 [label="system_same70.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$system__same70_8h.html",tooltip="Copyright (c) 2015-2018 Microchip Technology Inc."];
+  Node15 -> Node12 [color="steelblue1",style="solid"];
+}
