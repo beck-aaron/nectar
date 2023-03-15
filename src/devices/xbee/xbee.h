@@ -8,41 +8,37 @@
 
 #define XBEE_MAX_TX         256  // arbitrary values for now.
 #define XBEE_MAX_RX         256  // represent tx & rx buffer size for each device
-#define receive_xbee XBEE_UART_HANDLER
+#define xbee_uart_handler   XBEE_UART_HANDLER
 
-void test_xbee(void);
-void encode_xbee(void);
-void decode_xbee(void);
-void configure_xbee(void);
-void transmit_xbee(void);
+void xbee_test(void);
+void xbee_encode(void);
+void xbee_decode(void);
+void xbee_transmit(void);
+void xbee_receive(void);
+void xbee_force_receive(void);
+void xbee_configure(void);
 
 typedef struct
 {
+    volatile bool received_api_frame;
+    uint64_t coordinator_address_64;
+    uint16_t coordinator_address_16;
+
     // XBee/XBee-PRO® S2C Zigbee® RF Module User Guide - pg 171
     uint8_t     delimiter;
     uint16_t    length;
+    api_frame_t api_frame;
     uint8_t     checksum;
 
-    struct
-    {
-        uint8_t cmdID;
-
-        union
-        {
-            at_command_t        at_command;
-            transmit_request_t  transmit_request;
-        };
-
-    } api_frame;
-
-    vector_t* tx_buffer;
-    vector_t* rx_buffer;
+    vector_t tx_buffer;
+    vector_t rx_buffer;
 
     void (*test)(void);
     void (*encode)(void);
     void (*decode)(void);    // decodes the data within the rx buffer
-    void (*configure)(void); // sets xbee device parameters
     void (*transmit)(void);  // transmits the encoded data within the payload
+    void (*receive)(void);   // checks if UART is not ready and logs received data
+    void (*configure)(void); // sets xbee device parameters
 
 } xbee_t;
 
