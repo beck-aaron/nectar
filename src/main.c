@@ -7,26 +7,30 @@
  * important information.
  *
  ******************************************************************************/
-#include <asf.h>
-#include <devices.h>
-#include <logger.h>
+#include "nectar.h"
 
-xbee_t xbee;
+nectar_t nectar;
 
 int main(void)
 {
     sysclk_init();
     board_init();
 
-    // initialize all external devices
-    devices_init();
+    nectar.init();
 
-    // signal initialization is complete
-    LED_On(LED0);
+    xbee.test();
 
     while(1)
     {   // main loop
+
+        // fetch data, format into packet, then send
+        // sending should be done using dma controller.
+        // we should be able to place our payloads in memory
+        // and have the dma controller automatically send them.
         LED_Toggle(LED0);
-        delay_ms(500);   
+
+        xbee.receive();
+
+        delay_ms(250);
     }
 }
