@@ -25,6 +25,7 @@ CPPFLAGS_INCLUDES = -I$(ASFDIR) \
 		-I$(ASFDIR)/common/services/ioport                             \
 		-I$(ASFDIR)/common/services/ioport/sam                         \
 		-I$(ASFDIR)/common/services/serial                             \
+		-I$(ASFDIR)/common/services/calendar                           \
 		-I$(ASFDIR)/common/services/serial/sam_uart                    \
 		-I$(ASFDIR)/common/services/spi                                \
 		-I$(ASFDIR)/common/services/spi/sam_spi                        \
@@ -38,6 +39,7 @@ CPPFLAGS_INCLUDES = -I$(ASFDIR) \
 		-I$(ASFDIR)/sam/drivers/pio                                    \
 		-I$(ASFDIR)/sam/drivers/pmc                                    \
 		-I$(ASFDIR)/sam/drivers/rtt                                    \
+		-I$(ASFDIR)/sam/drivers/rtc                                    \
 		-I$(ASFDIR)/sam/drivers/uart                                   \
 		-I$(ASFDIR)/sam/drivers/usart                                  \
 		-I$(ASFDIR)/sam/services/flash_efc                             \
@@ -67,6 +69,7 @@ TARGET = $(BUILDDIR)/nectar-driver.elf
 
 OBJECTS = $(BUILDDIR)/common/services/clock/same70/sysclk.o                         \
 		  $(BUILDDIR)/common/services/serial/usart_serial.o                         \
+		  $(BUILDDIR)/common/services/calendar/calendar.o                           \
 		  $(BUILDDIR)/common/services/delay/sam/cycle_counter.o          			\
           $(BUILDDIR)/common/utils/interrupt/interrupt_sam_nvic.o                   \
           $(BUILDDIR)/common/utils/stdio/read.o                                     \
@@ -74,12 +77,14 @@ OBJECTS = $(BUILDDIR)/common/services/clock/same70/sysclk.o                     
           $(BUILDDIR)/sam/boards/same70_xplained/init.o                             \
           $(BUILDDIR)/sam/drivers/pmc/pmc.o                                         \
           $(BUILDDIR)/sam/drivers/mpu/mpu.o                                         \
+		  $(BUILDDIR)/sam/drivers/rtc/rtc.o                              			\
           $(BUILDDIR)/sam/drivers/uart/uart.o                                       \
           $(BUILDDIR)/sam/drivers/usart/usart.o                                     \
 		  $(BUILDDIR)/sam/drivers/matrix/matrix.o                        			\
           $(BUILDDIR)/sam/utils/cmsis/same70/source/templates/gcc/startup_same70.o  \
           $(BUILDDIR)/sam/utils/cmsis/same70/source/templates/system_same70.o       \
           $(BUILDDIR)/sam/utils/syscalls/gcc/syscalls.o                             \
+		  $(BUILDDIR)/utils/clock.o    												\
 		  $(BUILDDIR)/devices/devices.o												\
 		  $(BUILDDIR)/devices/coz_ir/coz_ir.o										\
 		  $(BUILDDIR)/devices/telaire/telaire.o										\
