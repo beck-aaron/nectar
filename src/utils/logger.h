@@ -39,7 +39,7 @@
 #ifndef _LOGGER_H_
 #define _LOGGER_H_
 
-#include <asf.h>
+#include <stdio.h>
 #include <ctype.h>
 #include <vector.h>
 
@@ -57,19 +57,19 @@
 #define RX_COLOR            "\x1b[38;5;221m"    // yellow rx color
 #define COLOR_RESET         "\x1b[0m"           // reset default color
 
-#define LINE_LENGTH 0x10
+#define LOGGER_LINE_LENGTH 0x10
 #define LOGGER_START_MESSAGE "\r\n\
 ************** NECTAR LOGGER **************\r\n\
 *       version:      0.0.1               *\r\n\
 *     interface:      USART1              *\r\n\
 *      baudrate:      115200              *\r\n\
-*      compiled:     "__DATE__ "          *\r\n\
+*      compiled:      "__TIME__ "            *\r\n\
 *******************************************\r\n"
 
-void log_time(void);
-void log_level(uint8_t loglevel);
-void log_hexdump(void* hex, size_t size);
-void log_endl(void);
+inline static void log_time(void);
+inline static void log_level(uint8_t loglevel);
+inline static void log_hexdump(uint8_t* hex, size_t size);
+inline static void log_endl(void);
 
 #define LOG(LEVEL, ...) \
     log_time(); \
@@ -83,8 +83,84 @@ void log_endl(void);
     log_level(LEVEL); \
     printf(LABEL); \
     printf(COLOR_RESET HEX_COLOR); \
-    log_hexdump(BUFFER, LENGTH); \
+    log_hexdump((uint8_t*)BUFFER, LENGTH); \
     printf(COLOR_RESET); \
     log_endl();
+
+inline static void log_time(void)
+{
+    printf("%02x:%02x:%02x", 0x00, 0x00, 0x00);
+}
+
+inline static void log_level(uint8_t loglevel)
+{
+    switch(loglevel)
+    {
+        case DEBUG_LEVEL: default:
+            printf(" %s  ", DEBUG_COLOR "[DEBUG]");
+            break;
+        case WARNING_LEVEL:
+            printf(" %s  ", WARNING_COLOR "[WARNING]");
+            break;
+        case ERROR_LEVEL:
+            printf(" %s  ", ERROR_COLOR "[ERROR]");
+            break;
+        case TX_LEVEL:
+            printf(" %s  ", TX_COLOR "[TX DATA]");
+            break;
+        case RX_LEVEL:
+            printf(" %s  ", RX_COLOR "[RX DATA]");
+            break;
+    }
+}
+
+inline static void log_hexdump(uint8_t* byte, size_t size)
+{
+    vector_t line;
+    vector_init(LOGGER_LINE_LENGTH, &line);
+    log_endl();
+
+    for (size_t j = 0; j < size; j += 0x10)
+    {
+        printf(" %04X ", j);
+
+        for (size_t i = 0; i < LOGGER_LINE_LENGTH; ++i)
+        {
+            if (i % 8 == 0)
+                putchar(' ');
+
+            if (i+j < size) 
+                printf("%02X ", byte[i+j]);
+            else
+                printf("%3s", "");
+
+            vector_push(&(byte)[i+j], sizeof(*byte), &line);
+        }
+
+        putchar(' ');
+
+        for (size_t i = 0; i < LOGGER_LINE_LENGTH; ++i)
+        {
+            if (iscntrl(line.data[i]))
+            {
+                putchar('.');
+                continue;
+            }
+
+            putchar(line.data[i]);
+        }
+
+        vector_clear(&line);
+        log_endl();
+    }
+
+    vector_destroy(&line);
+    log_endl();
+}
+
+inline static void log_endl(void)
+{
+    printf("\r\n");
+}
 
 #endif // _LOGGER_H_
