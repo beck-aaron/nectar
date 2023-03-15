@@ -9,31 +9,59 @@
 
 #include "devices.h"
 
+inline static void logger_init(void);
+inline static void xbee_init(void);
+inline static void coz_ir_init(void);
+inline static void telaire_init(void);
+inline static void trisonica_init(void);
+
 void devices_init(void)
 {
-    init_serial_stdio(LOGGER);
-    LOG(DEBUG_LEVEL, "Initialized Logger serial interface.");
-
-    init_serial_uart(TELAIRE);
-    LOG(DEBUG_LEVEL, "Initialized Telaire serial interface.");
-
-    init_serial_uart(TRISONICA);
-    LOG(DEBUG_LEVEL, "Initialized Trisonica Mini serial interface.");
-
-    init_serial_uart(COZ_IR);
-    LOG(DEBUG_LEVEL, "Initialized CoZ-IR serial interface.");
-
-    init_xbee();
+    logger_init();
+    xbee_init();
+    telaire_init();
+    trisonica_init();
+    coz_ir_init();
 }
 
-void init_xbee(void)
+inline static void xbee_init(void)
 {
-    xbee.tx_buffer = vector_init(XBEE_MAX_TX);
-    xbee.rx_buffer = vector_init(XBEE_MAX_RX);
+    // TODO setup XDMAC for device
+    // use interrupt to LOG tranfered data
+    // or set a status flag
+    vector_init(XBEE_MAX_TX, &xbee.tx_buffer);
+    vector_init(XBEE_MAX_RX, &xbee.rx_buffer);
     usart_enable_interrupt(XBEE_UART, US_IER_RXRDY);
-    irq_register_handler(XBEE_UART_IRQ, 1);
-    init_serial_uart(XBEE);
+    usart_enable_interrupt(XBEE_UART, US_IER_OVRE);
+
+    irq_register_handler(XBEE_UART_IRQn, 1);
+    serial_uart_init(XBEE);
 
     xbee.configure();
-    LOG(DEBUG_LEVEL, "Initialized Xbee serial interface.");
+    LOG(DEBUG_LEVEL, "Initialized serial interface for xbee.");
+}
+
+inline static void logger_init(void)
+{
+    serial_stdio_init(LOGGER);
+    puts(LOGGER_START_MESSAGE);
+    LOG(DEBUG_LEVEL, "Initialized serial interface for logger.");
+}
+
+inline static void telaire_init(void)
+{
+    serial_uart_init(TELAIRE);
+    LOG(DEBUG_LEVEL, "Initialized serial interface for telaire.");
+}
+
+inline static void trisonica_init(void)
+{
+    serial_uart_init(TRISONICA);
+    LOG(DEBUG_LEVEL, "Initialized serial interface for trisonica mini.");
+}
+
+inline static void coz_ir_init(void)
+{
+    serial_uart_init(COZ_IR);
+    LOG(DEBUG_LEVEL, "Initialized serial interface for coz-ir.");
 }
