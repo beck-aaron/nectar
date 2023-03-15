@@ -18,19 +18,16 @@ int main(void)
 
     nectar.init();
 
-    xbee.test();
-
+    // main loop
     while(1)
-    {   // main loop
-
+    {
         // fetch data, format into packet, then send
         // sending should be done using dma controller.
         // we should be able to place our payloads in memory
         // and have the dma controller automatically send them.
+        nectar.transmit();
         LED_Toggle(LED0);
-
-        xbee.receive();
-
+        nectar.receive();
         delay_ms(250);
     }
 }

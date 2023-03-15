@@ -19,21 +19,26 @@ static void nectar_init(void)
 {
     devices_init();
     LED_On(LED0);
+    xbee.test();
 }
 
 static void nectar_transmit(void)
 {
+    // TODO
     // check if conditions are right for sending a transmission
     // if they are, send the transmission
 }
 
 static void nectar_receive(void)
 {
+    // TODO
     // check if conditions are right for processing a received transmission
+    xbee.receive();
 }
 
 static void nectar_collect(void)
 {
+    // TODO
     // check if data is ready from sensors, if it is, format into a
     // subpayload and add to queue
 }
