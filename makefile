@@ -51,11 +51,8 @@ CPPFLAGS_INCLUDES = -I$(ASFDIR) \
 		-I$(ASFDIR)/thirdparty/CMSIS/Lib/GCC 						   \
 		-I$(GCCLIB)/include              	 						   \
 		-I$(SOURCEDIR)/config										   \
-		-I$(SOURCEDIR)/logger  										   \
 		-I$(SOURCEDIR)/devices 										   \
-		-I$(SOURCEDIR)/util    										   \
-		-I$(SOURCEDIR)/wireless/codec				   			  	   \
-		-I$(SOURCEDIR)/sensors
+		-I$(SOURCEDIR)/utils   										   \
 
 CPPFLAGS_DEFINES = -D ARM_MATH_CM7=true -D BOARD=SAME70_XPLAINED -D __SAME70Q21__
 
@@ -83,10 +80,12 @@ OBJECTS = $(BUILDDIR)/common/services/clock/same70/sysclk.o                     
           $(BUILDDIR)/sam/utils/cmsis/same70/source/templates/gcc/startup_same70.o  \
           $(BUILDDIR)/sam/utils/cmsis/same70/source/templates/system_same70.o       \
           $(BUILDDIR)/sam/utils/syscalls/gcc/syscalls.o                             \
-		  $(BUILDDIR)/logger/logger.o												\
 		  $(BUILDDIR)/devices/devices.o												\
+		  $(BUILDDIR)/devices/coz_ir/coz_ir.o										\
+		  $(BUILDDIR)/devices/telaire/telaire.o										\
+		  $(BUILDDIR)/devices/trisonica/trisonica.o									\
 		  $(BUILDDIR)/devices/xbee/xbee.o											\
-		  $(BUILDDIR)/util/vector.o 												\
+		  $(BUILDDIR)/nectar.o 														\
           $(BUILDDIR)/main.o
 
 .PHONY : clean default upload bear

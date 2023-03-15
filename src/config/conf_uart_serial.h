@@ -49,9 +49,8 @@
 
 /* Xbee wireless transmitter interface */
 #define XBEE_UART                   USART0                  // serial interface
-#define XBEE_UART_ID                ID_USART0               // peripheral ID
 #define XBEE_UART_HANDLER           USART0_Handler          // interrupt handler
-#define XBEE_UART_IRQ               USART0_IRQn             // interrupt number
+#define XBEE_UART_IRQn              USART0_IRQn             // interrupt number
 #define XBEE_UART_BAUDRATE          (115200UL)              // baudrate
 #define XBEE_UART_CHAR_LENGTH       US_MR_CHRL_8_BIT        // character length
 #define XBEE_UART_PARITY            US_MR_PAR_NO            // Parity setting
@@ -59,15 +58,13 @@
 
 /* Logger interface */
 #define LOGGER_UART                 USART1                  // serial interface
-#define LOGGER_UART_ID              ID_USART1               // peripheral ID
 #define LOGGER_UART_BAUDRATE        (115200UL)              // baudrate
 #define LOGGER_UART_CHAR_LENGTH     US_MR_CHRL_8_BIT        // character length
 #define LOGGER_UART_PARITY          US_MR_PAR_NO            // Parity setting
 #define LOGGER_UART_STOP_BITS       US_MR_NBSTOP_1_BIT      // Stop bits setting
-                                                            //
+
 /* Trisonica-mini anemometer interface */
 #define TRISONICA_UART              USART2                  // serial interface
-#define TRISONICA_UART_ID           ID_USART2               // peripheral ID
 #define TRISONICA_UART_BAUDRATE     (115200UL)              // baudrate
 #define TRISONICA_UART_CHAR_LENGTH  US_MR_CHRL_8_BIT        // character length
 #define TRISONICA_UART_PARITY       US_MR_PAR_NO            // Parity setting
@@ -75,7 +72,6 @@
 
 /* Telaire-T6615 CO2 sensor interface */
 #define TELAIRE_UART                (Usart*)UART3           // serial interface
-#define TELAIRE_UART_ID             ID_UART3                // peripheral ID
 #define TELAIRE_UART_BAUDRATE       (19200UL)               // baudrate
 #define TELAIRE_UART_CHAR_LENGTH    US_MR_CHRL_8_BIT        // character length
 #define TELAIRE_UART_PARITY         US_MR_PAR_NO            // Parity setting
@@ -83,7 +79,8 @@
 
 /* CozIR-A CO2 sensor interface */
 #define COZ_IR_UART                 (Usart*)UART3           // serial interface
-#define COZ_IR_UART_ID              ID_UART3                // peripheral ID
+#define COZ_IR_UART_HANDLER         UART3_Handler           // interrupt handler
+#define COZ_IR_UART_IRQn            UART3_IRQn              // interrupt number
 #define COZ_IR_UART_BAUDRATE        (9600UL)                // baudrate
 #define COZ_IR_UART_CHAR_LENGTH     US_MR_CHRL_8_BIT        // character length
 #define COZ_IR_UART_PARITY          US_MR_PAR_NO            // Parity setting
