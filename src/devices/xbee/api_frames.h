@@ -167,6 +167,11 @@ inline static void set_at_command(void)
     // TODO
 }
 
+inline static void print_at_command(const at_command_t* at_command)
+{
+    // TODO
+}
+
 /** 
  * Xbee protocol encoding functions.
  * Refer to: XBee/XBee-PRO® S2C Zigbee® RF Module User Guide
@@ -198,6 +203,11 @@ inline static void set_transmit_request(uint8_t* payload, size_t size, api_frame
     transmit_request->transmit_options = TRANSMIT_REQUEST_TX_OPTIONS;
     transmit_request->payload = payload;
     transmit_request->size = size;
+}
+
+inline static void print_transmit_request(const transmit_request_t* transmit_request)
+{
+    // TODO
 }
 
 inline static void encode_transmit_request(const transmit_request_t* transmit_request, vector_t* vector)

@@ -1,4 +1,5 @@
 #include "xbee.h"
+#include "logger.h"
 #include "xbee/api_frames.h"
 
 xbee_t xbee = 
@@ -9,8 +10,9 @@ xbee_t xbee =
     .decode     = xbee_decode,
     .transmit   = xbee_transmit,
     .receive    = xbee_receive,
+    .force_receive = xbee_force_receive,
     .configure  = xbee_configure,
-    .received_api_frame = false,
+    .packet_length = 0,
 }; 
 
 void xbee_test(void)
@@ -58,12 +60,6 @@ void xbee_encode(void)
 
 void xbee_decode(void)
 {
-    // wait for full baudrate cycle to make sure all data is delivered
-    //while (!xbee.received_api_frame);
-    delay_us(XBEE_UART_BAUDRATE);
-    LOGHEX(RX_LEVEL, "Received xbee serial data.", xbee.rx_buffer.data, xbee.rx_buffer.size);
-    // decode into xbee object
-    vector_clear(&xbee.rx_buffer);
 }
 
 void xbee_configure(void)
@@ -73,15 +69,15 @@ void xbee_configure(void)
 
     xbee.api_frame.at_command.code      = VR;
     xbee.transmit();
-    xbee_force_receive();
+    xbee.force_receive();
 
     xbee.api_frame.at_command.code      = VL;
     xbee.transmit();
-    xbee_force_receive();
+    xbee.force_receive();
 
     xbee.api_frame.at_command.code      = NP;
     xbee.transmit();
-    xbee_force_receive();
+    xbee.force_receive();
 }
 
 void xbee_transmit(void)
@@ -92,33 +88,38 @@ void xbee_transmit(void)
     vector_clear(&xbee.tx_buffer);
 }
 
+static bool xbee_is_rx_ready(void)
+{
+    // ensure we get the packet length, unless we already have it
+    if(xbee.packet_length == 0)
+    {
+        while(xbee.rx_buffer.size < API_FRAME_HEADER_LENGTH); 
+        xbee.packet_length = (xbee.rx_buffer.data[API_FRAME_HEADER_IDX] << 4) + xbee.rx_buffer.data[API_FRAME_HEADER_IDX+1];
+    }
+
+    return xbee.rx_buffer.size - API_FRAME_HEADER_LENGTH - 1 == xbee.packet_length;
+}
+
 void xbee_receive(void)
 {
-    if(!usart_serial_is_rx_ready(XBEE_UART) && xbee.rx_buffer.size != 0)
+    if (xbee_is_rx_ready())
     {
         xbee.decode();
+        LOGHEX(RX_LEVEL, "Received xbee serial data.", xbee.rx_buffer.data, xbee.rx_buffer.size);
         vector_clear(&xbee.rx_buffer);
-        xbee.received_api_frame = true;
+        xbee.packet_length = 0;
     }
 }
 
 // force busy wait until usart finishes sending a payload.
 void xbee_force_receive(void)
 {
-    while(!xbee.received_api_frame)
-        xbee.receive();
-
-    xbee.received_api_frame = false;
+    while(!xbee_is_rx_ready());
+    xbee.receive();
 }
 
 void xbee_uart_handler(void)
 {
-    if (xbee.rx_buffer.size > xbee.rx_buffer.limit)
-    {
-        LOG(ERROR_LEVEL, "Xbee rx buffer overrun!");
-        return;
-    }
-
     usart_serial_getchar(XBEE_UART, &xbee.rx_buffer.data[xbee.rx_buffer.size++]);
 }
 

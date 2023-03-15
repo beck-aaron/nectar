@@ -9,6 +9,7 @@
 #define XBEE_MAX_TX         256  // arbitrary values for now.
 #define XBEE_MAX_RX         256  // represent tx & rx buffer size for each device
 #define xbee_uart_handler   XBEE_UART_HANDLER
+#define xbee_dma_handler    XBEE_DMA_HANDLER
 
 void xbee_test(void);
 void xbee_encode(void);
@@ -20,9 +21,7 @@ void xbee_configure(void);
 
 typedef struct
 {
-    volatile bool received_api_frame;
-    uint64_t coordinator_address_64;
-    uint16_t coordinator_address_16;
+    volatile size_t packet_length;
 
     // XBee/XBee-PRO® S2C Zigbee® RF Module User Guide - pg 171
     uint8_t     delimiter;
@@ -38,6 +37,7 @@ typedef struct
     void (*decode)(void);    // decodes the data within the rx buffer
     void (*transmit)(void);  // transmits the encoded data within the payload
     void (*receive)(void);   // checks if UART is not ready and logs received data
+    void (*force_receive)(void);   // checks if UART is not ready and logs received data
     void (*configure)(void); // sets xbee device parameters
 
 } xbee_t;
