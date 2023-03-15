@@ -36,7 +36,7 @@ ___
 
 Download the release for your operating system:
 
-    https://www.microchip.com/en-us/tools-resources/develop/microchip-studio/gcc-compilers_
+    https://www.microchip.com/en-us/tools-resources/develop/microchip-studio/gcc-compilers
 
 Install by extracting to the directory of your choice.  This install directory is needed when building.
 
