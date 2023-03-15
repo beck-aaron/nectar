@@ -10,6 +10,7 @@
 #ifndef DEVICES_H_
 #define DEVICES_H_
 
+#include <clock.h>
 #include "coz_ir/coz_ir.h"
 #include "telaire/telaire.h"
 #include "trisonica/trisonica.h"

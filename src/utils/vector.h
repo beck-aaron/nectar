@@ -9,7 +9,7 @@
 typedef struct
 {
     uint8_t* data;
-    size_t size;
+    volatile size_t size;
     size_t limit;
 
 } vector_t;

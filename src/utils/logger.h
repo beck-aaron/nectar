@@ -42,6 +42,7 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <vector.h>
+#include <rtc.h>
 
 #define DEBUG_LEVEL         0u
 #define WARNING_LEVEL       1u
@@ -89,7 +90,9 @@ inline static void log_endl(void);
 
 inline static void log_time(void)
 {
-    printf("%02x:%02x:%02x", 0x00, 0x00, 0x00);
+    uint32_t hours, minutes, seconds;
+    rtc_get_time(RTC, &hours, &minutes, &seconds);
+    printf("%02lu:%02lu:%02lu", hours, minutes, seconds);
 }
 
 inline static void log_level(uint8_t loglevel)

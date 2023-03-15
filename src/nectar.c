@@ -19,7 +19,7 @@ static void nectar_init(void)
 {
     devices_init();
     LED_On(LED0);
-    xbee.test();
+//  xbee.test();
 }
 
 static void nectar_transmit(void)
@@ -33,7 +33,8 @@ static void nectar_receive(void)
 {
     // TODO
     // check if conditions are right for processing a received transmission
-    xbee.receive();
+    //xbee.force_receive();
+//  xbee.receive();
 }
 
 static void nectar_collect(void)

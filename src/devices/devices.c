@@ -19,9 +19,9 @@ void devices_init(void)
 {
     logger_init();
     xbee_init();
-    telaire_init();
-    trisonica_init();
-    coz_ir_init();
+//  telaire_init();
+//  trisonica_init();
+//  coz_ir_init();
 }
 
 inline static void xbee_init(void)
@@ -32,7 +32,7 @@ inline static void xbee_init(void)
     vector_init(XBEE_MAX_TX, &xbee.tx_buffer);
     vector_init(XBEE_MAX_RX, &xbee.rx_buffer);
     usart_enable_interrupt(XBEE_UART, US_IER_RXRDY);
-    usart_enable_interrupt(XBEE_UART, US_IER_OVRE);
+    //usart_enable_interrupt(XBEE_UART, US_IER_OVRE);
 
     irq_register_handler(XBEE_UART_IRQn, 1);
     serial_uart_init(XBEE);
@@ -46,6 +46,9 @@ inline static void logger_init(void)
     serial_stdio_init(LOGGER);
     puts(LOGGER_START_MESSAGE);
     LOG(DEBUG_LEVEL, "Initialized serial interface for logger.");
+
+    time_t timestamp = time(NULL);
+    LOG(DEBUG_LEVEL, "Timestamp: %s", asctime(localtime(&timestamp)));
 }
 
 inline static void telaire_init(void)

@@ -2,6 +2,7 @@
 #define _NECTAR_H_
 
 #include <asf.h>
+#include <clock.h>
 #include <logger.h>
 #include <devices.h>
 

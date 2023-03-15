@@ -28,6 +28,5 @@ int main(void)
         nectar.transmit();
         LED_Toggle(LED0);
         nectar.receive();
-        delay_ms(250);
     }
 }
