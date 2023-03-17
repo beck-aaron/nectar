@@ -8,9 +8,10 @@
  ******************************************************************************/
 
 #include "devices.h"
+#include "dma.h"
 
-inline static void logger_init(void);
 inline static void xbee_init(void);
+inline static void logger_init(void);
 inline static void coz_ir_init(void);
 inline static void telaire_init(void);
 inline static void trisonica_init(void);
@@ -26,18 +27,20 @@ void devices_init(void)
 
 inline static void xbee_init(void)
 {
-    // TODO setup XDMAC for device
-    // use interrupt to LOG tranfered data
-    // or set a status flag
     vector_init(XBEE_MAX_TX, &xbee.tx_buffer);
     vector_init(XBEE_MAX_RX, &xbee.rx_buffer);
-    usart_enable_interrupt(XBEE_UART, US_IER_RXRDY);
-    //usart_enable_interrupt(XBEE_UART, US_IER_OVRE);
-
-    irq_register_handler(XBEE_UART_IRQn, 1);
     serial_uart_init(XBEE);
+    
+    xdmac_configure_peripheral_to_memory(
+        XBEE_UART,
+        XBEE_HWID_RX,
+        xbee.rx_buffer.data,
+        XBEE_MAX_RX,
+        XBEE_CHANNEL_RX
+    );
 
-    xbee.configure();
+//  xdmac_enable_peripheral_to_memory(XBEE_CHANNEL_RX);
+
     LOG(DEBUG_LEVEL, "Initialized serial interface for xbee.");
 }
 
@@ -68,3 +71,4 @@ inline static void coz_ir_init(void)
     serial_uart_init(COZ_IR);
     LOG(DEBUG_LEVEL, "Initialized serial interface for coz-ir.");
 }
+

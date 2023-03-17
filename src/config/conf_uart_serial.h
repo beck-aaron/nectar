@@ -56,6 +56,13 @@
 #define XBEE_UART_PARITY            US_MR_PAR_NO            // Parity setting
 #define XBEE_UART_STOP_BITS         US_MR_NBSTOP_1_BIT      // Stop bits setting
 
+/* Xbee DMA interface */
+#define XBEE_CHANNEL_TX             1
+#define XBEE_CHANNEL_RX             0
+#define XBEE_HWID_TX                XDMAC_CHANNEL_HWID_USART0_TX
+#define XBEE_HWID_RX                XDMAC_CHANNEL_HWID_USART0_RX
+
+
 /* Logger interface */
 #define LOGGER_UART                 USART1                  // serial interface
 #define LOGGER_UART_BAUDRATE        (115200UL)              // baudrate

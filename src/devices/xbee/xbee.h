@@ -5,11 +5,11 @@
 #include <logger.h>
 #include "api_frames.h"
 #include "at_commands.h"
+#include <dma.h>
 
 #define XBEE_MAX_TX         256  // arbitrary values for now.
 #define XBEE_MAX_RX         256  // represent tx & rx buffer size for each device
 #define xbee_uart_handler   XBEE_UART_HANDLER
-#define xbee_dma_handler    XBEE_DMA_HANDLER
 
 void xbee_test(void);
 void xbee_encode(void);
@@ -18,10 +18,18 @@ void xbee_transmit(void);
 void xbee_receive(void);
 void xbee_force_receive(void);
 void xbee_configure(void);
+void xbee_xdmac_handler(void);
+
+typedef enum
+{
+    XBEE_IDLE,
+    XBEE_RX_PENDING,
+
+} xbee_state_t;
 
 typedef struct
 {
-    volatile size_t packet_length;
+    volatile xbee_state_t state;
 
     // XBee/XBee-PRO® S2C Zigbee® RF Module User Guide - pg 171
     uint8_t     delimiter;

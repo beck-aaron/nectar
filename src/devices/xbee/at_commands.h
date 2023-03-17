@@ -39,7 +39,7 @@
 #ifndef _AT_COMMANDS_H_
 #define _AT_COMMANDS_H_
 
-#include <asf.h>
+#include <stdint.h>
 
 typedef struct
 {

@@ -67,10 +67,10 @@
 *      compiled:      "__TIME__ "            *\r\n\
 *******************************************\r\n"
 
-inline static void log_time(void);
-inline static void log_level(uint8_t loglevel);
-inline static void log_hexdump(uint8_t* hex, size_t size);
-inline static void log_endl(void);
+void log_time(void);
+void log_level(uint8_t loglevel);
+void log_hexdump(uint8_t* hex, size_t size);
+void log_endl(void);
 
 #define LOG(LEVEL, ...) \
     log_time(); \
@@ -87,83 +87,5 @@ inline static void log_endl(void);
     log_hexdump((uint8_t*)BUFFER, LENGTH); \
     printf(COLOR_RESET); \
     log_endl();
-
-inline static void log_time(void)
-{
-    uint32_t hours, minutes, seconds;
-    rtc_get_time(RTC, &hours, &minutes, &seconds);
-    printf("%02lu:%02lu:%02lu", hours, minutes, seconds);
-}
-
-inline static void log_level(uint8_t loglevel)
-{
-    switch(loglevel)
-    {
-        case DEBUG_LEVEL: default:
-            printf(" %s  ", DEBUG_COLOR "[DEBUG]");
-            break;
-        case WARNING_LEVEL:
-            printf(" %s  ", WARNING_COLOR "[WARNING]");
-            break;
-        case ERROR_LEVEL:
-            printf(" %s  ", ERROR_COLOR "[ERROR]");
-            break;
-        case TX_LEVEL:
-            printf(" %s  ", TX_COLOR "[TX DATA]");
-            break;
-        case RX_LEVEL:
-            printf(" %s  ", RX_COLOR "[RX DATA]");
-            break;
-    }
-}
-
-inline static void log_hexdump(uint8_t* byte, size_t size)
-{
-    vector_t line;
-    vector_init(LOGGER_LINE_LENGTH, &line);
-    log_endl();
-
-    for (size_t j = 0; j < size; j += 0x10)
-    {
-        printf(" %04X ", j);
-
-        for (size_t i = 0; i < LOGGER_LINE_LENGTH; ++i)
-        {
-            if (i % 8 == 0)
-                putchar(' ');
-
-            if (i+j < size) 
-                printf("%02X ", byte[i+j]);
-            else
-                printf("%3s", "");
-
-            vector_push(&(byte)[i+j], sizeof(*byte), &line);
-        }
-
-        putchar(' ');
-
-        for (size_t i = 0; i < LOGGER_LINE_LENGTH; ++i)
-        {
-            if (iscntrl(line.data[i]))
-            {
-                putchar('.');
-                continue;
-            }
-
-            putchar(line.data[i]);
-        }
-
-        vector_clear(&line);
-        log_endl();
-    }
-
-    vector_destroy(&line);
-    log_endl();
-}
-
-inline static void log_endl(void)
-{
-    printf("\r\n");
-}
 
 #endif // _LOGGER_H_

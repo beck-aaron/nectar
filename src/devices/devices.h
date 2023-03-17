@@ -10,7 +10,9 @@
 #ifndef DEVICES_H_
 #define DEVICES_H_
 
+#include <dma.h>
 #include <clock.h>
+#include <xdmac.h>
 #include "coz_ir/coz_ir.h"
 #include "telaire/telaire.h"
 #include "trisonica/trisonica.h"
@@ -34,7 +36,7 @@ void devices_init(void);
  * @param DEVICE - defined in conf_uart_serial.h
  */
 #define serial_stdio_init(DEVICE) \
-    const usart_serial_options_t DEVICE##_serial_options = { \
+    static const usart_serial_options_t DEVICE##_serial_options = { \
         DEVICE##_UART_BAUDRATE, \
         DEVICE##_UART_CHAR_LENGTH, \
         DEVICE##_UART_PARITY, \
@@ -50,12 +52,15 @@ void devices_init(void);
  * @param DEVICE - defined in conf_uart_serial.h
  */
 #define serial_uart_init(DEVICE) \
-    usart_serial_options_t DEVICE##_serial_options = { \
+    static usart_serial_options_t DEVICE##_serial_options = { \
         DEVICE##_UART_BAUDRATE, \
         DEVICE##_UART_CHAR_LENGTH, \
         DEVICE##_UART_PARITY, \
         DEVICE##_UART_STOP_BITS, \
     }; \
     usart_serial_init(DEVICE##_UART, &DEVICE##_serial_options);
+
+#define xdmac_channel_init(DEVICE)
+    
 
 #endif /* DEVICES_H_ */

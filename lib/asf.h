@@ -100,6 +100,9 @@
 // From module: TC - Timer Counter
 //#include <tc.h>
 
+// From module: XDMAC - Direct Memory Access Controller
+#include <xdmac.h>
+
 // From module: UART - Univ. Async Rec/Trans
 #include <uart.h>
 

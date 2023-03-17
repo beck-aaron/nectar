@@ -40,6 +40,7 @@ CPPFLAGS_INCLUDES = -I$(ASFDIR) \
 		-I$(ASFDIR)/sam/drivers/pmc                                    \
 		-I$(ASFDIR)/sam/drivers/rtt                                    \
 		-I$(ASFDIR)/sam/drivers/rtc                                    \
+		-I$(ASFDIR)/sam/drivers/xdmac                                  \
 		-I$(ASFDIR)/sam/drivers/uart                                   \
 		-I$(ASFDIR)/sam/drivers/usart                                  \
 		-I$(ASFDIR)/sam/services/flash_efc                             \
@@ -55,6 +56,9 @@ CPPFLAGS_INCLUDES = -I$(ASFDIR) \
 		-I$(SOURCEDIR)/config										   \
 		-I$(SOURCEDIR)/devices 										   \
 		-I$(SOURCEDIR)/utils   										   \
+		-I$(SOURCEDIR)/utils/clock							   		   \
+		-I$(SOURCEDIR)/utils/logger						   		   	   \
+		-I$(SOURCEDIR)/utils/dma   						   		   	   \
 
 CPPFLAGS_DEFINES = -D ARM_MATH_CM7=true -D BOARD=SAME70_XPLAINED -D __SAME70Q21__
 
@@ -78,13 +82,16 @@ OBJECTS = $(BUILDDIR)/common/services/clock/same70/sysclk.o                     
           $(BUILDDIR)/sam/drivers/pmc/pmc.o                                         \
           $(BUILDDIR)/sam/drivers/mpu/mpu.o                                         \
 		  $(BUILDDIR)/sam/drivers/rtc/rtc.o                              			\
+		  $(BUILDDIR)/sam/drivers/xdmac/xdmac.o                          			\
           $(BUILDDIR)/sam/drivers/uart/uart.o                                       \
           $(BUILDDIR)/sam/drivers/usart/usart.o                                     \
 		  $(BUILDDIR)/sam/drivers/matrix/matrix.o                        			\
           $(BUILDDIR)/sam/utils/cmsis/same70/source/templates/gcc/startup_same70.o  \
           $(BUILDDIR)/sam/utils/cmsis/same70/source/templates/system_same70.o       \
           $(BUILDDIR)/sam/utils/syscalls/gcc/syscalls.o                             \
-		  $(BUILDDIR)/utils/clock.o    												\
+		  $(BUILDDIR)/utils/clock/clock.o											\
+		  $(BUILDDIR)/utils/logger/logger.o   										\
+		  $(BUILDDIR)/utils/dma/dma.o      											\
 		  $(BUILDDIR)/devices/devices.o												\
 		  $(BUILDDIR)/devices/coz_ir/coz_ir.o										\
 		  $(BUILDDIR)/devices/telaire/telaire.o										\
