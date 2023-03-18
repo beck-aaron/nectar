@@ -162,12 +162,12 @@ typedef struct
 } api_frame_t;
 
 
-inline static void set_at_command(void)
+inline void set_at_command(void)
 {
     // TODO
 }
 
-inline static void print_at_command(const at_command_t* at_command)
+inline void print_at_command(const at_command_t* at_command)
 {
     // TODO
 }
@@ -180,19 +180,19 @@ inline static void print_at_command(const at_command_t* at_command)
  * TODO: determine which commands have parameter values and which do not,
  * only encode parameter when required
  */
-inline static void encode_at_command(const at_command_t* at_command, vector_t* vector)
+inline void encode_at_command(const at_command_t* at_command, vector_t* vector)
 {
     vector_push(&at_command->frame_id, sizeof(uint8_t), vector);
     vector_push(&at_command->code, sizeof(uint16_t), vector);
 //  vector_push(&at_command->param, sizeof(uint16_t), xbee.tx_buffer);
 }
 
-inline static void decode_at_command(const uint8_t *buffer, const at_command_t *at_command)
+inline void decode_at_command(at_command_t* at_command, vector_t* vector)
 {
     // TODO
 }
 
-inline static void set_transmit_request(uint8_t* payload, size_t size, api_frame_t* api_frame)
+inline void set_transmit_request(uint8_t* payload, size_t size, api_frame_t* api_frame)
 {
     api_frame->cmdID = ZIGBEE_TRANSMIT_REQUEST;
     transmit_request_t* transmit_request = &api_frame->transmit_request;
@@ -205,12 +205,12 @@ inline static void set_transmit_request(uint8_t* payload, size_t size, api_frame
     transmit_request->size = size;
 }
 
-inline static void print_transmit_request(const transmit_request_t* transmit_request)
+inline void print_transmit_request(const transmit_request_t* transmit_request)
 {
     // TODO
 }
 
-inline static void encode_transmit_request(const transmit_request_t* transmit_request, vector_t* vector)
+inline void encode_transmit_request(const transmit_request_t* transmit_request, vector_t* vector)
 {
     vector_push(&transmit_request->frame_id, sizeof(uint8_t), vector);
     vector_push(&transmit_request->destination_address_64, sizeof(uint64_t), vector);
@@ -220,9 +220,13 @@ inline static void encode_transmit_request(const transmit_request_t* transmit_re
     vector_push_bytes(transmit_request->payload, transmit_request->size, vector);
 }
 
-inline static void decode_transmit_request(const uint8_t *buffer, const transmit_request_t *transmit_request)
+inline void decode_transmit_request(transmit_request_t* transmit_request, vector_t* vector)
 {
     // TODO
+}
+
+inline void decode_transmit_status(transmit_status_t* transmit_status, vector_t* vector)
+{
 }
 
 #endif /* _API_FRAMES_H_ */

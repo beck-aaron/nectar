@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * File:    dma.h
+ * Author:  Aaron Beck
+ *
+ * Description:
+ *
+ ******************************************************************************/
 #ifndef _DMA_H_
 #define _DMA_H_
 
@@ -6,10 +13,8 @@
 
 #define XDMAC_NUM_CHANNELS 24
 
-void xdmac_configure_peripheral_to_memory(Usart *usart, uint8_t hwid, uint8_t *memory, size_t length, uint32_t channel_num);
-void xdmac_enable_peripheral_to_memory(uint32_t channel_num);
-void xdmac_disable_peripheral_to_memory(uint32_t channel_num);
-void xdmac_suspend_channel(uint32_t channel_num);
+void xdmac_configure_peripheral_to_memory(Usart* usart, uint8_t hwid, uint8_t* memory, size_t length, uint32_t channel_num);
+void xdmac_configure_memory_to_peripheral(uint8_t* memory, size_t length, Usart* usart, uint8_t hwid, uint32_t channel_num);
 
 #endif /* _DMA_H_ */
 

@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * File:    logger.c
+ * Author:  Aaron Beck
+ *
+ * Description:
+ *
+ ******************************************************************************/
 #include "logger.h"
 
 void log_time(void)
@@ -37,12 +44,12 @@ void log_hexdump(uint8_t* byte, size_t size)
 
     for (size_t j = 0; j < size; j += 0x10)
     {
-        printf(" %04X ", j);
+        printf(" %04X: ", j);
 
         for (size_t i = 0; i < LOGGER_LINE_LENGTH; ++i)
         {
             if (i % 8 == 0)
-                putchar(' ');
+                printf(" - ");
 
             if (i+j < size) 
                 printf("%02X ", byte[i+j]);
@@ -52,7 +59,7 @@ void log_hexdump(uint8_t* byte, size_t size)
             vector_push(&(byte)[i+j], sizeof(*byte), &line);
         }
 
-        putchar(' ');
+        printf(" | ");
 
         for (size_t i = 0; i < LOGGER_LINE_LENGTH; ++i)
         {

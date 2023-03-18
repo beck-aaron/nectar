@@ -15,18 +15,15 @@ int main(void)
 {
     sysclk_init();
     board_init();
-    LED_On(LED0);
 
     nectar.init();
-
-    // main loop
 
     while(1)
     {
         nectar.transmit();
         nectar.receive();
-        LED_Toggle(LED0);
-        delay_ms(50);
+        nectar.compile();
+        nectar.status();
     }
 }
 

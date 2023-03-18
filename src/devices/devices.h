@@ -6,13 +6,11 @@
  * and a function to initialize all the peripherals used for external devices.
  *
  ******************************************************************************/
-
 #ifndef DEVICES_H_
 #define DEVICES_H_
 
-#include <dma.h>
-#include <clock.h>
 #include <xdmac.h>
+#include <dma.h>
 #include "coz_ir/coz_ir.h"
 #include "telaire/telaire.h"
 #include "trisonica/trisonica.h"
@@ -61,6 +59,5 @@ void devices_init(void);
     usart_serial_init(DEVICE##_UART, &DEVICE##_serial_options);
 
 #define xdmac_channel_init(DEVICE)
-    
 
 #endif /* DEVICES_H_ */

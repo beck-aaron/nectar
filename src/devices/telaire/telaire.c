@@ -1,9 +1,15 @@
+/*******************************************************************************
+ * File:    telaire.c
+ * Author:  Aaron Beck
+ *
+ * Description:
+ *
+ ******************************************************************************/
 #include "telaire.h"
-#include "telaire/tsunami.h"
 
-static void encode_read_cmd(void);
-static void encode_update_cmd(void); //TODO
-static void encode_loopback_cmd(void); //TODO
+static void telaire_encode_read_cmd(void);
+static void telaire_encode_update_cmd(void); //TODO
+static void telaire_encode_loopback_cmd(void); //TODO
 
 telaire_t telaire =
 {
@@ -24,7 +30,7 @@ void telaire_encode(void)
     switch(telaire.command)
     {
         case CMD_READ:
-            encode_read_cmd();
+            telaire_encode_read_cmd();
             break;
 
         case CMD_WARMUP:
@@ -35,11 +41,11 @@ void telaire_encode(void)
             break;
 
         case CMD_UPDATE:
-            encode_update_cmd();
+            telaire_encode_update_cmd();
             break;
 
         case CMD_LOOPBACK:
-            encode_loopback_cmd();
+            telaire_encode_loopback_cmd();
             break;
 
         case CMD_SELF_TEST_START:
@@ -67,18 +73,18 @@ void telaire_push(void* value, size_t size)
     vector_push(value, size, &telaire.tx_buffer);
 }
 
-static void encode_read_cmd(void)
+static void telaire_encode_read_cmd(void)
 {
     telaire.push(&telaire.command, sizeof(uint8_t));
     telaire.push(&telaire.cmd_read.data_id, sizeof(uint8_t));
 }
 
-static void encode_update_cmd(void)
+static void telaire_encode_update_cmd(void)
 {
     //TODO
 }
 
-static void encode_loopback_cmd(void)
+static void telaire_encode_loopback_cmd(void)
 {
     //TODO
 }

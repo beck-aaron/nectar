@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * File:    xbee.h
+ * Author:  Aaron Beck
+ *
+ * Description:
+ *
+ ******************************************************************************/
 #ifndef _XBEE_H_
 #define _XBEE_H_
 
@@ -16,21 +23,19 @@ void xbee_encode(void);
 void xbee_decode(void);
 void xbee_transmit(void);
 void xbee_receive(void);
-void xbee_force_receive(void);
 void xbee_configure(void);
-void xbee_xdmac_handler(void);
+
+//void xbee_force_receive(void);
 
 typedef enum
 {
     XBEE_IDLE,
-    XBEE_RX_PENDING,
+    XBEE_PENDING,
 
 } xbee_state_t;
 
 typedef struct
 {
-    volatile xbee_state_t state;
-
     // XBee/XBee-PRO® S2C Zigbee® RF Module User Guide - pg 171
     uint8_t     delimiter;
     uint16_t    length;
@@ -39,6 +44,8 @@ typedef struct
 
     vector_t tx_buffer;
     vector_t rx_buffer;
+    volatile xbee_state_t tx_state;
+    volatile xbee_state_t rx_state;
 
     void (*test)(void);
     void (*encode)(void);

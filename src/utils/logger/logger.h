@@ -3,37 +3,7 @@
  * Author:  Aaron Beck
  * Date:    02/11/2023
  *
- * Currently initializing logger to use USART2 ports, which correspond to
- * the TX2 & RX2 on the custom board we are using.
- *
- * In order to access this logging data:
- * OUTDATED: UPDATE THIS WITH CLEARER INSTRUCTIONS
- *
- * Evaluation board instructions:
- *
- * PTLS board instructions:
- *
- *  1. connect a USB - TTL/UART cable to the USART2 pins on the board.
- *
- *      we used a TTL-R232G-VREG3V3-WE cable by FTDI chip
- *
- *  2. connect to the usb port via terminal
- *      this can be done several ways, but the simplest
- *      is to use the "screen" or "picocom" command-line utilities.
- *
- *  $ screen /dev/tty.DEVICEID <parameters>
- *
- *      <baud_rate>           := amount of electrical signals received per second.
- *      <bits_per_byte>       := cs8 or cs7, transmission of 8 or 7 bits per byte
- *      <flow_control_tx>     := ixon or -ixon, enables/disables flow-control tx
- *      <flow_control_rx>     := ixoff or -ixoff, enables/disables flow-control rx
- *      <clear_keep_last_bit> := istrip or -istrip clear/keep eighth bit in each byte
- *
- *  example:
- *
- *  $ screen /dev/tty.usbserial-FT2VVX6F 115200 cs8 -ixon -ixoff -istrip
- *
- *  see screen manual for more details
+ * In order to access this logger output:
  *
  ******************************************************************************/
 #ifndef _LOGGER_H_

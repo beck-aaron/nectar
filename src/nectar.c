@@ -1,47 +1,85 @@
+/*******************************************************************************
+ * File:    nectar.c
+ * Author:  Aaron Beck
+ *
+ * Description:
+ *
+ ******************************************************************************/
 #include "nectar.h"
 
-static void nectar_init(void);
-static void nectar_transmit(void);
-static void nectar_receive(void);
-static void nectar_collect(void);
-
-xbee_t xbee;
+// declare devices
+xbee_t      xbee;
+coz_ir_t    coz_ir;
+telaire_t   telaire;
+trisonica_t trisonica;
 
 nectar_t nectar =
 {
+    .state      = NECTAR_NORMAL,
     .init       = nectar_init,
     .transmit   = nectar_transmit,
     .receive    = nectar_receive,
-    .collect    = nectar_collect,
+    .compile    = nectar_compile,
+    .status     = nectar_status,
 };
 
-static void nectar_init(void)
+inline void nectar_init(void)
 {
-    pmc_enable_periph_clk(ID_XDMAC);
     devices_init();
     LED_On(LED0);
 }
 
-static void nectar_transmit(void)
+uint8_t buffer[] = "hello world";
+inline void nectar_transmit(void)
 {
-    // TODO
-    // check if conditions are right for sending a transmission
-    // if they are, send the transmission
-    xbee.test();
+    set_transmit_request(buffer, sizeof(buffer)-1, &xbee.api_frame);
+    xbee.transmit();
+
+    // todo: implement transmitting commands to sensors
+    // based on data received from xbee
 }
 
-static void nectar_receive(void)
+inline void nectar_receive(void)
 {
-    // TODO
-    // check if conditions are right for processing a received transmission
     xbee.receive();
-    //xbee.force_receive();
+
+    // todo: collect data from sensors
 }
 
-static void nectar_collect(void)
+void nectar_compile(void)
 {
-    // TODO
-    // check if data is ready from sensors, if it is, format into a
-    // subpayload and add to queue
+    // format data from sensors into subpayloads, then payloads
 }
 
+// flash LED based on the current state of nectar
+void nectar_status(void)
+{
+    switch(nectar.state)
+    {
+        // 2 quick flashes after cycle
+        case NECTAR_NORMAL:
+            for (uint8_t i = 0; i < 4; ++i)
+            {
+                LED_Toggle(LED0);
+                delay_ms(50);
+            }
+            break;
+
+        // 4 slightly slower flashes
+        case NECTAR_WARNING:
+            for (uint8_t i = 0; i < 8; ++i)
+            {
+                LED_Toggle(LED0);
+                delay_ms(500);
+            }
+            break;
+
+        // slow flashes indicate error
+        case NECTAR_ERROR:
+            while(1)
+            {
+                LED_Toggle(LED0);
+                delay_s(2);
+            }
+    }
+}
