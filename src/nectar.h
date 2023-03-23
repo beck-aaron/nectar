@@ -8,7 +8,6 @@
 #ifndef _NECTAR_H_
 #define _NECTAR_H_
 
-#include "stdlib.h"
 #include <asf.h>
 #include <clock.h>
 #include <logger.h>
@@ -47,12 +46,13 @@ typedef enum
 
 } nectar_state_t;
 
-// outside interface to use the nectar driver
 typedef struct
 {
     size_t max_payload_size; //todo: get this value from the xbee during init.
     nectar_state_t state;
 
+    uint16_t device_bitmask; // set after initialization, used to determine what
+                             // devices we should check for data
     void (*init)(void);
     void (*transmit)(void);
     void (*receive)(void);
@@ -62,11 +62,29 @@ typedef struct
 } nectar_t;
 extern nectar_t nectar;
 
+/**
+ * @brief 
+ */
 void nectar_init(void);
-void nectar_transmit(void);
-void nectar_receive(void);
-void nectar_compile(void);
-void nectar_status(void);
 
+/**
+ * @brief 
+ */
+void nectar_transmit(void);
+
+/**
+ * @brief 
+ */
+void nectar_receive(void);
+
+/**
+ * @brief 
+ */
+void nectar_compile(void);
+
+/**
+ * @brief 
+ */
+void nectar_status(void);
 
 #endif /* _NECTAR_H_ */

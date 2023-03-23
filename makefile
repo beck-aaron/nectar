@@ -56,9 +56,6 @@ CPPFLAGS_INCLUDES = -I$(ASFDIR) \
 		-I$(SOURCEDIR)/config										   \
 		-I$(SOURCEDIR)/devices 										   \
 		-I$(SOURCEDIR)/utils   										   \
-		-I$(SOURCEDIR)/utils/clock							   		   \
-		-I$(SOURCEDIR)/utils/logger						   		   	   \
-		-I$(SOURCEDIR)/utils/dma   						   		   	   \
 
 CPPFLAGS_DEFINES = -D ARM_MATH_CM7=true -D BOARD=SAME70_XPLAINED -D __SAME70Q21__
 
@@ -89,14 +86,13 @@ OBJECTS = $(BUILDDIR)/common/services/clock/same70/sysclk.o                     
           $(BUILDDIR)/sam/utils/cmsis/same70/source/templates/gcc/startup_same70.o  \
           $(BUILDDIR)/sam/utils/cmsis/same70/source/templates/system_same70.o       \
           $(BUILDDIR)/sam/utils/syscalls/gcc/syscalls.o                             \
-		  $(BUILDDIR)/utils/clock/clock.o											\
-		  $(BUILDDIR)/utils/logger/logger.o   										\
-		  $(BUILDDIR)/utils/dma/dma.o      											\
 		  $(BUILDDIR)/devices/devices.o												\
 		  $(BUILDDIR)/devices/coz_ir/coz_ir.o										\
 		  $(BUILDDIR)/devices/telaire/telaire.o										\
 		  $(BUILDDIR)/devices/trisonica/trisonica.o									\
 		  $(BUILDDIR)/devices/xbee/xbee.o											\
+		  $(BUILDDIR)/devices/xbee/api_frames.o										\
+		  $(BUILDDIR)/utils/clock.o      											\
 		  $(BUILDDIR)/nectar.o 														\
           $(BUILDDIR)/main.o
 

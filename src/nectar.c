@@ -7,12 +7,6 @@
  ******************************************************************************/
 #include "nectar.h"
 
-// declare devices
-xbee_t      xbee;
-coz_ir_t    coz_ir;
-telaire_t   telaire;
-trisonica_t trisonica;
-
 nectar_t nectar =
 {
     .state      = NECTAR_NORMAL,
@@ -25,25 +19,39 @@ nectar_t nectar =
 
 inline void nectar_init(void)
 {
+    // attempt to connect with each device, if device is connected
+    // the state variable for each device will be set to DEVICE_CONNECTED
+    // this is used to compute the bitmask for our subpayloads
+    // acknowledge the fact that the bitmask is wasting space within subpayload
+    // since we are not currently supporting hot-swapping of sensors
     devices_init();
     LED_On(LED0);
 }
 
 uint8_t buffer[] = "hello world";
+
+// we should pop from our queue of payloads only when xbee.tx_state == SERIAL_IDLE
 inline void nectar_transmit(void)
 {
-    set_transmit_request(buffer, sizeof(buffer)-1, &xbee.api_frame);
-    xbee.transmit();
+    // TODO: if queue is empty, return;
 
-    // todo: implement transmitting commands to sensors
-    // based on data received from xbee
+    if (xbee.tx_state == SERIAL_IDLE)
+    {
+        // pop from subpayload queue
+        // set transmit request with appropriate data
+        LOG(DEBUG_LEVEL, "[NECTAR] setting transmit request with new data.");
+        set_transmit_request(buffer, sizeof(buffer)-1, &xbee.api_frame);
+    }
+
+    xbee.transmit();
 }
 
 inline void nectar_receive(void)
 {
-    xbee.receive();
-
     // todo: collect data from sensors
+//  LOG(DEBUG_LEVEL, "xbee rx-state: %u", xbee.rx_state);
+    xbee.receive();
+    //coz_ir.receive();
 }
 
 void nectar_compile(void)

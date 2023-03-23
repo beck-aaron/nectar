@@ -27,6 +27,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <vector.h>
+#include <logger.h>
 
 #define API_FRAME_DELIMITER                 0x7E
 #define API_FRAME_HEADER_IDX                0x1
@@ -46,65 +47,103 @@ typedef enum
 
 } esc_char_t;
 
-typedef enum
+#define API_FRAME(X) \
+    X(0x08, AT_COMMAND, "AT_COMMAND") \
+    X(0x09, AT_COMMAND_QUEUE_PARAM, "AT_COMMAND_QUEUE_PARAM") \
+    X(0x10, ZIGBEE_TRANSMIT_REQUEST, "ZIGBEE_TRANSMIT_REQUEST") \
+    X(0x11, EXPLICIT_ADDRESSING_ZIGBEE_COMMAND_FRAME, "EXPLICIT_ADDRESSING_ZIGBEE_COMMAND_FRAME") \
+    X(0x17, REMOTE_COMMAND_REQUEST, "REMOTE_COMMAND_REQUEST") \
+    X(0x21, CREATE_SOURCE_ROUTE, "CREATE_SOURCE_ROUTE") \
+    X(0x88, AT_COMMAND_RESPONSE, "AT_COMMAND_RESPONSE") \
+    X(0x8A, MODEM_STATUS, "MODEM_STATUS") \
+    X(0x8B, ZIGBEE_TRANSMIT_STATUS, "ZIGBEE_TRANSMIT_STATUS") \
+    X(0x90, ZIGBEE_RECEIVE_PACKET, "ZIGBEE_RECEIVE_PACKET") \
+    X(0x91, ZIGBEE_EXPLICIT_RX_INDICATOR, "ZIGBEE_EXPLICIT_RX_INDICATOR") \
+    X(0x92, ZIGBEE_IO_DATA_SAMPLE_RX_INDICATOR, "ZIGBEE_IO_DATA_SAMPLE_RX_INDICATOR") \
+    X(0x94, XBEE_SENSOR_READ_INDICATOR, "XBEE_SENSOR_READ_INDICATOR") \
+    X(0x95, NODE_IDENTIFICATION_INDICATOR, "NODE_IDENTIFICATION_INDICATOR") \
+    X(0x97, REMOTE_COMMAND_RESPONSE, "REMOTE_COMMAND_RESPONSE") \
+    X(0x98, EXTENDED_MODEM_STATUS, "EXTENDED_MODEM_STATUS") \
+    X(0xA0, OVER_THE_AIR_FIRMWARE_UPDATE_STATUS, "OVER_THE_AIR_FIRMWARE_UPDATE_STATUS") \
+    X(0xA1, ROUTE_RECORD_INDICATOR, "ROUTE_RECORD_INDICATOR") \
+    X(0xA3, MANY_TO_ONE_ROUTE_REQUEST_INDICATOR, "MANY_TO_ONE_ROUTE_REQUEST_INDICATOR") \
+
+#define API_FRAME_ENUM(ID, NAME, TEXT) NAME = ID,
+#define API_FRAME_TEXT(ID, NAME, TEXT) case ID: return TEXT;
+
+typedef enum {
+    API_FRAME(API_FRAME_ENUM)
+} api_frame_id;
+
+inline static const char *api_frame_str(int code)
 {
-    AT_COMMAND                                  = 0x08,
-    AT_COMMAND_QUEUE_PARAM                      = 0x09,
-    ZIGBEE_TRANSMIT_REQUEST                     = 0x10,
-    EXPLICIT_ADDRESSING_ZIGBEE_COMMAND_FRAME    = 0x11,
-    REMOTE_COMMAND_REQUEST                      = 0x17,
-    CREATE_SOURCE_ROUTE                         = 0x21,
-    AT_COMMAND_RESPONSE                         = 0x88,
-    MODEM_STATUS                                = 0x8A,
-    ZIGBEE_TRANSMIT_STATUS                      = 0x8B,
-    ZIGBEE_RECEIVE_PACKET                       = 0x90,
-    ZIGBEE_EXPLICIT_RX_INDICATOR                = 0x91,
-    ZIGBEE_IO_DATA_SAMPLE_RX_INDICATOR          = 0x92,
-    XBEE_SENSOR_READ_INDICATOR                  = 0x94,
-    NODE_IDENTIFICATION_INDICATOR               = 0x95,
-    REMOTE_COMMAND_RESPONSE                     = 0x97,
-    EXTENDED_MODEM_STATUS                       = 0x98,
-    OVER_THE_AIR_FIRMWARE_UPDATE_STATUS         = 0xA0,
-    ROUTE_RECORD_INDICATOR                      = 0xA1,
-    MANY_TO_ONE_ROUTE_REQUEST_INDICATOR         = 0xA3,
+    switch (code) {
+        API_FRAME(API_FRAME_TEXT)
+    }
 
-} api_frame_type;
+    return "UNKNOWN API FRAME";
+}
 
-typedef enum 
-{
-    SUCCESS                             = 0x00,
-    MAC_ACK_FAILURE                     = 0x01,
-    CCA_LBT_FAILURE                     = 0x02,
-    NO_SPECTRUM_FREE                    = 0x03,
-    INVALID_DEST_ENDPOINT               = 0x15,
-    NETWORK_ACK_FAILURE                 = 0x21,
-    NOT_JOINED_TO_NETWORK               = 0x22,
-    SELF_ADDRESSED                      = 0x23,
-    ADDRESS_NOT_FOUND                   = 0x24,
-    ROUTE_NOT_FOUND                     = 0x25,
-    BROADCAST_SOURCE_FAILED             = 0x26,
-    INVALID_BINDING_TABLE               = 0x2B,
-    RESOURCE_ERROR_ONE                  = 0x2C,
-    ATTEMPTED_BROADCAST_WITH_APS_TX     = 0x2D,
-    ATTEMPTED_UNICAST_WITH_APS_TX       = 0x2E,
-    INTERNAL_RESOURCE_ERROR             = 0x31,
-    RESOURCE_ERROR_TWO                  = 0x32,
-    NO_SECURE_CONNECTION                = 0x34,
-    ENCRYPTION_FAILURE                  = 0x35,
-    DATA_PAYLOAD_TOO_LARGE              = 0x74,
-    INDIRECT_MSG_UNREQUESTED            = 0x75,
+#define DELIVERY_STATUS(X) \
+    X(0x00, SUCCESS,                            "SUCCESS")                  \
+    X(0x01, MAC_ACK_FAILURE,                    "MAC_ACK_FAILURE")          \
+    X(0x02, CCA_LBT_FAILURE,                    "CCA_LBT_FAILURE")          \
+    X(0x03, NO_SPECTRUM_FREE,                   "NO_SPECTRUM_FREE")         \
+    X(0x15, INVALID_DEST_ENDPOINT,              "INVALID_DEST_ENDPOINT")    \
+    X(0x21, NETWORK_ACK_FAILURE,                "NETWORK_ACK_FAILURE")      \
+    X(0x22, NOT_JOINED_TO_NETWORK,              "NOT_JOINED_TO_NETWORK")    \
+    X(0x23, SELF_ADDRESSED,                     "SELF_ADDRESSED")           \
+    X(0x24, ADDRESS_NOT_FOUND,                  "ADDRESS_NOT_FOUND")        \
+    X(0x25, ROUTE_NOT_FOUND,                    "ROUTE_NOT_FOUND")          \
+    X(0x26, BROADCAST_SOURCE_FAILED,            "BROADCAST_SOURCE_FAILED")  \
+    X(0x2B, INVALID_BINDING_TABLE,              "INVALID_BINDING_TABLE")    \
+    X(0x2C, RESOURCE_ERROR_ONE,                 "RESOURCE_ERROR_ONE")       \
+    X(0x2D, ATTEMPTED_BROADCAST_WITH_APS_TX,    "ATTEMPTED_BROADCAST_WITH_APS_TX") \
+    X(0x2E, ATTEMPTED_UNICAST_WITH_APS_TX,      "ATTEMPTED_UNICAST_WITH_APS_TX") \
+    X(0x31, INTERNAL_RESOURCE_ERROR,            "INTERNAL_RESOURCE_ERROR")  \
+    X(0x32, RESOURCE_ERROR_TWO,                 "RESOURCE_ERROR_TWO")       \
+    X(0x34, NO_SECURE_CONNECTION,               "NO_SECURE_CONNECTION")     \
+    X(0x35, ENCRYPTION_FAILURE,                 "ENCRYPTION_FAILURE")       \
+    X(0x74, DATA_PAYLOAD_TOO_LARGE,             "DATA_PAYLOAD_TOO_LARGE")   \
+    X(0x75, INDIRECT_MSG_UNREQUESTED,           "INDIRECT_MSG_UNREQUESTED") \
 
+#define DELIVERY_STATUS_ENUM(ID, NAME, TEXT) NAME = ID,
+#define DELIVERY_STATUS_TEXT(ID, NAME, TEXT) case ID: return TEXT;
+
+typedef enum {
+    DELIVERY_STATUS(DELIVERY_STATUS_ENUM)
 } delivery_status_t;
 
-typedef enum
+inline static const char *delivery_status_str(int code)
 {
-    NO_DISCOVERY_OVERHEAD               = 0x00,
-    ZIGBEE_ADDRESS_DISCOVERY            = 0x01,
-    ROUTE_DISCOVERY                     = 0x02,
-    ZIGBEE_ADDRESS_AND_ROUTE_DISCOVERY  = 0x03,
-    ZIGBEE_END_DEVICE_EXTENDED_TIMEOUT  = 0x40,
+    switch (code) {
+        DELIVERY_STATUS(DELIVERY_STATUS_TEXT)
+    }
 
+    return "UNKNOWN STATUS";
+}
+
+#define DISCOVERY_STATUS(X) \
+    X(0x00, NO_DISCOVERY_OVERHEAD,              "NO_DISCOVERY_OVERHEAD")        \
+    X(0x01, ZIGBEE_ADDRESS_DISCOVERY,           "ZIGBEE_ADDRESS_DISCOVERY")     \
+    X(0x02, ROUTE_DISCOVERY,                    "ROUTE_DISCOVERY")              \
+    X(0x03, ZIGBEE_END_DEVICE_EXTENDED_TIMEOUT, "ZIGBEE_END_DEVICE_EXTENDED_TIMEOUT") \
+
+#define DISCOVERY_STATUS_ENUM(ID, NAME, TEXT) NAME = ID,
+#define DISCOVERY_STATUS_TEXT(ID, NAME, TEXT) case ID: return TEXT;
+
+typedef enum {
+    DISCOVERY_STATUS(DISCOVERY_STATUS_ENUM)
 } discovery_status_t;
+
+inline static const char *discovery_status_str(int code)
+{
+    switch (code) {
+        DISCOVERY_STATUS(DISCOVERY_STATUS_TEXT)
+    }
+
+    return "UNKNOWN STATUS";
+}
 
 /**
  * @brief TODO
@@ -162,15 +201,8 @@ typedef struct
 } api_frame_t;
 
 
-inline void set_at_command(void)
-{
-    // TODO
-}
-
-inline void print_at_command(const at_command_t* at_command)
-{
-    // TODO
-}
+void set_at_command(void);
+void print_at_command(const at_command_t* at_command);
 
 /** 
  * Xbee protocol encoding functions.
@@ -180,53 +212,13 @@ inline void print_at_command(const at_command_t* at_command)
  * TODO: determine which commands have parameter values and which do not,
  * only encode parameter when required
  */
-inline void encode_at_command(const at_command_t* at_command, vector_t* vector)
-{
-    vector_push(&at_command->frame_id, sizeof(uint8_t), vector);
-    vector_push(&at_command->code, sizeof(uint16_t), vector);
-//  vector_push(&at_command->param, sizeof(uint16_t), xbee.tx_buffer);
-}
+void encode_at_command(const at_command_t* at_command, vector_t* vector);
+void decode_at_command(at_command_t* at_command, vector_t* vector);
 
-inline void decode_at_command(at_command_t* at_command, vector_t* vector)
-{
-    // TODO
-}
+void set_transmit_request(uint8_t* payload, size_t size, api_frame_t* api_frame);
+void print_transmit_request(const transmit_request_t* transmit_request);
+void encode_transmit_request(const transmit_request_t* transmit_request, vector_t* vector);
+void decode_transmit_request(transmit_request_t* transmit_request, vector_t* vector);
 
-inline void set_transmit_request(uint8_t* payload, size_t size, api_frame_t* api_frame)
-{
-    api_frame->cmdID = ZIGBEE_TRANSMIT_REQUEST;
-    transmit_request_t* transmit_request = &api_frame->transmit_request;
-    transmit_request->frame_id = 0x1;
-    transmit_request->destination_address_64 = TRANSMIT_REQUEST_64_BIT_ADDRESS;
-    transmit_request->destination_address_16 = TRANSMIT_REQUEST_16_BIT_ADDRESS;
-    transmit_request->broadcast_radius = TRANSMIT_REQUEST_NO_BROADCAST;
-    transmit_request->transmit_options = TRANSMIT_REQUEST_TX_OPTIONS;
-    transmit_request->payload = payload;
-    transmit_request->size = size;
-}
-
-inline void print_transmit_request(const transmit_request_t* transmit_request)
-{
-    // TODO
-}
-
-inline void encode_transmit_request(const transmit_request_t* transmit_request, vector_t* vector)
-{
-    vector_push(&transmit_request->frame_id, sizeof(uint8_t), vector);
-    vector_push(&transmit_request->destination_address_64, sizeof(uint64_t), vector);
-    vector_push(&transmit_request->destination_address_16, sizeof(uint16_t), vector);
-    vector_push(&transmit_request->broadcast_radius, sizeof(uint8_t), vector);
-    vector_push(&transmit_request->transmit_options, sizeof(uint8_t), vector);
-    vector_push_bytes(transmit_request->payload, transmit_request->size, vector);
-}
-
-inline void decode_transmit_request(transmit_request_t* transmit_request, vector_t* vector)
-{
-    // TODO
-}
-
-inline void decode_transmit_status(transmit_status_t* transmit_status, vector_t* vector)
-{
-}
-
+void decode_transmit_status(transmit_status_t* transmit_status, vector_t* vector);
 #endif /* _API_FRAMES_H_ */

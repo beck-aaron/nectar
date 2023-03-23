@@ -8,7 +8,8 @@
  ******************************************************************************/
 #include "devices.h"
 
-inline static void xbee_init(void);
+// TODO: move these to their respective files
+inline static void xdmac_init(void);
 inline static void logger_init(void);
 inline static void coz_ir_init(void);
 inline static void telaire_init(void);
@@ -16,7 +17,7 @@ inline static void trisonica_init(void);
 
 void devices_init(void)
 {
-    pmc_enable_periph_clk(ID_XDMAC);
+    xdmac_init();
     logger_init();
     xbee_init();
     telaire_init();
@@ -24,15 +25,10 @@ void devices_init(void)
     coz_ir_init();
 }
 
-inline static void xbee_init(void)
+inline static void xdmac_init(void)
 {
-    vector_init(XBEE_MAX_TX, &xbee.tx_buffer);
-    vector_init(XBEE_MAX_RX, &xbee.rx_buffer);
-    serial_uart_init(XBEE);
-
-    // configure xbee here
-
-    LOG(DEBUG_LEVEL, "Initialized serial interface for xbee.");
+    pmc_enable_periph_clk(ID_XDMAC);
+    // enable interrupts here
 }
 
 inline static void logger_init(void)
@@ -44,6 +40,19 @@ inline static void logger_init(void)
     time_t timestamp = time(NULL);
     LOG(DEBUG_LEVEL, "Timestamp: %s", asctime(gmtime(&timestamp)));
 }
+
+void xbee_init(void)
+{
+    vector_init(XBEE_MAX_TX, &xbee.tx_buffer);
+    vector_init(XBEE_MAX_RX, &xbee.rx_buffer);
+    serial_uart_init(XBEE);
+
+    // configure xbee here
+    // setup timeout for setting xbee state to DEVICE_CONNECTED
+    xbee.state = DEVICE_CONNECTED;
+    LOG(DEBUG_LEVEL, "Initialized serial interface for xbee.");
+}
+
 
 inline static void telaire_init(void)
 {
