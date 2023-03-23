@@ -23,7 +23,7 @@ int main(void)
         nectar.transmit();
         nectar.receive();
         nectar.compile();
-        nectar.status();
+//      nectar.status();
     }
 }
 
