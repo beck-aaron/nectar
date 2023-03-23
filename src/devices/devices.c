@@ -20,9 +20,9 @@ void devices_init(void)
     xdmac_init();
     logger_init();
     xbee_init();
-    telaire_init();
-    trisonica_init();
-    coz_ir_init();
+//  telaire_init();
+//  trisonica_init();
+//  coz_ir_init();
 }
 
 inline static void xdmac_init(void)

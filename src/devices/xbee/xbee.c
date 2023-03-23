@@ -87,7 +87,11 @@ void xbee_receive(void)
         case SERIAL_PENDING:
             SCB_CleanInvalidateDCache();
             if (!xbee_has_received_packet())
-            {
+            { 
+                // we do NOT want to flush if dma flush is pending
+                if (xbee.length == 0)
+                    return;
+
                 xdmac_flush_channel(XBEE_CHANNEL_RX);
                 return;
             }
@@ -104,6 +108,8 @@ void xbee_receive(void)
 
 void xbee_encode(void)
 {
+    LOG(ENCODER_LEVEL, "[XBEE] Encoding api frame.");
+
     vector_push(&xbee.delimiter, sizeof(uint8_t), &xbee.tx_buffer);
     vector_push(&xbee.length, sizeof(uint16_t), &xbee.tx_buffer);
     vector_push(&xbee.api_frame.cmdID, sizeof(uint8_t), &xbee.tx_buffer);
@@ -132,6 +138,8 @@ void xbee_encode(void)
 
 void xbee_decode(void)
 {
+    LOG(DECODER_LEVEL, "[XBEE] Decoding api frame.");
+
     if (!xbee_verify_checksum())
     {
         LOG(ERROR_LEVEL, "[XBEE] failed to verify checksum");

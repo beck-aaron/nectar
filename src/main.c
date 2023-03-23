@@ -18,7 +18,7 @@ int main(void)
 
     nectar.init();
 
-    while(1)
+    while(true)
     {
         nectar.transmit();
         nectar.receive();
