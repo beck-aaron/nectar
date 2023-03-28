@@ -4,6 +4,9 @@
 typedef struct
 {
 
+    // work in progress
+    // push should add data to the end of the queue
+    // pop should return a pointer of the element that was first in the queue
 
 } queue_t;
 

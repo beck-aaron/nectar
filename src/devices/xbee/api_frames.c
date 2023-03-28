@@ -8,19 +8,19 @@
  * TODO: determine which commands have parameter values and which do not,
  * only encode parameter when required
  */
-void encode_at_command(const at_command_t* at_command, vector_t* vector)
+void xbee_encode_at_command(const at_command_t* at_command, vector_t* vector)
 {
     vector_push(&at_command->frame_id, sizeof(uint8_t), vector);
     vector_push(&at_command->code, sizeof(uint16_t), vector);
 //  vector_push(&at_command->param, sizeof(uint16_t), xbee.tx_buffer);
 }
 
-void decode_at_command(at_command_t* at_command, vector_t* vector)
+void xbee_decode_at_command(at_command_t* at_command, vector_t* vector)
 {
-    // TODO
+
 }
 
-void set_transmit_request(uint8_t* payload, size_t size, api_frame_t* api_frame)
+void xbee_set_transmit_request(uint8_t* payload, size_t size, api_frame_t* api_frame)
 {
     api_frame->cmdID = ZIGBEE_TRANSMIT_REQUEST;
     transmit_request_t* transmit_request = &api_frame->transmit_request;
@@ -33,12 +33,12 @@ void set_transmit_request(uint8_t* payload, size_t size, api_frame_t* api_frame)
     transmit_request->size = size;
 }
 
-void print_transmit_request(const transmit_request_t* transmit_request)
+void xbee_print_transmit_request(const transmit_request_t* transmit_request)
 {
     // TODO
 }
 
-void encode_transmit_request(const transmit_request_t* transmit_request, vector_t* vector)
+void xbee_encode_transmit_request(const transmit_request_t* transmit_request, vector_t* vector)
 {
     vector_push(&transmit_request->frame_id, sizeof(uint8_t), vector);
     vector_push(&transmit_request->destination_address_64, sizeof(uint64_t), vector);
@@ -49,18 +49,18 @@ void encode_transmit_request(const transmit_request_t* transmit_request, vector_
 
     LOG(ENCODER_LEVEL, "[XBEE] \t%-24s:= %u", "frame id", transmit_request->frame_id);
     LOG(ENCODER_LEVEL, "[XBEE] \t%-24s:= %#0llX", "destination address (64)", transmit_request->destination_address_64);
-    LOG(ENCODER_LEVEL, "[XBEE] \t%-24s:= %#0X", "destination address (16)", transmit_request->destination_address_16);
-    LOG(ENCODER_LEVEL, "[XBEE] \t%-24s:= %#0X", "broadcast radius", transmit_request->broadcast_radius);
-    LOG(ENCODER_LEVEL, "[XBEE] \t%-24s:= %#0X", "transmit options", transmit_request->transmit_options);
+    LOG(ENCODER_LEVEL, "[XBEE] \t%-24s:= 0x%02X", "destination address (16)", transmit_request->destination_address_16);
+    LOG(ENCODER_LEVEL, "[XBEE] \t%-24s:= 0x%02X", "broadcast radius", transmit_request->broadcast_radius);
+    LOG(ENCODER_LEVEL, "[XBEE] \t%-24s:= 0x%02X", "transmit options", transmit_request->transmit_options);
     LOGHEX(ENCODER_LEVEL, "[XBEE] \tpayload", transmit_request->payload, transmit_request->size);
 }
 
-void decode_transmit_request(transmit_request_t* transmit_request, vector_t* vector)
+void xbee_decode_transmit_request(transmit_request_t* transmit_request, vector_t* vector)
 {
     // TODO
 }
 
-void decode_transmit_status(transmit_status_t* transmit_status, vector_t* vector)
+void xbee_decode_transmit_status(transmit_status_t* transmit_status, vector_t* vector)
 {
 
     vector_pop(&transmit_status->frame_id, sizeof(uint8_t), vector);

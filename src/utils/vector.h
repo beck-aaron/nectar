@@ -2,7 +2,9 @@
  * File:    vector.h
  * Author:  Aaron Beck
  *
- * Description:
+ * Description: NOT Dynamic as of yet, need to find a safe way to do this...
+ *              Currently just supports pushing for any fixed-width integer
+ *              value and for byte arrays.
  *
  ******************************************************************************/
 #ifndef _VECTOR_H_

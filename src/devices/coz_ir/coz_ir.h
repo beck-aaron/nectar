@@ -1,17 +1,10 @@
 #ifndef _COZ_IR_H_
 #define _COZ_IR_H_
 
-#include <asf.h>
 #include <logger.h>
 
 #define COZ_IR_MAX_TX   256 // arbitrary values for now. replace!
 #define COZ_IR_MAX_RX   256
-#define coz_ir_receive  COZ_IR_UART_HANDLER
-
-void coz_ir_encode(void);
-void coz_ir_decode(void);
-void coz_ir_transmit(void);
-void coz_ir_configure(void);
 
 typedef struct
 {
@@ -26,6 +19,12 @@ typedef struct
     void (*configure)(void);
 
 } coz_ir_t;
-extern coz_ir_t coz_ir;
+
+void coz_ir_init(coz_ir_t* coz_ir);
+void coz_ir_transmit(coz_ir_t* coz_ir);
+void coz_ir_receive(coz_ir_t* coz_ir);
+void coz_ir_encode(coz_ir_t* coz_ir);
+void coz_ir_decode(coz_ir_t* coz_ir);
+
 
 #endif /* _COZ_IR_H_ */

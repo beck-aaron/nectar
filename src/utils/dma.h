@@ -9,8 +9,15 @@
 #define _DMA_H_
 
 #include <xdmac.h>
+#include <pmc.h>
 
 #define XDMAC_NUM_CHANNELS 24
+
+inline static void xdmac_init(void)
+{
+    pmc_enable_periph_clk(ID_XDMAC);
+    // enable interrupts here
+}
 
 inline static size_t xdmac_get_bytes_transferred(size_t ublock_size, uint32_t channel_num)
 {
@@ -20,6 +27,23 @@ inline static size_t xdmac_get_bytes_transferred(size_t ublock_size, uint32_t ch
 inline static void xdmac_flush_channel(uint32_t channel_num)
 {
     XDMAC->XDMAC_GSWF = (XDMAC_GSWF_SWF0 << channel_num);
+}
+
+inline static bool xdmac_flush_pending(uint32_t channel_num)
+{
+    return !(xdmac_channel_get_interrupt_status(XDMAC, channel_num) & XDMAC_CIS_FIS);
+}
+
+inline static void xdmac_enable_channel(uint32_t channel_num)
+{
+    SCB_CleanDCache();
+    xdmac_channel_enable(XDMAC, channel_num);
+}
+
+inline static void xdmac_disable_channel(uint32_t channel_num)
+{
+    SCB_InvalidateDCache();
+    xdmac_channel_disable(XDMAC, channel_num);
 }
 
 inline static void xdmac_configure_peripheral_to_memory(Usart *usart, uint8_t hwid, uint8_t *memory, size_t length, uint32_t channel_num)

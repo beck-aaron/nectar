@@ -8,12 +8,12 @@
 #ifndef _XBEE_H_
 #define _XBEE_H_
 
-#include <asf.h>
-#include <state.h>
 #include <dma.h>
+#include <delay.h>
+#include <state.h>
+#include <rtt.h>
 #include <logger.h>
 #include "api_frames.h"
-#include "at_commands.h"
 
 #define XBEE_MAX_TX         256  // arbitrary values for now.
 #define XBEE_MAX_RX         256  // represent tx & rx buffer size for each device
@@ -31,27 +31,17 @@ typedef struct
 
     vector_t tx_buffer;
     vector_t rx_buffer;
-    volatile serial_state_t tx_state;
-    volatile serial_state_t rx_state;
-
-    void (*test)(void);
-    void (*transmit)(void);  // transmits the encoded data within the payload
-    void (*receive)(void);   // checks if UART is not ready and logs received data
-    void (*encode)(void);
-    void (*decode)(void);    // decodes the data within the rx buffer
-    void (*configure)(void); // sets xbee device parameters
+    serial_state_t tx_state;
+    serial_state_t rx_state;
 
 } xbee_t;
-extern xbee_t xbee;
 
 // public functions here
-void xbee_init(void);
-void xbee_test(void);
-void xbee_transmit(void);
-void xbee_receive(void);
-void xbee_encode(void);
-void xbee_decode(void);
-void xbee_configure(void);
+void xbee_init(xbee_t* xbee);
+void xbee_transmit(xbee_t* xbee);
+void xbee_receive(xbee_t* xbee);
+void xbee_encode(xbee_t* xbee);
+void xbee_decode(xbee_t* xbee);
 
 //void xbee_force_receive(void);
 

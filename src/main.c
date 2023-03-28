@@ -9,21 +9,19 @@
  ******************************************************************************/
 #include "nectar.h"
 
-nectar_t nectar;
-
 int main(void)
 {
     sysclk_init();
     board_init();
 
-    nectar.init();
+    nectar_t nectar_data;
+    nectar_init(&nectar_data);
 
     while(true)
     {
-        nectar.transmit();
-        nectar.receive();
-        nectar.compile();
-//      nectar.status();
+        nectar_transmit(&nectar_data);
+        nectar_receive(&nectar_data);
+        nectar_compile(&nectar_data);
     }
 }
 

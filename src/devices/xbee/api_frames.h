@@ -28,6 +28,7 @@
 #include <stdlib.h>
 #include <vector.h>
 #include <logger.h>
+#include "at_commands.h"
 
 #define API_FRAME_DELIMITER                 0x7E
 #define API_FRAME_HEADER_IDX                0x1
@@ -201,8 +202,8 @@ typedef struct
 } api_frame_t;
 
 
-void set_at_command(void);
-void print_at_command(const at_command_t* at_command);
+void xbee_set_at_command(void);
+void xbee_print_at_command(const at_command_t* at_command);
 
 /** 
  * Xbee protocol encoding functions.
@@ -212,13 +213,13 @@ void print_at_command(const at_command_t* at_command);
  * TODO: determine which commands have parameter values and which do not,
  * only encode parameter when required
  */
-void encode_at_command(const at_command_t* at_command, vector_t* vector);
-void decode_at_command(at_command_t* at_command, vector_t* vector);
+void xbee_encode_at_command(const at_command_t* at_command, vector_t* vector);
+void xbee_decode_at_command(at_command_t* at_command, vector_t* vector);
 
-void set_transmit_request(uint8_t* payload, size_t size, api_frame_t* api_frame);
-void print_transmit_request(const transmit_request_t* transmit_request);
-void encode_transmit_request(const transmit_request_t* transmit_request, vector_t* vector);
-void decode_transmit_request(transmit_request_t* transmit_request, vector_t* vector);
+void xbee_set_transmit_request(uint8_t* payload, size_t size, api_frame_t* api_frame);
+void xbee_print_transmit_request(const transmit_request_t* transmit_request);
+void xbee_encode_transmit_request(const transmit_request_t* transmit_request, vector_t* vector);
+void xbee_decode_transmit_request(transmit_request_t* transmit_request, vector_t* vector);
 
-void decode_transmit_status(transmit_status_t* transmit_status, vector_t* vector);
+void xbee_decode_transmit_status(transmit_status_t* transmit_status, vector_t* vector);
 #endif /* _API_FRAMES_H_ */

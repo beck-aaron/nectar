@@ -38,53 +38,38 @@ typedef struct
 
 } nectar_payload_t;
 
-typedef enum
-{
-    NECTAR_NORMAL,
-    NECTAR_WARNING,
-    NECTAR_ERROR,
-
-} nectar_state_t;
-
 typedef struct
 {
     size_t max_payload_size; //todo: get this value from the xbee during init.
-    nectar_state_t state;
-
     uint16_t device_bitmask; // set after initialization, used to determine what
                              // devices we should check for data
-    void (*init)(void);
-    void (*transmit)(void);
-    void (*receive)(void);
-    void (*compile)(void);
-    void (*status)(void);
+
+    // nectar usees these devices
+    xbee_t xbee;
+    coz_ir_t coz_ir;
+    telaire_t telaire;
+    trisonica_t trisonica;
 
 } nectar_t;
-extern nectar_t nectar;
 
 /**
  * @brief 
  */
-void nectar_init(void);
+void nectar_init(nectar_t* nectar);
 
 /**
  * @brief 
  */
-void nectar_transmit(void);
+void nectar_transmit(nectar_t* nectar);
 
 /**
  * @brief 
  */
-void nectar_receive(void);
+void nectar_receive(nectar_t* nectar);
 
 /**
  * @brief 
  */
-void nectar_compile(void);
-
-/**
- * @brief 
- */
-void nectar_status(void);
+void nectar_compile(nectar_t* nectar);
 
 #endif /* _NECTAR_H_ */

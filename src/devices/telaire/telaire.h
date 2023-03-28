@@ -8,6 +8,7 @@
 #ifndef _TELAIRE_H_
 #define _TELAIRE_H_
 
+#include <logger.h>
 #include <vector.h>
 #include "tsunami.h"
 
@@ -15,13 +16,6 @@
 #define TELAIRE_MAX_RX  256  // program has access to... fix these values
 #define TELAIRE_HEADER_FLAG 0xFF
 #define TELAIRE_HEADER_ADDR 0xFE
-#define telaire_receive TRISONICA_UART_HANDLER
-
-void telaire_encode(void);
-void telaire_decode(void);
-void telaire_transmit(void);
-void telaire_configure(void);
-void telaire_push(void* value, size_t size);
 
 typedef struct
 {
@@ -42,13 +36,13 @@ typedef struct
     vector_t tx_buffer;
     vector_t rx_buffer;
 
-    void (*encode)(void);
-    void (*decode)(void);
-    void (*transmit)(void);
-    void (*configure)(void);
-    void (*push)(void* value, size_t size);
-
 } telaire_t;
-extern telaire_t telaire;
+
+void telaire_init(telaire_t* telaire);
+void telaire_transmit(telaire_t* telaire);
+void telaire_receive(telaire_t* telaire);
+void telaire_encode(telaire_t* telaire);
+void telaire_decode(telaire_t* telaire);
+void telaire_configure(telaire_t* telaire);
 
 #endif /* _TELAIRE_H_ */

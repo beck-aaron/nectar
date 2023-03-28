@@ -9,6 +9,7 @@
 #define _TRISONICA_H_
 
 #include <vector.h>
+#include <logger.h>
 
 #define TRISONICA_MAX_TX  256  // TODO: determine how much memory our
 #define TRISONICA_MAX_RX  256  // program has access to... fix these values
@@ -36,13 +37,13 @@ typedef struct
     void (*configure)(void);
 
 } trisonica_t;
-extern trisonica_t trisonica;
 
-void trisonica_encode(void);
-void trisonica_decode(void);
-void trisonica_transmit(void);
-void trisonica_receive(void);
-void trisonica_configure(void);
+void trisonica_init(trisonica_t* trisonica);
+void trisonica_encode(trisonica_t* trisonica);
+void trisonica_decode(trisonica_t* trisonica);
+void trisonica_transmit(trisonica_t* trisonica);
+void trisonica_receive(trisonica_t* trisonica);
+void trisonica_configure(trisonica_t* trisonica);
 
 
 #endif /* _TELAIRE_H_ */

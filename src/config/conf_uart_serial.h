@@ -92,5 +92,21 @@
 #define COZ_IR_UART_CHAR_LENGTH     US_MR_CHRL_8_BIT        // character length
 #define COZ_IR_UART_PARITY          US_MR_PAR_NO            // Parity setting
 #define COZ_IR_UART_STOP_BITS       US_MR_NBSTOP_1_BIT      // Stop bits setting
+                                                            //
+/**
+ * @brief Initializes a uart device for serial IO.
+ * This sets up the appropriate uart/usart peripheral for data transmission
+ * and retrieval.
+ *
+ * @param DEVICE - defined in conf_uart_serial.h
+ */
+#define serial_uart_init(DEVICE)                                        \
+    static usart_serial_options_t DEVICE##_serial_options = {           \
+        DEVICE##_UART_BAUDRATE,                                         \
+        DEVICE##_UART_CHAR_LENGTH,                                      \
+        DEVICE##_UART_PARITY,                                           \
+        DEVICE##_UART_STOP_BITS,                                        \
+    };                                                                  \
+    usart_serial_init(DEVICE##_UART, &DEVICE##_serial_options);
 
 #endif/* CONF_USART_SERIAL_H_INCLUDED */

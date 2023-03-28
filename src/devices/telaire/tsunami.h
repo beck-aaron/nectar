@@ -5,6 +5,7 @@
 #define _TSUNAMI_LITE_H
 
 #include <stdint.h>
+#include <vector.h>
 
 typedef enum
 {
@@ -87,5 +88,9 @@ typedef struct
     } results;
 
 } cmd_test_t;
+
+void telaire_encode_read_cmd(const cmd_read_t* cmd, vector_t* vector);
+void telaire_encode_update_cmd(const cmd_update_t* cmd, vector_t* vector);
+void telaire_encode_test_cmd(const cmd_test_t* cmd, vector_t* vector);
 
 #endif /* _TSUNAMI_LITE_H */

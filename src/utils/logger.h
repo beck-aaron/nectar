@@ -9,10 +9,11 @@
 #ifndef _LOGGER_H_
 #define _LOGGER_H_
 
-#include <stdio.h>
-#include <ctype.h>
+#include <clock.h>
 #include <vector.h>
-#include <rtc.h>
+#include <ctype.h>
+#include <stdio.h>
+#include <stdio_serial.h>
 
 enum LOG_CODES
 {
@@ -32,7 +33,7 @@ enum LOG_CODES
 #define TX_COLOR            "\x1b[38;5;215m"    // orange
 #define RX_COLOR            "\x1b[38;5;221m"    // yellow
 #define DECODER_COLOR       "\x1b[38;5;45m"     // blue
-#define ENCODER_COLOR       "\x1b[38;5;14m"     // 
+#define ENCODER_COLOR       "\x1b[38;5;14m"     // light green
 #define COLOR_RESET         "\x1b[0m"           // reset
 
 #define LOGGER_LINE_LENGTH 0x10
@@ -44,28 +45,54 @@ enum LOG_CODES
 *      compiled:      "__TIME__ "            *\r\n\
 *******************************************\r\n"
 
+inline static void logger_init(void);
 inline static void log_time(void);
 inline static void log_level(uint8_t loglevel);
 inline static void log_hexdump(uint8_t* hex, size_t size);
 inline static void log_endl(void);
 
-#define STR(VALUE) #VALUE
-#define XSTR(VALUE) STR(VALUE)
+#define LOG(LEVEL, ...)     \
+    log_time();             \
+    log_level(LEVEL);       \
+    printf(__VA_ARGS__);    \
+    printf(COLOR_RESET);    \
+    log_endl();             \
 
-#define LOG(LEVEL, ...) \
-    log_time(); \
-    log_level(LEVEL); \
-    printf(__VA_ARGS__); \
-    printf(COLOR_RESET); \
-    log_endl();
+#define LOGHEX(LEVEL, LABEL, BUFFER, LENGTH)    \
+    log_time();                                 \
+    log_level(LEVEL);                           \
+    printf(LABEL);                              \
+    log_hexdump((uint8_t*)BUFFER, LENGTH);      \
+    printf(COLOR_RESET);                        \
+    log_endl();                                 \
 
-#define LOGHEX(LEVEL, LABEL, BUFFER, LENGTH) \
-    log_time(); \
-    log_level(LEVEL); \
-    printf(LABEL); \
-    log_hexdump((uint8_t*)BUFFER, LENGTH); \
-    printf(COLOR_RESET); \
-    log_endl();
+/**
+ * @brief Initializes a uart device for stdio. This enables
+ * functions like printf to work nicely with a terminal output.
+ * 
+ * undefined behavior if used for mulitple peripherals!
+ *
+ * @param DEVICE - defined in conf_uart_serial.h
+ */
+#define serial_stdio_init(DEVICE)                                       \
+    static const usart_serial_options_t DEVICE##_serial_options = {     \
+        DEVICE##_UART_BAUDRATE,                                         \
+        DEVICE##_UART_CHAR_LENGTH,                                      \
+        DEVICE##_UART_PARITY,                                           \
+        DEVICE##_UART_STOP_BITS,                                        \
+    };                                                                  \
+    stdio_serial_init(DEVICE##_UART, &DEVICE##_serial_options);
+
+
+inline static void logger_init(void)
+{
+    serial_stdio_init(LOGGER);
+    puts(LOGGER_START_MESSAGE);
+    LOG(DEBUG_LEVEL, "Initialized serial interface for logger.");
+
+    time_t timestamp = time(NULL);
+    LOG(DEBUG_LEVEL, "Timestamp: %s", asctime(gmtime(&timestamp)));
+}
 
 inline static void log_time(void)
 {
@@ -143,7 +170,6 @@ inline static void log_hexdump(uint8_t* byte, size_t size)
     }
 
     vector_destroy(&line);
-    log_endl();
 }
 
 inline static void log_endl(void)

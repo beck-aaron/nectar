@@ -7,45 +7,54 @@
  ******************************************************************************/
 #include "telaire.h"
 
-static void telaire_encode_read_cmd(void);
-static void telaire_encode_update_cmd(void); //TODO
-static void telaire_encode_loopback_cmd(void); //TODO
-
-telaire_t telaire =
+void telaire_init(telaire_t* telaire)
 {
-    .flag       = TELAIRE_HEADER_FLAG,
-    .address    = TELAIRE_HEADER_ADDR,
-    .encode     = telaire_encode,
-    .decode     = telaire_decode,
-    .transmit   = telaire_transmit,
-    .configure  = telaire_configure,
-    .push       = telaire_push,
-};
+    telaire->flag = TELAIRE_HEADER_FLAG;
+    telaire->address = TELAIRE_HEADER_ADDR;
+    vector_init(TELAIRE_MAX_TX, &telaire->tx_buffer);
+    vector_init(TELAIRE_MAX_RX, &telaire->rx_buffer);
+    serial_uart_init(TELAIRE);
 
-void telaire_encode(void)
+    // configure telaire here
+    LOG(DEBUG_LEVEL, "Initialized serial interface for telaire.");
+}
+
+void telaire_transmit(telaire_t* telaire)
 {
-    telaire.push(&telaire.flag, sizeof(uint8_t));
-    telaire.push(&telaire.address, sizeof(uint8_t));
+}
 
-    switch(telaire.command)
+void telaire_receive(telaire_t* telaire)
+{
+}
+
+void telaire_configure(telaire_t* telaire)
+{
+}
+
+void telaire_encode(telaire_t* telaire)
+{
+    vector_push(&telaire->flag, sizeof(uint8_t), &telaire->tx_buffer);
+    vector_push(&telaire->address, sizeof(uint8_t), &telaire->tx_buffer);
+
+    switch(telaire->command)
     {
         case CMD_READ:
-            telaire_encode_read_cmd();
+//          telaire_encode_read_cmd();
             break;
 
         case CMD_WARMUP:
         case CMD_STATUS:
         case CMD_HALT:
         case CMD_STREAM_DATA:
-            telaire.push(&telaire.command, sizeof(uint8_t));
+            vector_push(&telaire->command, sizeof(uint8_t), &telaire->tx_buffer);
             break;
 
         case CMD_UPDATE:
-            telaire_encode_update_cmd();
+//          telaire_encode_update_cmd();
             break;
 
         case CMD_LOOPBACK:
-            telaire_encode_loopback_cmd();
+//          telaire_encode_loopback_cmd();
             break;
 
         case CMD_SELF_TEST_START:
@@ -56,35 +65,6 @@ void telaire_encode(void)
     }
 }
 
-void telaire_decode(void)
+void telaire_decode(telaire_t* telaire)
 {
-}
-
-void telaire_transmit(void)
-{
-}
-
-void telaire_configure(void)
-{
-}
-
-void telaire_push(void* value, size_t size)
-{
-    vector_push(value, size, &telaire.tx_buffer);
-}
-
-static void telaire_encode_read_cmd(void)
-{
-    telaire.push(&telaire.command, sizeof(uint8_t));
-    telaire.push(&telaire.cmd_read.data_id, sizeof(uint8_t));
-}
-
-static void telaire_encode_update_cmd(void)
-{
-    //TODO
-}
-
-static void telaire_encode_loopback_cmd(void)
-{
-    //TODO
 }

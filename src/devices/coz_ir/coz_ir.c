@@ -1,25 +1,27 @@
 #include "coz_ir.h"
 
-coz_ir_t coz_ir =
+void coz_ir_init(coz_ir_t* coz_ir)
 {
-    .encode = coz_ir_encode,
-    .decode = coz_ir_decode,
-    .transmit = coz_ir_transmit,
-    .configure = coz_ir_configure,
-};
+    //todo: init buffers here
+    serial_uart_init(COZ_IR);
 
-void coz_ir_encode(void)
+    // configure coz_ir here
+    LOG(DEBUG_LEVEL, "Initialized serial interface for coz-ir.");
+}
+
+
+void coz_ir_encode(coz_ir_t* coz_ir)
 {
 }
 
-void coz_ir_decode(void)
+void coz_ir_decode(coz_ir_t* coz_ir)
 {
 }
 
-void coz_ir_transmit(void)
+void coz_ir_transmit(coz_ir_t* coz_ir)
 {
 }
 
-void coz_ir_configure(void)
+void coz_ir_receive(coz_ir_t* coz_ir)
 {
 }
