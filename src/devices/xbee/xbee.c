@@ -47,10 +47,7 @@ void xbee_init(xbee_t* xbee)
 // setup timeout for setting xbee state to DEVICE_CONNECTED
 inline static void xbee_configure(xbee_t* xbee)
 {
-    time_t start_time = time(&start_time);
-    time_t current_time;
-    double time_limit = 5;
-
+    timer xbee_timeout = timer_init(5);
     xbee->api_frame.cmdID = AT_COMMAND;
     xbee->api_frame.at_command.frame_id  = 0x01;
     xbee->api_frame.at_command.code      = VL;
@@ -60,16 +57,11 @@ inline static void xbee_configure(xbee_t* xbee)
     xdmac_enable_channel(XBEE_CHANNEL_RX);
     xbee_transmit(xbee);
 
-    xbee->rx_state = SERIAL_PENDING;
     xbee->length = 0;
+    xbee->rx_state = SERIAL_PENDING;
 
-    while(!xbee_has_received_packet(xbee))
+    while(!(xbee_has_received_packet(xbee) || timer_expired(&xbee_timeout)))
     {
-        time(&current_time);
-        if (difftime(current_time, start_time) >= time_limit)
-            break;
-
-        delay_s(1);
         xdmac_flush_channel(XBEE_CHANNEL_RX);
     }
 
@@ -117,7 +109,7 @@ void xbee_receive(xbee_t* xbee)
 {
     switch(xbee->rx_state)
     {
-        case SERIAL_IDLE: // fallthrough to pending state on same cycle
+        case SERIAL_IDLE:
             xbee->length = 0;
             xbee->rx_state = SERIAL_PENDING;
             LOG(DEBUG_LEVEL, "[XBEE] rx state change: IDLE -> PENDING");
@@ -125,6 +117,7 @@ void xbee_receive(xbee_t* xbee)
             xdmac_configure_peripheral_to_memory(XBEE_UART, XBEE_HWID_RX,
                     xbee->rx_buffer.data, XBEE_MAX_RX, XBEE_CHANNEL_RX);
             xdmac_channel_enable(XDMAC, XBEE_CHANNEL_RX);
+        // fallthrough to pending state on same cycle
 
         case SERIAL_PENDING:
             if (!xbee_has_received_packet(xbee))
