@@ -25,6 +25,7 @@ inline void nectar_init(nectar_t* nectar)
     delay_s(5);
 }
 
+// NOTE: this is the buffer that gets sent in the transmit request payload
 uint8_t buffer[] = "hello world";
 
 // we should pop from our queue of payloads only when xbee.tx_state == SERIAL_IDLE
