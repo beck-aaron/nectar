@@ -42,6 +42,15 @@ Install by extracting to the directory of your choice.  This install directory i
 
 ---
 
+### Windows WSL2 Setup
+To connect to the logger using WSL2, some trickery is involved to access the usb device through WSL2.
+Install usbipd-win, then follow these instructions. After you have passed the bus through, the
+device in WSL2 should show up as /dev/ttyACM0
+
+    https://devblogs.microsoft.com/commandline/connecting-usb-devices-to-wsl/
+
+---
+
 ### Clone Repository
 
     $ git clone https://github.com/beck-aaron/nectar.git
