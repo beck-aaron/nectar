@@ -48,7 +48,25 @@ Install usbipd-win, then follow these instructions. After you have passed the bu
 device in WSL2 should show up as /dev/ttyACM0
 
     https://devblogs.microsoft.com/commandline/connecting-usb-devices-to-wsl/
-
+    
+#### Windows WSL2 Build
+After following the instructions from that link to attach to the SAME70's USB bus ID, perform the following
+steps to flash the SAME70 with your built code:
+1. In WSL2 session:
+```
+// cd to your nectar repo's root
+make -j
+```    
+2. In a File Explorer:
+```
+Copy `nectar/build/nectar-driver.elf` to `C:/Users/<your user>/`
+```
+3. In _administrator_ Command Prompt:
+```
+usbipd wsl detach --busid <SAME70 bus ID> // if attached, it keeps the port busy and blocks openocd which will output `Error: unable to find a matching CMSIS-DAP device`
+cd C:\Users\<your user>
+openocd\bin\openocd.exe -f board\atmel_same70_xplained.cfg -c "program nectar-driver.elf verify reset exit"
+```
 ---
 
 ### Clone Repository
