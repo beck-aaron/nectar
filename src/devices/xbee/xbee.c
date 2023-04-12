@@ -35,7 +35,7 @@ void xbee_init(xbee_t* xbee)
     {
         case DEVICE_DISCONNECTED:
             LOG(ERROR_LEVEL, "Unable to communicate with xbee, verify it is plugged in!");
-            break;
+            exit(0);
 
         case DEVICE_CONNECTED:
             LOG(DEBUG_LEVEL, "Connected to xbee over serial interface.");
@@ -167,6 +167,8 @@ void xbee_encode(xbee_t* xbee)
 
     LOG(ENCODER_LEVEL, "[XBEE] %-10s := 0x%02X", "length", xbee->length);
     LOG(ENCODER_LEVEL, "[XBEE] %-10s := 0x%02X", "checksum", xbee->checksum);
+
+    xbee->length = 0;
 }
 
 void xbee_decode(xbee_t* xbee)
