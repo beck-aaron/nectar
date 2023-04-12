@@ -9,10 +9,8 @@
 #define _XBEE_H_
 
 #include <dma.h>
-#include <delay.h>
 #include <state.h>
 #include <timer.h>
-#include <rtt.h>
 #include <logger.h>
 #include "api_frames.h"
 

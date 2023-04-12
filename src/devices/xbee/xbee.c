@@ -43,7 +43,6 @@ void xbee_init(xbee_t* xbee)
     }
 }
 
-// configure xbee here
 // setup timeout for setting xbee state to DEVICE_CONNECTED
 inline static void xbee_configure(xbee_t* xbee)
 {
