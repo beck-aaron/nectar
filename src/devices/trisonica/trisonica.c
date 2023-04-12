@@ -14,7 +14,7 @@ void trisonica_init(trisonica_t* trisonica)
 
     // configure trisonica here
 
-    LOG(DEBUG_LEVEL, "Initialized serial interface for trisonica mini.");
+//  LOG(DEBUG_LEVEL, "Initialized serial interface for trisonica mini.");
 }
 
 void trisonica_encode(trisonica_t* trisonica)

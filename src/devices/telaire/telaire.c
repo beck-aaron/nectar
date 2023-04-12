@@ -16,7 +16,7 @@ void telaire_init(telaire_t* telaire)
     serial_uart_init(TELAIRE);
 
     // configure telaire here
-    LOG(DEBUG_LEVEL, "Initialized serial interface for telaire.");
+//  LOG(DEBUG_LEVEL, "Initialized serial interface for telaire.");
 }
 
 void telaire_transmit(telaire_t* telaire)
