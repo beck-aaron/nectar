@@ -15,6 +15,8 @@
 #include <stdio.h>
 #include <stdio_serial.h>
 
+#define BASE_TWO 2
+
 enum LOG_CODES
 {
     DEBUG_LEVEL,
@@ -49,6 +51,7 @@ inline static void logger_init(void);
 inline static void log_time(void);
 inline static void log_level(uint8_t loglevel);
 inline static void log_hexdump(uint8_t* hex, size_t size);
+inline static void log_bitstring(uint8_t* bytes, size_t size);
 inline static void log_endl(void);
 
 #define LOG(LEVEL, ...)     \
@@ -63,6 +66,14 @@ inline static void log_endl(void);
     log_level(LEVEL);                           \
     printf(LABEL);                              \
     log_hexdump((uint8_t*)BUFFER, LENGTH);      \
+    printf(COLOR_RESET);                        \
+    log_endl();                                 \
+
+#define LOGBITS(LEVEL, LABEL, BUFFER, LENGTH)   \
+    log_time();                                 \
+    log_level(LEVEL);                           \
+    printf(LABEL);                              \
+    log_bitstring((uint8_t*)BUFFER, LENGTH);    \
     printf(COLOR_RESET);                        \
     log_endl();                                 \
 
@@ -170,6 +181,24 @@ inline static void log_hexdump(uint8_t* byte, size_t size)
     }
 
     vector_destroy(&line);
+}
+
+inline static void log_bitstring(uint8_t* bytes, size_t size)
+{
+    uint32_t bitcount = size << 3;
+    uint8_t bitstring[bitcount + 1];
+    for (size_t i = 0; i < size; ++i)
+    {
+        for (uint8_t j = 0; j < 8; ++j)
+        {
+            bitstring[(i*8)+j] = (uint8_t)((bytes[i] >> j) & 0x1);
+        }
+    }
+
+    for (size_t i = bitcount; i > 0; --i)
+    {
+        printf("%u", bitstring[i-1]);
+    }
 }
 
 inline static void log_endl(void)
