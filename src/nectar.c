@@ -7,16 +7,21 @@
  ******************************************************************************/
 #include "nectar.h"
 
+static size_t nectar_calculate_subpayload_size(uint16_t datapoints);
+static void nectar_payload_init(nectar_payload_t* payload);
 inline void nectar_init(nectar_t* nectar)
 {
     srand((unsigned) time(NULL));
 
+    nectar_payload_init(&nectar->payload);
     // TODO: initialize first payload in queue
+    /*
     nectar->payload.full = false;
     nectar->payload.size = 2; // include the delimiter and subpayload count
     nectar->payload.delimiter = 0xAF; // constant
     nectar->payload.datapoints = 0x8000; // poll CONNECTED datapoints for this
     nectar->payload.subpayload_count = 0; // number of collected subpayloads
+    */
     vector_init(256, &nectar->payload_buffer); // encoded payload buffer
 
     logger_init();
@@ -60,11 +65,7 @@ inline void nectar_transmit(nectar_t* nectar)
         // pop payload from front of queue
 
         // for now just reset the payload
-        nectar->payload.full = false;
-        nectar->payload.size = 2;
-        nectar->payload.delimiter = 0xAF; // constant
-        nectar->payload.datapoints = 0x8000; // poll CONNECTED datapoints for this
-        nectar->payload.subpayload_count = 0;        // subpayload_count based on CONNECTED datapoints
+        nectar_payload_init(&nectar->payload);
     }
 
     // transmit fresh payload if SERIAL_IDLE, otherwise retransmit stale payload
@@ -119,6 +120,21 @@ void nectar_compile(nectar_t* nectar)
     */
 
     payload->subpayload_count++;
+}
+
+static void nectar_payload_init(nectar_payload_t* payload)
+{
+    payload->full = false;
+    payload->size = 2; // include the delimiter and subpayload count
+    payload->delimiter = 0xAF; // constant
+    payload->datapoints = 0x8000; // poll CONNECTED datapoints for this
+    payload->subpayload_count = 0; // number of collected subpayloads
+}
+
+static size_t nectar_calculate_subpayload_size(uint16_t datapoints)
+{
+
+    return 0;
 }
 
 void nectar_encode_payload(nectar_payload_t* payload, vector_t* buffer)
