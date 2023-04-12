@@ -116,7 +116,7 @@ static void nectar_payload_init(nectar_payload_t* payload)
     payload->full = false;
     payload->size = 2; // include the delimiter and subpayload count
     payload->delimiter = 0xAF; // constant
-    payload->datapoints = 0xC000; // TODO: poll CONNECTED devices to compute this
+    payload->datapoints = 0x8000; // TODO: poll CONNECTED devices to compute this
     payload->subpayload_count = 0; // number of collected subpayloads
     payload->subpayload_size = nectar_calculate_subpayload_size(payload->datapoints);
 }
