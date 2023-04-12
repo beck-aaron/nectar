@@ -35,6 +35,9 @@ inline void nectar_init(nectar_t* nectar)
 
 inline void nectar_transmit(nectar_t* nectar)
 {
+    // poll all sensors for data
+    coz_ir_transmit(&nectar->coz_ir);
+
     // TODO: replace this with payload in front of queue
     if (!nectar->payload.full)
     {
@@ -68,9 +71,9 @@ inline void nectar_transmit(nectar_t* nectar)
 
 inline void nectar_receive(nectar_t* nectar)
 {
-    xbee_receive(&nectar->xbee);
     // todo: asynchronously collect data from sensors
-    //coz_ir_receive(&nectar->coz_ir);
+    xbee_receive(&nectar->xbee);
+    coz_ir_receive(&nectar->coz_ir);
     //telaire_receive(&nectar->telaire);
 }
 
@@ -96,6 +99,7 @@ void nectar_compile(nectar_t* nectar)
     // set all values in subpayload
     uint16_t datapoints = payload->datapoints;
     if (Tst_bits(datapoints, NECTAR_TIMESTAMP)) subpayload->timestamp = time(NULL);
+    if (Tst_bits(datapoints, NECTAR_CO2_PPM)) subpayload->co2_ppm = coz_ir_get_data(&nectar->coz_ir, COZ_IR_CO2_PPM);
 
     /* other values that might be set based on sensor configuration
     if (Tst_bits(datapoints, NECTAR_CO2_PPM)) subpayload->co2_ppm = y;

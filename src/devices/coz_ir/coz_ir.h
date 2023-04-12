@@ -27,7 +27,6 @@ typedef struct
 
     vector_t tx_buffer;
     vector_t rx_buffer;
-    serial_state_t tx_state;
     serial_state_t rx_state;
 
     vector_t co2_ppm;
@@ -41,7 +40,7 @@ void coz_ir_transmit(coz_ir_t* coz_ir);
 void coz_ir_receive(coz_ir_t* coz_ir);
 void coz_ir_encode(coz_ir_t* coz_ir);
 void coz_ir_decode(coz_ir_t* coz_ir);
-void coz_ir_get_data(coz_ir_t* coz_ir, coz_ir_data_t type);
+float coz_ir_get_data(coz_ir_t* coz_ir, coz_ir_data_t type);
 
 
 #endif /* _COZ_IR_H_ */

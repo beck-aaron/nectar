@@ -13,6 +13,8 @@ static void coz_ir_configure(coz_ir_t* coz_ir)
 
 void coz_ir_init(coz_ir_t* coz_ir)
 {
+    coz_ir->tx_state = SERIAL_IDLE;
+    coz_ir->rx_state = SERIAL_IDLE;
     serial_uart_init(COZ_IR);
     vector_init(COZ_IR_MAX_TX, &coz_ir->tx_buffer);
     vector_init(COZ_IR_MAX_RX, &coz_ir->rx_buffer);
@@ -33,14 +35,16 @@ void coz_ir_transmit(coz_ir_t* coz_ir)
             usart_serial_write_packet(COZ_IR_UART, coz_ir->tx_buffer.data, coz_ir->tx_buffer.size);
             coz_ir->rx_state = SERIAL_PENDING;
             vector_clear(&coz_ir->tx_buffer);
-            break;
+            return;
 
         case SERIAL_PENDING:
-            break;
+            return;
     }
-    // request co2, temperature, & humidity
-    // we know the length of these messages
+}
 
+static bool coz_ir_message_received(void)
+{
+    return false;
 }
 
 void coz_ir_receive(coz_ir_t* coz_ir)
@@ -48,10 +52,12 @@ void coz_ir_receive(coz_ir_t* coz_ir)
     // use serial state to determine if we have successfully received
     // wait until DMA has received CO2, TEMPERATURE, & HUMIDITY
     // in other words, wait until COZ_IR_RESPONSE_LENGTH bytes have been transferred
-    if (coz_ir->rx_state == SERIAL_PENDING)
+    if (coz_ir->rx_state == SERIAL_PENDING && coz_ir_message_received())
     {
-        // TODO: check to see if we have received all the necessary bytes
         coz_ir_decode(coz_ir);
+
+        // reset dma channel for new reception
+        coz_ir->rx_state = SERIAL_IDLE;
     }
 
     // if we are in IDLE, reset DMA channel
@@ -68,6 +74,7 @@ void coz_ir_decode(coz_ir_t* coz_ir)
 {
 }
 
-void coz_ir_get_data(coz_ir_t* coz_ir, coz_ir_data_t type)
+float coz_ir_get_data(coz_ir_t* coz_ir, coz_ir_data_t type)
 {
+    return 0.0;
 }
