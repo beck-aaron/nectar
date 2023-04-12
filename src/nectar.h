@@ -13,9 +13,8 @@
 #include <logger.h>
 #include <devices.h>
 
-// TODO: test to determine this value
-#define MAX_SUBPAYLOADS 2
-#define MAX_PAYLOAD_SIZE 0x2A
+#define MAX_SUBPAYLOADS 0x16 // computed based off of smallest subpayload
+#define MAX_PAYLOAD_SIZE 0x84
 
 enum nectar_mask
 {
@@ -49,6 +48,7 @@ typedef struct
     uint8_t delimiter;
     uint16_t datapoints; // bitmask of current data points being recorded - see user manual
     uint8_t subpayload_count;
+    size_t subpayload_size;
     nectar_subpayload_t subpayloads[MAX_SUBPAYLOADS];
 
 } nectar_payload_t;
@@ -56,7 +56,6 @@ typedef struct
 typedef struct
 {
     nectar_payload_t payload;
-    size_t max_payload_size; //todo: get this value from the xbee during init.
 
     // driver usees these devices
     xbee_t xbee;
