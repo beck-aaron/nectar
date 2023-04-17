@@ -13,8 +13,8 @@
 #include <logger.h>
 #include <devices.h>
 
-#define MAX_SUBPAYLOADS 0x16 // computed based off of smallest subpayload
-#define MAX_PAYLOAD_SIZE 0x84
+#define MAX_SUBPAYLOADS 0x0D // computed based off of smallest subpayload
+#define MAX_PAYLOAD_SIZE 0x54
 
 enum nectar_mask
 {
@@ -31,7 +31,7 @@ enum nectar_mask
 typedef struct nectar_subpayload_t nectar_subpayload_t;
 struct nectar_subpayload_t
 {
-    time_t      timestamp;
+    uint64_t    timestamp;
     uint16_t    co2_ppm;
     float       u_vector;
     float       v_vector;

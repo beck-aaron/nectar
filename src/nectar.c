@@ -95,17 +95,16 @@ void nectar_compile(nectar_t* nectar)
 
     // set all values in subpayload
     uint16_t datapoints = payload->datapoints;
-    if (Tst_bits(datapoints, NECTAR_TIMESTAMP)) subpayload->timestamp = time(NULL);
 
-    /* other values that might be set based on sensor configuration
-    if (Tst_bits(datapoints, NECTAR_CO2_PPM)) subpayload->co2_ppm = y;
-    if (Tst_bits(datapoints, NECTAR_U_VECTOR)) subpayload->x = y;
-    if (Tst_bits(datapoints, NECTAR_V_VECTOR)) subpayload->x = y;
-    if (Tst_bits(datapoints, NECTAR_W_VECTOR)) subpayload->x = y;
-    if (Tst_bits(datapoints, NECTAR_TEMPERATURE)) subpayload->x = y;
-    if (Tst_bits(datapoints, NECTAR_HUMIDITY)) subpayload->x = y;
-    if (Tst_bits(datapoints, NECTAR_PRESSURE)) subpayload->x = y;
-    */
+    /* other values that might be set based on sensor configuration */
+    if (Tst_bits(datapoints, NECTAR_TIMESTAMP)) subpayload->timestamp = time(NULL);
+    if (Tst_bits(datapoints, NECTAR_CO2_PPM)) subpayload->co2_ppm = (rand() % 120) + 290;
+    if (Tst_bits(datapoints, NECTAR_U_VECTOR)) subpayload->u_vector = (rand() % 20) - 10;
+    if (Tst_bits(datapoints, NECTAR_V_VECTOR)) subpayload->v_vector = (rand() % 20) - 10;
+    if (Tst_bits(datapoints, NECTAR_W_VECTOR)) subpayload->w_vector = (rand() % 20) - 10;
+    if (Tst_bits(datapoints, NECTAR_TEMPERATURE)) subpayload->temperature = (rand() % 40);
+    if (Tst_bits(datapoints, NECTAR_HUMIDITY)) subpayload->humidity = rand() % 100;
+    if (Tst_bits(datapoints, NECTAR_PRESSURE)) subpayload->pressure = (rand() % 100) + 970;
 
     payload->size += payload->subpayload_size;
     payload->subpayload_count++;
@@ -116,7 +115,7 @@ static void nectar_payload_init(nectar_payload_t* payload)
     payload->full = false;
     payload->size = 2; // include the delimiter and subpayload count
     payload->delimiter = 0xAF; // constant
-    payload->datapoints = 0x8000; // TODO: poll CONNECTED devices to compute this
+    payload->datapoints = 0xC000; // TODO: poll CONNECTED devices to compute this
     payload->subpayload_count = 0; // number of collected subpayloads
     payload->subpayload_size = nectar_calculate_subpayload_size(payload->datapoints);
 }
@@ -124,7 +123,7 @@ static void nectar_payload_init(nectar_payload_t* payload)
 static size_t nectar_calculate_subpayload_size(uint16_t datapoints)
 {
     size_t size = 2; // start with bitmask
-    if (Tst_bits(datapoints, NECTAR_TIMESTAMP)) size += sizeof(time_t);
+    if (Tst_bits(datapoints, NECTAR_TIMESTAMP)) size += sizeof(uint64_t);
     if (Tst_bits(datapoints, NECTAR_CO2_PPM)) size += sizeof(uint16_t);
     if (Tst_bits(datapoints, NECTAR_U_VECTOR)) size += sizeof(float);
     if (Tst_bits(datapoints, NECTAR_V_VECTOR)) size += sizeof(float);
@@ -158,8 +157,8 @@ void nectar_encode_subpayload(nectar_subpayload_t* subpayload, uint16_t datapoin
     vector_push(&datapoints, sizeof(uint16_t), buffer);
 
     if (Tst_bits(datapoints, NECTAR_TIMESTAMP)) {
-        vector_push(&subpayload->timestamp, sizeof(time_t), buffer);
-        LOG(ENCODER_LEVEL, "[NECTAR] \t%-24s:= %lu", "timestamp", subpayload->timestamp);
+        vector_push(&subpayload->timestamp, sizeof(uint64_t), buffer);
+        LOG(ENCODER_LEVEL, "[NECTAR] \t%-24s:= %llu", "timestamp", subpayload->timestamp);
     }
     if (Tst_bits(datapoints, NECTAR_CO2_PPM)) {
         vector_push(&subpayload->co2_ppm, sizeof(uint16_t), buffer);
@@ -167,20 +166,26 @@ void nectar_encode_subpayload(nectar_subpayload_t* subpayload, uint16_t datapoin
     }
     if (Tst_bits(datapoints, NECTAR_U_VECTOR)) {
         vector_push(&subpayload->u_vector, sizeof(float), buffer);
+        LOG(ENCODER_LEVEL, "[NECTAR] \t%-24s:= %f", "u-vector", subpayload->u_vector);
     }
     if (Tst_bits(datapoints, NECTAR_V_VECTOR)) {
         vector_push(&subpayload->v_vector, sizeof(float), buffer);
+        LOG(ENCODER_LEVEL, "[NECTAR] \t%-24s:= %f", "v-vector", subpayload->v_vector);
     }
     if (Tst_bits(datapoints, NECTAR_W_VECTOR)) {
         vector_push(&subpayload->w_vector, sizeof(float), buffer);
+        LOG(ENCODER_LEVEL, "[NECTAR] \t%-24s:= %f", "w-vector", subpayload->w_vector);
     }
     if (Tst_bits(datapoints, NECTAR_TEMPERATURE)) {
         vector_push(&subpayload->temperature, sizeof(float), buffer);
+        LOG(ENCODER_LEVEL, "[NECTAR] \t%-24s:= %f", "temperature", subpayload->temperature);
     }
     if (Tst_bits(datapoints, NECTAR_HUMIDITY)) {
         vector_push(&subpayload->humidity, sizeof(float), buffer);
+        LOG(ENCODER_LEVEL, "[NECTAR] \t%-24s:= %f", "humidity", subpayload->humidity);
     }
     if (Tst_bits(datapoints, NECTAR_PRESSURE)) {
         vector_push(&subpayload->pressure, sizeof(float), buffer);
+        LOG(ENCODER_LEVEL, "[NECTAR] \t%-24s:= %f", "pressure", subpayload->pressure);
     }
 }
