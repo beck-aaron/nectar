@@ -13,10 +13,12 @@ static size_t nectar_calculate_subpayload_size(uint16_t datapoints);
 
 inline void nectar_init(nectar_t* nectar)
 {
-    srand((unsigned) time(NULL));
+    srand((unsigned) time(NULL)); // seeding rand only necessary while using fake data
 
-    nectar_payload_init(&nectar->payload);
-    vector_init(256, &nectar->payload_buffer); // encoded payload buffer
+    nectar->subpayload_index = 0;
+    vector_init(256, &nectar->encoded_buffer);
+    queue_init(&nectar->payload_queue, nectar->payload_buffer, sizeof(nectar_payload_t), MAX_PAYLOADS);
+    nectar_payload_init((nectar_payload_t*)nectar->payload_queue.front);
 
     logger_init();
     xdmac_init();
@@ -33,11 +35,32 @@ inline void nectar_init(nectar_t* nectar)
     delay_s(2);
 }
 
+static void nectar_payload_init(nectar_payload_t* payload)
+{
+    payload->full = false;
+    payload->size = 2; // include the delimiter and subpayload count
+    payload->delimiter = 0xAF; // constant
+    payload->datapoints = 0xC600; // TODO: poll CONNECTED devices to compute this
+    payload->subpayload_count = 0; // number of collected subpayloads
+    payload->subpayload_size = nectar_calculate_subpayload_size(payload->datapoints);
+}
+
+static size_t nectar_calculate_subpayload_size(uint16_t datapoints)
+{
+    size_t size = 2; // add delimiter and payload count to size
+    if (datapoints & NECTAR_TIMESTAMP)   size += sizeof(uint32_t);
+    if (datapoints & NECTAR_CO2_PPM)     size += sizeof(uint16_t);
+    if (datapoints & NECTAR_U_VECTOR)    size += sizeof(float);
+    if (datapoints & NECTAR_V_VECTOR)    size += sizeof(float);
+    if (datapoints & NECTAR_W_VECTOR)    size += sizeof(float);
+    if (datapoints & NECTAR_TEMPERATURE) size += sizeof(float);
+    if (datapoints & NECTAR_HUMIDITY)    size += sizeof(float);
+    if (datapoints & NECTAR_PRESSURE)    size += sizeof(float);
+    return size;
+}
+
 inline void nectar_transmit(nectar_t* nectar)
 {
-    // poll all sensors for data
-//  coz_ir_transmit(&nectar->coz_ir);
-
     // TODO: replace this with payload in front of queue
     if (!nectar->payload.full)
     {
@@ -57,8 +80,8 @@ inline void nectar_transmit(nectar_t* nectar)
     // and we can remove it from our payload queue.
     if (nectar->xbee.tx_state == SERIAL_IDLE)
     {
-        nectar_encode_payload(&nectar->payload, &nectar->payload_buffer);
-        xbee_set_transmit_request(nectar->payload_buffer.data, nectar->payload_buffer.size, &nectar->xbee.api_frame);
+        nectar_encode_payload(&nectar->payload, &nectar->encoded_buffer);
+        xbee_set_transmit_request(nectar->encoded_buffer.data, nectar->encoded_buffer.size, &nectar->xbee.api_frame);
         // pop payload from front of queue
 
         // for now just reset the front payload
@@ -73,8 +96,6 @@ inline void nectar_receive(nectar_t* nectar)
 {
     // todo: asynchronously collect data from sensors
     xbee_receive(&nectar->xbee);
-//  coz_ir_receive(&nectar->coz_ir);
-    //telaire_receive(&nectar->telaire);
 }
 
 void nectar_compile(nectar_t* nectar)
@@ -98,47 +119,13 @@ void nectar_compile(nectar_t* nectar)
 
     // set all values in subpayload
     uint16_t datapoints = payload->datapoints;
-    if (datapoints & NECTAR_TIMESTAMP) subpayload->timestamp = time(NULL);
+    if (datapoints & NECTAR_TIMESTAMP) subpayload->index = nectar->subpayload_index++;
     if (datapoints & NECTAR_CO2_PPM) subpayload->co2_ppm = coz_ir_get_ppm(&nectar->coz_ir);
     if (datapoints & NECTAR_TEMPERATURE) subpayload->temperature = coz_ir_get_temp(&nectar->coz_ir);
     if (datapoints & NECTAR_HUMIDITY) subpayload->humidity = coz_ir_get_humidity(&nectar->coz_ir);
 
-    /* other values that might be set based on sensor configuration
-    if (Tst_bits(datapoints, NECTAR_CO2_PPM)) subpayload->co2_ppm = y;
-    if (Tst_bits(datapoints, NECTAR_U_VECTOR)) subpayload->x = y;
-    if (Tst_bits(datapoints, NECTAR_V_VECTOR)) subpayload->x = y;
-    if (Tst_bits(datapoints, NECTAR_W_VECTOR)) subpayload->x = y;
-    if (Tst_bits(datapoints, NECTAR_TEMPERATURE)) subpayload->x = y;
-    if (Tst_bits(datapoints, NECTAR_HUMIDITY)) subpayload->x = y;
-    if (Tst_bits(datapoints, NECTAR_PRESSURE)) subpayload->x = y;
-    */
-
     payload->size += payload->subpayload_size;
     payload->subpayload_count++;
-}
-
-static void nectar_payload_init(nectar_payload_t* payload)
-{
-    payload->full = false;
-    payload->size = 2; // include the delimiter and subpayload count
-    payload->delimiter = 0xAF; // constant
-    payload->datapoints = 0xC600; // TODO: poll CONNECTED devices to compute this
-    payload->subpayload_count = 0; // number of collected subpayloads
-    payload->subpayload_size = nectar_calculate_subpayload_size(payload->datapoints);
-}
-
-static size_t nectar_calculate_subpayload_size(uint16_t datapoints)
-{
-    size_t size = 2; // add delimiter and payload count to size
-    if (datapoints & NECTAR_TIMESTAMP)   size += sizeof(time_t);
-    if (datapoints & NECTAR_CO2_PPM)     size += sizeof(uint16_t);
-    if (datapoints & NECTAR_U_VECTOR)    size += sizeof(float);
-    if (datapoints & NECTAR_V_VECTOR)    size += sizeof(float);
-    if (datapoints & NECTAR_W_VECTOR)    size += sizeof(float);
-    if (datapoints & NECTAR_TEMPERATURE) size += sizeof(float);
-    if (datapoints & NECTAR_HUMIDITY)    size += sizeof(float);
-    if (datapoints & NECTAR_PRESSURE)    size += sizeof(float);
-    return size;
 }
 
 void nectar_encode_payload(nectar_payload_t* payload, vector_t* buffer)
@@ -153,8 +140,7 @@ void nectar_encode_payload(nectar_payload_t* payload, vector_t* buffer)
     LOGBITS(ENCODER_LEVEL, "[NECTAR] device bitmask  := ", &payload->datapoints, sizeof(uint16_t));
     LOG(ENCODER_LEVEL, "[NECTAR] \tEncoding subpayloads.");
 
-    for (uint32_t i = 0; i < payload->subpayload_count; ++i)
-    {
+    for (uint32_t i = 0; i < payload->subpayload_count; ++i) {
         nectar_encode_subpayload(&payload->subpayloads[i], payload->datapoints, buffer);
     }
 }
@@ -164,8 +150,8 @@ void nectar_encode_subpayload(nectar_subpayload_t* subpayload, uint16_t datapoin
     vector_push(&datapoints, sizeof(uint16_t), buffer);
 
     if (Tst_bits(datapoints, NECTAR_TIMESTAMP)) {
-        vector_push(&subpayload->timestamp, sizeof(time_t), buffer);
-        LOG(ENCODER_LEVEL, "[NECTAR] \t%-24s:= %lu", "timestamp", subpayload->timestamp);
+        vector_push(&subpayload->index, sizeof(time_t), buffer);
+        LOG(ENCODER_LEVEL, "[NECTAR] \t%-24s:= %u", "index", subpayload->index);
     }
     if (Tst_bits(datapoints, NECTAR_CO2_PPM)) {
         vector_push(&subpayload->co2_ppm, sizeof(uint16_t), buffer);

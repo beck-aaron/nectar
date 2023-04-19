@@ -78,6 +78,9 @@ inline static void xbee_configure(xbee_t* xbee)
 
 // if our tx is pending, we just send the encoded buffer again.
 // No need for encoding again.
+// todo: replace tx transfer with dma transfer
+// configure memory to peripheral
+// enable memory to peripheral
 void xbee_transmit(xbee_t* xbee)
 {
     switch(xbee->tx_state)
@@ -85,9 +88,6 @@ void xbee_transmit(xbee_t* xbee)
         case SERIAL_IDLE:
             xbee_encode(xbee);
             LOGHEX(TX_LEVEL, "[XBEE] Transmitting serial data in tx buffer.", xbee->tx_buffer.data, xbee->tx_buffer.size);
-            // todo: replace with dma transfer
-            // configure memory to peripheral
-            // enable memory to peripheral
             usart_serial_write_packet(XBEE_UART, xbee->tx_buffer.data, xbee->tx_buffer.size);
             xbee->tx_state = SERIAL_PENDING;
             LOG(DEBUG_LEVEL, "[XBEE] tx state change: IDLE -> PENDING");
@@ -96,7 +96,6 @@ void xbee_transmit(xbee_t* xbee)
         case SERIAL_PENDING:
             if (xbee->rx_state == SERIAL_IDLE)
             {
-                // transmit tx buffer again
                 LOGHEX(TX_LEVEL, "[XBEE] Retransmitting stale data in tx buffer.", xbee->tx_buffer.data, xbee->tx_buffer.size);
                 usart_serial_write_packet(XBEE_UART, xbee->tx_buffer.data, xbee->tx_buffer.size);
             }
@@ -116,8 +115,8 @@ void xbee_receive(xbee_t* xbee)
             xdmac_configure_peripheral_to_memory(XBEE_UART, XBEE_HWID_RX,
                     xbee->rx_buffer.data, XBEE_MAX_RX, XBEE_CHANNEL_RX);
             xdmac_channel_enable(XDMAC, XBEE_CHANNEL_RX);
-        // fallthrough to pending state on same cycle
 
+        // fallthrough to pending state on same cycle
         case SERIAL_PENDING:
             if (!xbee_has_received_packet(xbee))
             { 

@@ -12,9 +12,11 @@
 #include <clock.h>
 #include <logger.h>
 #include <devices.h>
+#include <queue.h>
 
 #define MAX_SUBPAYLOADS 0x16 // computed based off of smallest subpayload
 #define MAX_PAYLOAD_SIZE 0x84
+#define MAX_PAYLOADS 0x0F // todo: determine how much memory we can use for this...
 
 enum nectar_mask
 {
@@ -31,7 +33,7 @@ enum nectar_mask
 typedef struct nectar_subpayload_t nectar_subpayload_t;
 struct nectar_subpayload_t
 {
-    time_t      timestamp;
+    size_t      index;
     uint16_t    co2_ppm;
     float       u_vector;
     float       v_vector;
@@ -43,28 +45,31 @@ struct nectar_subpayload_t
 
 typedef struct
 {
-    bool full;
-    size_t size;
-    uint8_t delimiter;
-    uint16_t datapoints; // bitmask of current data points being recorded - see user manual
-    uint8_t subpayload_count;
-    size_t subpayload_size;
+    bool        full;
+    size_t      size;
+    uint8_t     delimiter;          // delimiter is always 0xAF
+    uint16_t    datapoints;         // bitmask of current data points being recorded - see user manual
+    uint8_t     subpayload_count;   // number of subpayloads in a current payload
+    size_t      subpayload_size;    // size (in bytes) of payload
+
     nectar_subpayload_t subpayloads[MAX_SUBPAYLOADS];
 
 } nectar_payload_t;
 
 typedef struct
 {
-    nectar_payload_t payload;
-
     // driver usees these devices
     xbee_t xbee;
     coz_ir_t coz_ir;
-    telaire_t telaire;
-    trisonica_t trisonica;
+    telaire_t telaire;      // TODO
+    trisonica_t trisonica;  // TODO
 
-    // used to store the currently encoded payload
-    vector_t payload_buffer;
+    vector_t encoded_buffer;        // stores currently encoded payload
+    uint32_t subpayload_index;      // stores unique index for subpayload
+
+    // used to store recorded payloads
+    queue_t payload_queue;
+    nectar_payload_t payload_buffer[MAX_PAYLOADS];
 
 } nectar_t;
 

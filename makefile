@@ -19,6 +19,7 @@ LD=arm-none-eabi-g++
 CPPFLAGS_INCLUDES = -I$(ASFDIR) \
 		-I$(ASFDIR)/common/boards                                      \
 		-I$(ASFDIR)/common/services/clock                              \
+		-I$(ASFDIR)/common/services/fifo                               \
 		-I$(ASFDIR)/common/services/delay                              \
 		-I$(ASFDIR)/common/services/delay/sam                          \
 		-I$(ASFDIR)/common/services/gpio                               \

@@ -4,13 +4,17 @@
 #include <stdlib.h>
 
 // work in progress
-typedef struct
+struct queue
 {
-    void* front;
-    void* back;
+    volatile void* front;
+    volatile void* back;
     size_t size;
+    size_t limit;
+    size_t element_size;
+};
+typedef struct queue queue_t;
 
-} queue_t;
+void queue_init(queue_t* queue, void* buffer, size_t length, size_t element);
 
 // each element should have a pointer to the next element
 // push should insert a data element to the back of the queue
