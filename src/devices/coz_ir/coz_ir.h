@@ -9,6 +9,7 @@
 
 #define COZ_IR_MAX_TX   256 // arbitrary values for now. replace!
 #define COZ_IR_MAX_RX   256
+#define BASE_TEN 10
 
 typedef enum
 {
@@ -29,18 +30,22 @@ typedef struct
     vector_t rx_buffer;
     serial_state_t rx_state;
 
-    vector_t co2_ppm;
-    vector_t temperature;
-    vector_t humidity;
+    uint16_t co2_ppm;
+    float    temperature;
+    float    humidity;
 
 } coz_ir_t;
 
+// Implemented
 void coz_ir_init(coz_ir_t* coz_ir);
+uint16_t coz_ir_get_ppm(coz_ir_t* coz_ir);
+float coz_ir_get_temp(coz_ir_t* coz_ir);
+float coz_ir_get_humidity(coz_ir_t* coz_ir);
+
+// TODO
 void coz_ir_transmit(coz_ir_t* coz_ir);
 void coz_ir_receive(coz_ir_t* coz_ir);
 void coz_ir_encode(coz_ir_t* coz_ir);
 void coz_ir_decode(coz_ir_t* coz_ir);
-float coz_ir_get_data(coz_ir_t* coz_ir, coz_ir_data_t type);
-
 
 #endif /* _COZ_IR_H_ */

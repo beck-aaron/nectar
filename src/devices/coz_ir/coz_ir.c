@@ -1,26 +1,18 @@
 #include "coz_ir.h"
 
-// local functions
 static void coz_ir_configure(coz_ir_t* coz_ir)
 {
-    timer coz_ir_timeout = timer_init(5);
-
-    while (!timer_expired(&coz_ir_timeout))
-    {
-        // attempt to set device to polling mode
-    }
+    //TODO
 }
 
 void coz_ir_init(coz_ir_t* coz_ir)
 {
-    coz_ir->tx_state = SERIAL_IDLE;
-    coz_ir->rx_state = SERIAL_IDLE;
     serial_uart_init(COZ_IR);
+
     vector_init(COZ_IR_MAX_TX, &coz_ir->tx_buffer);
     vector_init(COZ_IR_MAX_RX, &coz_ir->rx_buffer);
     coz_ir_configure(coz_ir);
-
-    // setup dma channel for data reception
+    coz_ir->rx_state = SERIAL_IDLE;
 
     // configure coz_ir here
     LOG(DEBUG_LEVEL, "Initialized serial interface for coz-ir.");
@@ -28,53 +20,61 @@ void coz_ir_init(coz_ir_t* coz_ir)
 
 void coz_ir_transmit(coz_ir_t* coz_ir)
 {
-    switch(coz_ir->rx_state)
-    {
-        case SERIAL_IDLE:
-            coz_ir_encode(coz_ir);
-            usart_serial_write_packet(COZ_IR_UART, coz_ir->tx_buffer.data, coz_ir->tx_buffer.size);
-            coz_ir->rx_state = SERIAL_PENDING;
-            vector_clear(&coz_ir->tx_buffer);
-            return;
-
-        case SERIAL_PENDING:
-            return;
-    }
-}
-
-static bool coz_ir_message_received(void)
-{
-    return false;
+    LOGHEX(TX_LEVEL, "[COZ-IR] Transmitting serial data in tx buffer.", coz_ir->tx_buffer.data, coz_ir->tx_buffer.size);
+    usart_serial_write_packet(COZ_IR_UART, coz_ir->tx_buffer.data, coz_ir->tx_buffer.size);
 }
 
 void coz_ir_receive(coz_ir_t* coz_ir)
 {
-    // use serial state to determine if we have successfully received
-    // wait until DMA has received CO2, TEMPERATURE, & HUMIDITY
-    // in other words, wait until COZ_IR_RESPONSE_LENGTH bytes have been transferred
-    if (coz_ir->rx_state == SERIAL_PENDING && coz_ir_message_received())
-    {
-        coz_ir_decode(coz_ir);
-
-        // reset dma channel for new reception
-        coz_ir->rx_state = SERIAL_IDLE;
-    }
-
-    // if we are in IDLE, reset DMA channel
-}
-
-void coz_ir_encode(coz_ir_t* coz_ir)
-{
-    coz_ir_encode_message(COZ_IR_GET_FILTERED_CO2_PPM, &coz_ir->tx_buffer);
-    coz_ir_encode_message(COZ_IR_GET_TEMPERATURE, &coz_ir->tx_buffer);
-    coz_ir_encode_message(COZ_IR_GET_HUMIDITY, &coz_ir->tx_buffer);
+    usart_serial_read_packet(COZ_IR_UART, coz_ir->rx_buffer.data, 10);
+    LOGHEX(RX_LEVEL, "[COZ-IR] Received serial data in rx buffer.", coz_ir->rx_buffer.data, 10);
 }
 
 void coz_ir_decode(coz_ir_t* coz_ir)
 {
+    LOGHEX(DECODER_LEVEL, "coz receive buffer", coz_ir->rx_buffer.data, COZ_IR_MAX_RX);
 }
 
-float coz_ir_get_data(coz_ir_t* coz_ir, coz_ir_data_t type)
+uint16_t coz_ir_get_ppm(coz_ir_t* coz_ir)
 {
-    return 0.0;
+    coz_ir_encode_message(COZ_IR_GET_FILTERED_CO2_PPM, &coz_ir->tx_buffer);
+    coz_ir_transmit(coz_ir);
+    coz_ir_receive(coz_ir);
+
+    uint8_t null = '\0';
+    vector_push(&null, sizeof(null), &coz_ir->rx_buffer);
+    coz_ir->co2_ppm = strtol((char*)coz_ir->rx_buffer.data+4, NULL, BASE_TEN);
+    LOG(DEBUG_LEVEL, "[COZ-IR] co2 ppm: %u", coz_ir->co2_ppm);
+
+    vector_clear(&coz_ir->tx_buffer);
+    vector_clear(&coz_ir->rx_buffer);
+    return coz_ir->co2_ppm;
+}
+
+float coz_ir_get_temp(coz_ir_t* coz_ir)
+{
+    coz_ir_encode_message(COZ_IR_GET_TEMPERATURE, &coz_ir->tx_buffer);
+    coz_ir_transmit(coz_ir);
+    coz_ir_receive(coz_ir);
+
+    uint8_t null = '\0';
+    vector_push(&null, sizeof(null), &coz_ir->rx_buffer);
+    coz_ir->temperature = (strtol((char*)coz_ir->rx_buffer.data+4, NULL, BASE_TEN) - 1000.0)/10;
+    vector_clear(&coz_ir->tx_buffer);
+    vector_clear(&coz_ir->rx_buffer);
+    return coz_ir->temperature;
+}
+
+float coz_ir_get_humidity(coz_ir_t* coz_ir)
+{
+    coz_ir_encode_message(COZ_IR_GET_HUMIDITY, &coz_ir->tx_buffer);
+    coz_ir_transmit(coz_ir);
+    coz_ir_receive(coz_ir);
+
+    uint8_t null = '\0';
+    vector_push(&null, sizeof(null), &coz_ir->rx_buffer);
+    coz_ir->humidity = strtol((char*)coz_ir->rx_buffer.data+4, NULL, BASE_TEN)/10.0;
+    vector_clear(&coz_ir->tx_buffer);
+    vector_clear(&coz_ir->rx_buffer);
+    return coz_ir->humidity;
 }

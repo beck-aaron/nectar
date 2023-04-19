@@ -92,6 +92,12 @@
 #define COZ_IR_UART_CHAR_LENGTH     US_MR_CHRL_8_BIT        // character length
 #define COZ_IR_UART_PARITY          US_MR_PAR_NO            // Parity setting
 #define COZ_IR_UART_STOP_BITS       US_MR_NBSTOP_1_BIT      // Stop bits setting
+
+/* CozIR-A DMA interface */
+#define COZ_IR_CHANNEL_TX           3
+#define COZ_IR_CHANNEL_RX           2
+#define COZ_IR_HWID_TX              XDMAC_CHANNEL_HWID_UART3_TX
+#define COZ_IR_HWID_RX              XDMAC_CHANNEL_HWID_UART3_RX
                                                             //
 /**
  * @brief Initializes a uart device for serial IO.

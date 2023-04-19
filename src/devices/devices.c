@@ -16,6 +16,6 @@ void devices_init(xbee_t* xbee, coz_ir_t* coz_ir, telaire_t* telaire, trisonica_
 {
     xbee_init(xbee);
     coz_ir_init(coz_ir);
-    telaire_init(telaire);
-    trisonica_init(trisonica);
+//  telaire_init(telaire);
+//  trisonica_init(trisonica);
 }
