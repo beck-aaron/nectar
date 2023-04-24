@@ -48,12 +48,16 @@ enum LOG_CODES
 *******************************************\r\n"
 
 inline static void logger_init(void);
-inline static void log_time(void);
+static void log_time(void);
 inline static void log_level(uint8_t loglevel);
 inline static void log_hexdump(uint8_t* hex, size_t size);
 inline static void log_bitstring(uint8_t* bytes, size_t size);
 inline static void log_endl(void);
 
+// turns logging on or off to improve speed
+#define LOG_EVERYTHING 1
+
+#if LOG_EVERYTHING
 #define LOG(LEVEL, ...)     \
     log_time();             \
     log_level(LEVEL);       \
@@ -76,6 +80,13 @@ inline static void log_endl(void);
     log_bitstring((uint8_t*)BUFFER, LENGTH);    \
     printf(COLOR_RESET);                        \
     log_endl();                                 \
+
+#else
+#define LOG(LEVEL, ...)
+#define LOGHEX(LEVEL, LABEL, BUFFER, LENGTH)
+#define LOGBITS(LEVEL, LABEL, BUFFER, LENGTH)
+
+#endif
 
 /**
  * @brief Initializes a uart device for stdio. This enables
@@ -105,7 +116,7 @@ inline static void logger_init(void)
     LOG(DEBUG_LEVEL, "Timestamp: %s", asctime(gmtime(&timestamp)));
 }
 
-inline static void log_time(void)
+static void log_time(void)
 {
     uint32_t hours, minutes, seconds;
     rtc_get_time(RTC, &hours, &minutes, &seconds);

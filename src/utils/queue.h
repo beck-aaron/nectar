@@ -2,12 +2,18 @@
 #define _QUEUE_H_
 
 #include <stdlib.h>
+#include <stdint.h>
+#include <stdbool.h>
+#include <logger.h>
 
 // work in progress
 struct queue
 {
-    volatile void* front;
-    volatile void* back;
+    void* buffer_head;
+    void* buffer_tail;
+    volatile uintptr_t front;
+    volatile uintptr_t back;
+    bool full;
     size_t size;
     size_t limit;
     size_t element_size;
@@ -15,9 +21,8 @@ struct queue
 typedef struct queue queue_t;
 
 void queue_init(queue_t* queue, void* buffer, size_t length, size_t element);
-
-// each element should have a pointer to the next element
-// push should insert a data element to the back of the queue
-// pop should return a pointer of the element that was first in the queue
+void queue_pop(queue_t* queue);
+void queue_push(queue_t* queue);
+void queue_print(queue_t* queue);
 
 #endif /* _QUEUE_H_ */
