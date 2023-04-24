@@ -2,7 +2,15 @@
  * File:    nectar.h
  * Author:  Aaron Beck
  *
- * Description:
+ * Description: Entry point for the nectar driver. Main functions include transmit,
+ * receive, and compile.  Transmit communicates with the xbee, sending the currently
+ * encoded transmit request if ready.  Receive checks the xbee dma transfer to
+ * detemine if a full xbee frame has been sent, and decodes that frame once it is sent.
+ * Compile polls sensors for data, currently just the COZ-IR sensor.
+ *
+ * A payload queue stores compiled data when the network is down or disconnected.
+ * As soon as the network connection is restored, data will be flushed out of the queue
+ * and regular transmission will occur.
  *
  ******************************************************************************/
 #ifndef _NECTAR_H_
@@ -14,9 +22,9 @@
 #include <devices.h>
 #include <queue.h>
 
-#define MAX_SUBPAYLOADS 0x16 // computed based off of smallest subpayload
-#define MAX_PAYLOAD_SIZE 0x84
-#define MAX_PAYLOADS 0x0F // todo: determine how much memory we can use for this...
+#define MAX_SUBPAYLOADS 0x0D    // computed based off of smallest subpayload
+#define MAX_PAYLOAD_SIZE 0x54   // determined based on XBee specification
+#define MAX_PAYLOADS 0x0F       // TODO: determine how much memory we can use for this...
 
 enum nectar_mask
 {
@@ -33,7 +41,7 @@ enum nectar_mask
 typedef struct nectar_subpayload_t nectar_subpayload_t;
 struct nectar_subpayload_t
 {
-    size_t      index;
+    uint32_t      index;
     uint16_t    co2_ppm;
     float       u_vector;
     float       v_vector;
@@ -61,27 +69,27 @@ typedef struct
     // driver usees these devices
     xbee_t xbee;
     coz_ir_t coz_ir;
-    telaire_t telaire;      // TODO
-    trisonica_t trisonica;  // TODO
+    telaire_t telaire;              // TODO
+    trisonica_t trisonica;          // TODO
 
     vector_t encoded_buffer;        // stores currently encoded payload
     uint32_t subpayload_index;      // stores unique index for subpayload
 
     // used to store recorded payloads
     queue_t payload_queue;
-    nectar_payload_t payload_buffer[MAX_PAYLOADS];
+    nectar_payload_t payload_buffer[1];
 
 } nectar_t;
 
 /**
- * @brief 
+ * Initializes logger, dma, sensor drivers, and all local variables
  *
- * @param nectar
+ * @param nectar - the nectar struct to initialize
  */
 void nectar_init(nectar_t* nectar);
 
 /**
- * @brief 
+ * Transmits the front of the payload queue to the basestation, if xbee is ready
  *
  * @param nectar
  */
