@@ -94,6 +94,7 @@ OBJECTS = $(BUILDDIR)/common/services/clock/same70/sysclk.o                     
 		  $(BUILDDIR)/devices/xbee/xbee.o											\
 		  $(BUILDDIR)/devices/xbee/api_frames.o										\
 		  $(BUILDDIR)/utils/clock.o      											\
+		  $(BUILDDIR)/utils/queue.o      											\
 		  $(BUILDDIR)/nectar.o 														\
           $(BUILDDIR)/main.o
 
