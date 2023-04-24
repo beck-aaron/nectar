@@ -2,8 +2,8 @@
  * File:    devices.h
  * Author:  Aaron Beck
  *
- * Stores the data structures for each device used with the Nectar driver
- * and a function to initialize all the peripherals used for external devices.
+ * An entry point to initialize all the peripherals used for external devices
+ * and the drivers used to communicate with those devices.
  *
  ******************************************************************************/
 #ifndef DEVICES_H_

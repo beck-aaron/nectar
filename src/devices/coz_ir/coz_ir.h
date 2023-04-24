@@ -1,3 +1,15 @@
+/*******************************************************************************
+ * File:    coz_ir.h
+ * Author:  Aaron Beck
+ *
+ * Description: driver for the COZ-IR A sensor.  This is a very barebones
+ * driver that polls the device for temperature, humidity, and co2 ppm.  No
+ * error checking is performed.  The device is assumed to be plugged in. There
+ * is much room for improvement on this driver. DMA is not used at the moment,
+ * the only commands used on this device are very short and do not warrant DMA
+ * currently although this could be implemented in the future.
+ *
+ ******************************************************************************/
 #ifndef _COZ_IR_H_
 #define _COZ_IR_H_
 
@@ -5,7 +17,6 @@
 #include <state.h>
 #include <timer.h>
 #include <logger.h>
-#include "commands.h"
 
 #define COZ_IR_MAX_TX   256 // arbitrary values for now. replace!
 #define COZ_IR_MAX_RX   256

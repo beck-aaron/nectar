@@ -2,7 +2,7 @@
  * File:    trisonica.h
  * Author:  Aaron Beck
  *
- * Description:
+ * Description: TODO
  *
  ******************************************************************************/
 #ifndef _TRISONICA_H_
