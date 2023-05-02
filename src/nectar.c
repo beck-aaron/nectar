@@ -18,10 +18,8 @@ inline void nectar_init(nectar_t* nectar)
     nectar->subpayload_index = 0;
     vector_init(MAX_PAYLOAD_SIZE, &nectar->encoded_buffer);
     queue_init(&nectar->payload_queue, nectar->payload_buffer, sizeof(nectar_payload_t), MAX_PAYLOADS);
-    queue_push(&nectar->payload_queue);
-    nectar_payload_init(nectar->payload_buffer);
 
-    logger_init();
+//  logger_init();
     xdmac_init();
     devices_init(
         &nectar->xbee,
@@ -101,6 +99,11 @@ inline void nectar_receive(nectar_t* nectar)
 // compile data to payload at back of queue
 void nectar_compile(nectar_t* nectar)
 {
+    if (nectar->payload_queue.size == 0) {
+        queue_push(&nectar->payload_queue);
+        nectar_payload_init((nectar_payload_t*)nectar->payload_queue.front);
+    }
+
     LOG(DEBUG_LEVEL, "[NECTAR] Compiling payload at address: %#0X", nectar->payload_queue.back);
     nectar_payload_t* payload = (nectar_payload_t*)nectar->payload_queue.back;
 

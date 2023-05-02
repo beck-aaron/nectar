@@ -47,15 +47,9 @@ enum LOG_CODES
 *      compiled:      "__TIME__ "            *\r\n\
 *******************************************\r\n"
 
-inline static void logger_init(void);
-static void log_time(void);
-inline static void log_level(uint8_t loglevel);
-inline static void log_hexdump(uint8_t* hex, size_t size);
-inline static void log_bitstring(uint8_t* bytes, size_t size);
-inline static void log_endl(void);
 
 // turns logging on or off to improve speed
-#define LOG_EVERYTHING 1
+#define LOG_EVERYTHING 0
 
 #if LOG_EVERYTHING
 #define LOG(LEVEL, ...)     \
@@ -81,12 +75,7 @@ inline static void log_endl(void);
     printf(COLOR_RESET);                        \
     log_endl();                                 \
 
-#else
-#define LOG(LEVEL, ...)
-#define LOGHEX(LEVEL, LABEL, BUFFER, LENGTH)
-#define LOGBITS(LEVEL, LABEL, BUFFER, LENGTH)
 
-#endif
 
 /**
  * @brief Initializes a uart device for stdio. This enables
@@ -105,6 +94,12 @@ inline static void log_endl(void);
     };                                                                  \
     stdio_serial_init(DEVICE##_UART, &DEVICE##_serial_options);
 
+inline static void logger_init(void);
+static void log_time(void);
+inline static void log_level(uint8_t loglevel);
+inline static void log_hexdump(uint8_t* hex, size_t size);
+inline static void log_bitstring(uint8_t* bytes, size_t size);
+inline static void log_endl(void);
 
 inline static void logger_init(void)
 {
@@ -216,5 +211,13 @@ inline static void log_endl(void)
 {
     printf("\r\n");
 }
+
+#else
+
+#define LOG(LEVEL, ...)
+#define LOGHEX(LEVEL, LABEL, BUFFER, LENGTH)
+#define LOGBITS(LEVEL, LABEL, BUFFER, LENGTH)
+
+#endif
 
 #endif // _LOGGER_H_
