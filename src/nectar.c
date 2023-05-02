@@ -18,7 +18,8 @@ inline void nectar_init(nectar_t* nectar)
     nectar->subpayload_index = 0;
     vector_init(MAX_PAYLOAD_SIZE, &nectar->encoded_buffer);
     queue_init(&nectar->payload_queue, nectar->payload_buffer, sizeof(nectar_payload_t), MAX_PAYLOADS);
-//  nectar_payload_init(nectar->current_payload);
+    queue_push(&nectar->payload_queue);
+    nectar_payload_init(nectar->payload_buffer);
 
     logger_init();
     xdmac_init();
@@ -86,7 +87,6 @@ inline void nectar_transmit(nectar_t* nectar)
         nectar_encode_payload(payload, &nectar->encoded_buffer);
         xbee_set_transmit_request(nectar->encoded_buffer.data, nectar->encoded_buffer.size, &nectar->xbee.api_frame);
         queue_pop(&nectar->payload_queue);
-        nectar_payload_init((nectar_payload_t*)nectar->payload_queue.front);
     }
 
     // transmit fresh payload if state is SERIAL_IDLE, otherwise retransmit stale payload
@@ -96,12 +96,12 @@ inline void nectar_transmit(nectar_t* nectar)
 inline void nectar_receive(nectar_t* nectar)
 {
     xbee_receive(&nectar->xbee);
-    // TODO: asynchronously collect data from sensors
 }
 
 // compile data to payload at back of queue
 void nectar_compile(nectar_t* nectar)
 {
+    LOG(DEBUG_LEVEL, "[NECTAR] Compiling payload at address: %#0X", nectar->payload_queue.back);
     nectar_payload_t* payload = (nectar_payload_t*)nectar->payload_queue.back;
 
     if (payload->size + payload->subpayload_size >= MAX_PAYLOAD_SIZE)

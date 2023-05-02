@@ -17,6 +17,7 @@
 #include <state.h>
 #include <timer.h>
 #include <logger.h>
+#include <delay.h>
 
 #define COZ_IR_MAX_TX   256 // arbitrary values for now. replace!
 #define COZ_IR_MAX_RX   256

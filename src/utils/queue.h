@@ -24,5 +24,6 @@ void queue_init(queue_t* queue, void* buffer, size_t length, size_t element);
 void queue_pop(queue_t* queue);
 void queue_push(queue_t* queue);
 void queue_print(queue_t* queue);
+void queue_flush(queue_t* queue, void (void* callback));
 
 #endif /* _QUEUE_H_ */

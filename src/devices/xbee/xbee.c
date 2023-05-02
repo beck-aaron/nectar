@@ -53,6 +53,7 @@ inline static void xbee_configure(xbee_t* xbee)
 
     xdmac_configure_peripheral_to_memory(XBEE_UART, XBEE_HWID_RX,
                 xbee->rx_buffer.data, XBEE_MAX_RX, XBEE_CHANNEL_RX);
+    SCB_CleanDCache();
     xdmac_enable_channel(XBEE_CHANNEL_RX);
     xbee_transmit(xbee);
 
@@ -110,13 +111,14 @@ void xbee_receive(xbee_t* xbee)
         case SERIAL_IDLE:
             xbee->length = 0;
             xbee->rx_state = SERIAL_PENDING;
+            vector_clear(&xbee->rx_buffer);
             LOG(DEBUG_LEVEL, "[XBEE] rx state change: IDLE -> PENDING");
-            SCB_CleanDCache();
             xdmac_configure_peripheral_to_memory(XBEE_UART, XBEE_HWID_RX,
                     xbee->rx_buffer.data, XBEE_MAX_RX, XBEE_CHANNEL_RX);
+            SCB_CleanDCache();
             xdmac_channel_enable(XDMAC, XBEE_CHANNEL_RX);
+            break;
 
-        // fallthrough to pending state on same cycle
         case SERIAL_PENDING:
             if (!xbee_has_received_packet(xbee))
             { 
@@ -130,10 +132,9 @@ void xbee_receive(xbee_t* xbee)
             xdmac_channel_disable(XDMAC, XBEE_CHANNEL_RX);
             LOGHEX(RX_LEVEL, "[XBEE] Received serial data from xbee", xbee->rx_buffer.data, xbee->rx_buffer.size);
             xbee_decode(xbee);
-            vector_clear(&xbee->rx_buffer);
             xbee->rx_state = SERIAL_IDLE;
             LOG(DEBUG_LEVEL, "[XBEE] rx state change: PENDING -> IDLE");
-            return;
+            break;
     }
 }
 
@@ -216,6 +217,7 @@ inline static void xbee_encode_packet_length(xbee_t* xbee)
 
 inline static void xbee_decode_packet_length(xbee_t* xbee)
 {
+    SCB_CleanInvalidateDCache();
     xbee->length = (xbee->rx_buffer.data[API_FRAME_HEADER_IDX] << 4) +
         xbee->rx_buffer.data[API_FRAME_HEADER_IDX+1];
 }
@@ -240,8 +242,8 @@ inline static bool xbee_verify_checksum(xbee_t* xbee)
 
 inline static bool xbee_has_received_packet(xbee_t* xbee)
 {
-    SCB_CleanInvalidateDCache();
     xbee->rx_buffer.size = xdmac_get_bytes_transferred(XBEE_MAX_RX, XBEE_CHANNEL_RX);
+    LOG(WARNING_LEVEL, "[XBEE] rx buffer size: %#0X", xbee->rx_buffer.size);
 
     // we haven't received the header yet
     if (xbee->rx_buffer.size < API_FRAME_HEADER_LENGTH)

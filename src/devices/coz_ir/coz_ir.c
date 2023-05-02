@@ -23,6 +23,7 @@ static void coz_ir_configure(coz_ir_t* coz_ir)
 void coz_ir_init(coz_ir_t* coz_ir)
 {
     serial_uart_init(COZ_IR);
+    delay_s(3);
 
     vector_init(COZ_IR_MAX_TX, &coz_ir->tx_buffer);
     vector_init(COZ_IR_MAX_RX, &coz_ir->rx_buffer);
