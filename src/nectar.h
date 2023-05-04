@@ -24,7 +24,7 @@
 
 #define MAX_SUBPAYLOADS 0x0D    // computed based off of smallest subpayload
 #define MAX_PAYLOAD_SIZE 0x54   // determined based on XBee specification
-#define MAX_PAYLOADS 0x0F       // TODO: determine how much memory we can use for this...
+#define MAX_PAYLOADS 0x04       // TODO: determine how much memory we can use for this...
 
 enum nectar_mask
 {
@@ -41,7 +41,7 @@ enum nectar_mask
 typedef struct nectar_subpayload_t nectar_subpayload_t;
 struct nectar_subpayload_t
 {
-    uint32_t      index;
+    uint32_t    index;
     uint16_t    co2_ppm;
     float       u_vector;
     float       v_vector;

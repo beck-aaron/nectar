@@ -24,6 +24,6 @@
  * acknowledge the fact that the bitmask is wasting space within subpayload
  * since we are not currently supporting hot-swapping of sensors
  */
-void devices_init(xbee_t* xbee, coz_ir_t* coz_ir, telaire_t* telaire, trisonica_t* trisonica);
+void devices_init(void* nectar);
 
 #endif /* DEVICES_H_ */

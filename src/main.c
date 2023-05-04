@@ -8,7 +8,6 @@
  *
  ******************************************************************************/
 #include "nectar.h"
-#include <logger.h>
 
 int main(void)
 {
@@ -20,10 +19,10 @@ int main(void)
 
     while(true)
     {
-        nectar_receive(&nectar_data);
-        nectar_transmit(&nectar_data);
         nectar_compile(&nectar_data);
-        delay_ms(500);
+        nectar_transmit(&nectar_data);
+        nectar_receive(&nectar_data);
+        queue_print(&nectar_data.payload_queue);
     }
 }
 

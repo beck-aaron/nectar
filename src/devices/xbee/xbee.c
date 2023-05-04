@@ -70,6 +70,8 @@ inline static void xbee_configure(xbee_t* xbee)
     if (!xbee_has_received_packet(xbee))
         xbee->state = DEVICE_DISCONNECTED;
 
+    SCB_InvalidateDCache();
+
     xbee->tx_state = SERIAL_IDLE;
     xbee->rx_state = SERIAL_IDLE;
     xbee->length = 0;
@@ -95,8 +97,7 @@ void xbee_transmit(xbee_t* xbee)
             break;
 
         case SERIAL_PENDING:
-            if (xbee->rx_state == SERIAL_IDLE)
-            {
+            if (xbee->rx_state == SERIAL_IDLE) {
                 LOGHEX(TX_LEVEL, "[XBEE] Retransmitting stale data in tx buffer.", xbee->tx_buffer.data, xbee->tx_buffer.size);
                 usart_serial_write_packet(XBEE_UART, xbee->tx_buffer.data, xbee->tx_buffer.size);
             }
@@ -113,9 +114,9 @@ void xbee_receive(xbee_t* xbee)
             xbee->rx_state = SERIAL_PENDING;
             vector_clear(&xbee->rx_buffer);
             LOG(DEBUG_LEVEL, "[XBEE] rx state change: IDLE -> PENDING");
+            SCB_CleanDCache();
             xdmac_configure_peripheral_to_memory(XBEE_UART, XBEE_HWID_RX,
                     xbee->rx_buffer.data, XBEE_MAX_RX, XBEE_CHANNEL_RX);
-            SCB_CleanDCache();
             xdmac_channel_enable(XDMAC, XBEE_CHANNEL_RX);
             break;
 
@@ -168,6 +169,7 @@ void xbee_encode(xbee_t* xbee)
     LOG(ENCODER_LEVEL, "[XBEE] %-10s := 0x%02X", "checksum", xbee->checksum);
 
     xbee->length = 0;
+    fflush(stdout);
 }
 
 void xbee_decode(xbee_t* xbee)
@@ -242,8 +244,9 @@ inline static bool xbee_verify_checksum(xbee_t* xbee)
 
 inline static bool xbee_has_received_packet(xbee_t* xbee)
 {
+    SCB_CleanInvalidateDCache();
     xbee->rx_buffer.size = xdmac_get_bytes_transferred(XBEE_MAX_RX, XBEE_CHANNEL_RX);
-    LOG(WARNING_LEVEL, "[XBEE] rx buffer size: %#0X", xbee->rx_buffer.size);
+    LOG(DEBUG_LEVEL, "[XBEE] dma transfer size: %#0X", xbee->rx_buffer.size);
 
     // we haven't received the header yet
     if (xbee->rx_buffer.size < API_FRAME_HEADER_LENGTH)
@@ -257,6 +260,7 @@ inline static bool xbee_has_received_packet(xbee_t* xbee)
     if (xbee->length != xbee->rx_buffer.size - 4)
     {
         LOG(WARNING_LEVEL, "[XBEE] frame size (0x%02X) not equal to received bytes (0x%02X)", xbee->length + 4, xbee->rx_buffer.size);
+        LOGHEX(WARNING_LEVEL, "[XBEE] rx buffer", xbee->rx_buffer.data, xbee->rx_buffer.size)
         return false;
     }
 

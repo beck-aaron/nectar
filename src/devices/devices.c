@@ -11,11 +11,11 @@
  *
  ******************************************************************************/
 #include "devices.h"
+#include "../nectar.h"
 
-void devices_init(xbee_t* xbee, coz_ir_t* coz_ir, telaire_t* telaire, trisonica_t* trisonica)
+void devices_init(void* driver)
 {
-    xbee_init(xbee);
-    coz_ir_init(coz_ir);
-//  telaire_init(telaire);
-//  trisonica_init(trisonica);
+    nectar_t* nectar = driver;
+    xbee_init(&nectar->xbee);
+    coz_ir_init(&nectar->coz_ir);
 }

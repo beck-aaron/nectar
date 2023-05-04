@@ -15,15 +15,15 @@ void queue_init(queue_t* queue, void* buffer, size_t element_size, size_t number
 void queue_pop(queue_t* queue)
 {
     if (queue->size == 0) return;
-//  bool empty_queue = queue->front == queue->back;
+    bool empty_queue = queue->front == queue->back;
 
-    if (queue->front == (uintptr_t)queue->buffer_tail) {
+    if (queue->front + queue->element_size == (uintptr_t)queue->buffer_tail) {
         queue->front = (uintptr_t)queue->buffer_head;
     } else {
         queue->front += queue->element_size;
     }
 
-//  if (empty_queue) queue->back = queue->front;
+    if (empty_queue) queue->back = queue->front;
 
     queue->size--;
     queue->full = false;
@@ -37,6 +37,10 @@ void queue_push(queue_t* queue)
         queue->front = (uintptr_t)queue->buffer_head;
         queue->back = queue->front;
         queue->size++;
+        if (queue->size == queue->limit) {
+        //  LOG(DEBUG_LEVEL, "[QUEUE] size: %lu == limit: %lu", queue->size, queue->limit);
+            queue->full = true;
+        }
         return;
     }
 
@@ -49,8 +53,11 @@ void queue_push(queue_t* queue)
     queue->size++;
 
     if (queue->size == queue->limit) {
+        LOG(WARNING_LEVEL, "[QUEUE] maximum capacity reached");
         queue->full = true;
     }
+
+    fflush(stdout);
 }
 
 /* TODO queue flush with callback */
