@@ -9,8 +9,8 @@
 // work in progress
 struct queue
 {
-    void* buffer_head;
-    void* buffer_tail;
+    uintptr_t buffer_head;
+    uintptr_t buffer_tail;
     volatile uintptr_t front;
     volatile uintptr_t back;
     bool full;

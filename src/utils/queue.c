@@ -8,17 +8,17 @@ void queue_init(queue_t* queue, void* buffer, size_t element_size, size_t number
     queue->full = false;
     queue->element_size = element_size;
     queue->limit = number_of_elements;
-    queue->buffer_head = buffer;
-    queue->buffer_tail = (void*)((uintptr_t)buffer + (element_size * number_of_elements));
+    queue->buffer_head = (uintptr_t)buffer;
+    queue->buffer_tail = ((uintptr_t)buffer + (element_size * (number_of_elements-1)));
 }
 
 void queue_pop(queue_t* queue)
 {
     if (queue->size == 0) return;
-    bool empty_queue = queue->front == queue->back;
+    bool empty_queue = (queue->front == queue->back);
 
-    if (queue->front + queue->element_size == (uintptr_t)queue->buffer_tail) {
-        queue->front = (uintptr_t)queue->buffer_head;
+    if (queue->front == queue->buffer_tail) {
+        queue->front = queue->buffer_head;
     } else {
         queue->front += queue->element_size;
     }
@@ -26,6 +26,12 @@ void queue_pop(queue_t* queue)
     if (empty_queue) queue->back = queue->front;
 
     queue->size--;
+
+    if (queue->size == 0) {
+        queue->front = (uintptr_t)NULL;
+        queue->back = (uintptr_t)NULL;
+    }
+
     queue->full = false;
 }
 
@@ -34,18 +40,17 @@ void queue_push(queue_t* queue)
     if (queue->full) return;
 
     if (queue->size == 0) {
-        queue->front = (uintptr_t)queue->buffer_head;
+        queue->front = queue->buffer_head;
         queue->back = queue->front;
         queue->size++;
         if (queue->size == queue->limit) {
-        //  LOG(DEBUG_LEVEL, "[QUEUE] size: %lu == limit: %lu", queue->size, queue->limit);
             queue->full = true;
         }
         return;
     }
 
-    if (queue->back + queue->element_size == (uintptr_t)queue->buffer_tail) {
-        queue->back = (uintptr_t)queue->buffer_head;
+    if (queue->back == queue->buffer_tail) {
+        queue->back = queue->buffer_head;
     } else {
         queue->back += queue->element_size;
     }
@@ -83,4 +88,6 @@ void queue_print(queue_t* queue)
         printf(" | ");
     }
     printf("\r\n");
+
+    LOG(DEBUG_LEVEL, "[QUEUE] front ptr: %#0X, back ptr: %#0X", queue->front, queue->back);
 }

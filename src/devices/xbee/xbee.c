@@ -25,8 +25,12 @@ void xbee_init(xbee_t* xbee)
     xbee->tx_state = SERIAL_IDLE;
     xbee->rx_state = SERIAL_IDLE;
     xbee->state = DEVICE_CONNECTED;
-    vector_init(XBEE_MAX_TX, &xbee->tx_buffer);
+
+    // TODO: align buffers on 32 word boundary for dma
     vector_init(XBEE_MAX_RX, &xbee->rx_buffer);
+    vector_init(XBEE_MAX_TX, &xbee->tx_buffer);
+    LOG(DEBUG_LEVEL, "[XBEE] tx_buffer address: %#0X", (uintptr_t)xbee->tx_buffer.data);
+    LOG(DEBUG_LEVEL, "[XBEE] rx_buffer address: %#0X", (uintptr_t)xbee->rx_buffer.data);
     serial_uart_init(XBEE);
 
     xbee_configure(xbee);
@@ -219,7 +223,6 @@ inline static void xbee_encode_packet_length(xbee_t* xbee)
 
 inline static void xbee_decode_packet_length(xbee_t* xbee)
 {
-    SCB_CleanInvalidateDCache();
     xbee->length = (xbee->rx_buffer.data[API_FRAME_HEADER_IDX] << 4) +
         xbee->rx_buffer.data[API_FRAME_HEADER_IDX+1];
 }

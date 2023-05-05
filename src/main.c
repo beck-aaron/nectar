@@ -22,7 +22,7 @@ int main(void)
         nectar_compile(&nectar_data);
         nectar_transmit(&nectar_data);
         nectar_receive(&nectar_data);
-        queue_print(&nectar_data.payload_queue);
+//      delay_ms(500);
     }
 }
 

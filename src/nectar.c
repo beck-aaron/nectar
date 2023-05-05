@@ -15,12 +15,16 @@ void nectar_init(nectar_t* nectar)
 {
     srand((unsigned) time(NULL)); // seeding rand only necessary while using fake data
 
+#if LOG_EVERYTHING
+    logger_init();
+#endif
+
+    xdmac_init();
+
     nectar->subpayload_index = 0;
     vector_init(MAX_PAYLOAD_SIZE, &nectar->encoded_buffer);
     queue_init(&nectar->payload_queue, nectar->payload_buffer, sizeof(nectar_payload_t), MAX_PAYLOADS);
 
-    logger_init();
-    xdmac_init();
 
     xbee_init(&nectar->xbee);
     coz_ir_init(&nectar->coz_ir);
@@ -80,8 +84,10 @@ inline void nectar_transmit(nectar_t* nectar)
     {
         nectar_encode_payload(payload, &nectar->encoded_buffer);
         xbee_set_transmit_request(nectar->encoded_buffer.data, nectar->encoded_buffer.size, &nectar->xbee.api_frame);
+        xbee_transmit(&nectar->xbee);
         queue_pop(&nectar->payload_queue);
         LOG(DEBUG_LEVEL, "[NECTAR] Popping first payload off queue");
+        return;
     }
 
     // transmit fresh payload if state is SERIAL_IDLE, otherwise retransmit stale payload

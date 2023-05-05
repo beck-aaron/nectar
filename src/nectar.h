@@ -24,7 +24,7 @@
 
 #define MAX_SUBPAYLOADS 0x0D    // computed based off of smallest subpayload
 #define MAX_PAYLOAD_SIZE 0x54   // determined based on XBee specification
-#define MAX_PAYLOADS 0x04       // TODO: determine how much memory we can use for this...
+#define MAX_PAYLOADS 0x03       // TODO: determine how much memory we can use for this...
 
 enum nectar_mask
 {
