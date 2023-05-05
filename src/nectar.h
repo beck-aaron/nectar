@@ -21,6 +21,7 @@
 #include <logger.h>
 #include <devices.h>
 #include <queue.h>
+#include <math.h>
 
 #define MAX_SUBPAYLOADS 0x0D    // computed based off of smallest subpayload
 #define MAX_PAYLOAD_SIZE 0x54   // determined based on XBee specification

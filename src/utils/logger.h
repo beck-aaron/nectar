@@ -49,7 +49,7 @@ enum LOG_CODES
 
 
 // turns logging on or off to improve speed
-#define LOG_EVERYTHING 0
+#define LOG_EVERYTHING 1
 
 #if LOG_EVERYTHING
 #define LOG(LEVEL, ...)     \

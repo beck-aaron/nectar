@@ -133,10 +133,33 @@ void nectar_compile(nectar_t* nectar)
     if (datapoints & NECTAR_CO2_PPM) subpayload->co2_ppm = coz_ir_get_ppm(&nectar->coz_ir);
     if (datapoints & NECTAR_TEMPERATURE) subpayload->temperature = coz_ir_get_temp(&nectar->coz_ir);
     if (datapoints & NECTAR_HUMIDITY) subpayload->humidity = coz_ir_get_humidity(&nectar->coz_ir);
-    if (datapoints & NECTAR_U_VECTOR) subpayload->u_vector = (rand() % 20) - 10;
-    if (datapoints & NECTAR_V_VECTOR) subpayload->v_vector = (rand() % 20) - 10;
-    if (datapoints & NECTAR_W_VECTOR) subpayload->w_vector = (rand() % 20) - 10;
-    if (datapoints & NECTAR_PRESSURE) subpayload->pressure = (rand() % 20) - 10; // FIX THIS
+
+
+
+    double min = -5.0;
+    double max = 5.0;
+    double ampl = max - min;
+    double k = 0.08; // period = 2pi/k
+    double phase = 20;
+    double intercept = (max + min) / 2;
+
+    double y = ampl * sin(k * (subpayload->index - phase)) + intercept;
+    if (datapoints & NECTAR_U_VECTOR) subpayload->u_vector = y;
+
+    phase = 40;
+    y = ampl * sin(k * (subpayload->index - phase)) + intercept;
+    if (datapoints & NECTAR_V_VECTOR) subpayload->v_vector = y;
+
+    phase = 80;
+    y = ampl * sin(k * (subpayload->index - phase)) + intercept;
+    if (datapoints & NECTAR_W_VECTOR) subpayload->w_vector = y;
+
+    min = 970.0;
+    max = 1070.0;
+    ampl = max - min;
+    phase = 20;
+    y = ampl * sin(k * (subpayload->index - phase)) + intercept;
+    if (datapoints & NECTAR_PRESSURE) subpayload->pressure = y;
 
     // increment payload size by the subpayload size
     payload->size += payload->subpayload_size;
