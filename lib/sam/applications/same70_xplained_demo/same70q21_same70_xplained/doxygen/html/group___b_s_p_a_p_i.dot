@@ -1,0 +1,23 @@
+digraph "Functions"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir=LR;
+  Node1 [label="Functions",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Lists the available BSP (Board Support Package) APIs."];
+  Node4 [label="nm_bsp_deinit",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___nm_bsp_deinit_fn.html",tooltip="De-initialization of the BSP (Board Support Package)."];
+  Node3 [label="nm_bsp_init",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___nm_bsp_init_fn.html",tooltip="Initialization for BSP (Board Support Package) such as Reset and Chip Enable Pins for WINC,..."];
+  Node8 [label="nm_bsp_interrupt_ctrl",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___nm_bsp_interrupt_ctrl.html",tooltip="Synchronous enable/disable of WINC to host interrupts."];
+  Node7 [label="nm_bsp_register_isr",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___nm_bsp_register_fn.html",tooltip="Register ISR (Interrupt Service Routine) in the initialization of the HIF (Host Interface) Layer."];
+  Node5 [label="nm_bsp_reset",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___nm_bsp_reset_fn.html",tooltip="Resets the WINC SoC by setting CHIP_EN and RESET_N signals low, then after an appropriate delay,..."];
+  Node6 [label="nm_bsp_sleep",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___nm_bsp_sleep_fn.html",tooltip="Sleep in units of milliseconds."];
+  Node2 [label="BSP",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__nm__bsp.html",tooltip="Description of the BSP (Board Support Package) module."];
+  Node2->Node1 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node3 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node4 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node5 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node6 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node7 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node8 [shape=plaintext, dir="back", style="solid"];
+}

@@ -1,0 +1,18 @@
+digraph "i2sc1.h"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [label="i2sc1.h",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Copyright (c) 2017-2018 Microchip Technology Inc."];
+  Node1 -> Node2 [dir="back",color="steelblue1",style="solid"];
+  Node2 [label="same70q19b.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$same70q19b_8h.html",tooltip="Copyright (c) 2017-2019 Microchip Technology Inc."];
+  Node1 -> Node3 [dir="back",color="steelblue1",style="solid"];
+  Node3 [label="same70q20b.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$same70q20b_8h.html",tooltip="Copyright (c) 2017-2019 Microchip Technology Inc."];
+  Node1 -> Node4 [dir="back",color="steelblue1",style="solid"];
+  Node4 [label="same70q21b.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$same70q21b_8h.html",tooltip="Copyright (c) 2017-2019 Microchip Technology Inc."];
+  Node4 -> Node5 [dir="back",color="steelblue1",style="solid"];
+  Node5 [label="same70.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$same70_8h.html",tooltip="Copyright (c) 2015-2018 Microchip Technology Inc."];
+  Node5 -> Node6 [dir="back",color="steelblue1",style="solid"];
+  Node6 [label="system_same70.c",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$system__same70_8c.html",tooltip="Copyright (c) 2015-2018 Microchip Technology Inc."];
+}

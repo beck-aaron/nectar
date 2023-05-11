@@ -100,6 +100,9 @@
 // From module: TC - Timer Counter
 //#include <tc.h>
 
+// From module: XDMAC - Direct Memory Access Controller
+#include <xdmac.h>
+
 // From module: UART - Univ. Async Rec/Trans
 #include <uart.h>
 
@@ -116,5 +119,9 @@
 #include <stdlib.h>
 
 #include <stdint.h>
+
+#include <string.h>
+
+#include <time.h>
 
 #endif // ASF_H

@@ -1,0 +1,21 @@
+digraph "spi_read_packet"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [label="spi_read_packet",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Receive a sequence of bytes from an SPI device."];
+  Node1 -> Node2 [color="steelblue1",style="solid"];
+  Node2 [label="spi_is_rx_ready",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$drivers_2spi_2spi_8h.html#a13a4eac0894296a959996a0415baf649",tooltip="Check if all receptions are ready."];
+  Node1 -> Node3 [color="steelblue1",style="solid"];
+  Node3 [label="spi_is_tx_ready",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$drivers_2spi_2spi_8h.html#a3191ea9575f016d8c0a54b08920768d4",tooltip="Check if all transmissions are ready."];
+  Node1 -> Node4 [color="steelblue1",style="solid"];
+  Node4 [label="spi_read_single",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$sam__spi_2spi__master_8h.html#a50c12e055757be1c8d3713754ddef788",tooltip="Receive one byte from an SPI device."];
+  Node4 -> Node5 [color="steelblue1",style="solid"];
+  Node5 [label="spi_get",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$drivers_2spi_2spi_8h.html#a629c66773a518072f2c7faa5ad7ecd7d",tooltip="Get one data to a SPI peripheral."];
+  Node1 -> Node6 [color="steelblue1",style="solid"];
+  Node6 [label="spi_write_single",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$sam__spi_2spi__master_8h.html#a65c32defa363bf60ee9820a231884b69",tooltip="Write one byte to an SPI device."];
+  Node6 -> Node7 [color="steelblue1",style="solid"];
+  Node7 [label="spi_put",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$drivers_2spi_2spi_8h.html#adf99875478cb13bb164e96c73c9666bb",tooltip="Put one data to a SPI peripheral."];
+}

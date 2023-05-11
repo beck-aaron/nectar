@@ -1,0 +1,27 @@
+digraph "spi_master_setup_device"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [label="spi_master_setup_device",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Set up an SPI device."];
+  Node1 -> Node2 [color="steelblue1",style="solid"];
+  Node2 [label="spi_calc_baudrate_div",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__spi__group.html#ga151e4d2f434b53791d394b8eb73dfb21",tooltip="Calculate the baudrate divider."];
+  Node1 -> Node3 [color="steelblue1",style="solid"];
+  Node3 [label="spi_configure_cs_behavior",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__spi__group.html#ga64027e21fa9b3d741d24abaf3cb2ecc4",tooltip="Configure CS behavior for SPI transfer (spi_cs_behavior_t)."];
+  Node1 -> Node4 [color="steelblue1",style="solid"];
+  Node4 [label="spi_set_baudrate_div",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__spi__group.html#ga28248e1b6c31317a2d0128e5eae6f516",tooltip="Set Serial Clock Baud Rate divider value (SCBR)."];
+  Node1 -> Node5 [color="steelblue1",style="solid"];
+  Node5 [label="spi_set_bits_per_transfer",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__spi__group.html#ga357d0caf683beeb0a84b4e0874dbbb2c",tooltip="Set number of bits per transfer."];
+  Node1 -> Node6 [color="steelblue1",style="solid"];
+  Node6 [label="spi_set_clock_phase",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__spi__group.html#gae7f5adbf3062c0a834cfd8f98b0c1878",tooltip="Set Data Capture Phase."];
+  Node1 -> Node7 [color="steelblue1",style="solid"];
+  Node7 [label="spi_set_clock_polarity",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__spi__group.html#ga5047dc4debab95407fa5b27360addc39",tooltip="Set clock default state."];
+  Node1 -> Node8 [color="steelblue1",style="solid"];
+  Node8 [label="spi_set_transfer_delay",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__spi__group.html#ga4ccc2d131b456b98318bdb310e755447",tooltip="Configure timing for SPI transfer."];
+  Node1 -> Node9 [color="steelblue1",style="solid"];
+  Node9 [label="sysclk_get_peripheral_hz",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sysclk__group.html#ga8ae5a954767dfc4d16ce5ae7928e6edf",tooltip="Retrieves the current rate in Hz of the peripheral clocks."];
+  Node9 -> Node10 [color="steelblue1",style="solid"];
+  Node10 [label="sysclk_get_main_hz",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sysclk__group.html#ga4f078b193ed39eda16071c514569b8cb",tooltip="Return the current rate in Hz of the main system clock."];
+}

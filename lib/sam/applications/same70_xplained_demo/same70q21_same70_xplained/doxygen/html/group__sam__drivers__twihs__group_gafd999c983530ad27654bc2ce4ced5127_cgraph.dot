@@ -1,0 +1,15 @@
+digraph "twihs_master_init"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [label="twihs_master_init",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Initialize TWIHS master mode."];
+  Node1 -> Node2 [color="steelblue1",style="solid"];
+  Node2 [label="twihs_enable_master_mode",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__twihs__group.html#ga0b1c553b7ba5ddf62aa4e8596d7b89d8",tooltip="Enable TWIHS master mode."];
+  Node1 -> Node3 [color="steelblue1",style="solid"];
+  Node3 [label="twihs_reset",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__twihs__group.html#ga2d338424d0b5e2114ba773223d29014a",tooltip="Reset TWIHS."];
+  Node1 -> Node4 [color="steelblue1",style="solid"];
+  Node4 [label="twihs_set_speed",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__twihs__group.html#gaf0c5041ddf15a0b1072c2002b44339f9",tooltip="Set the I2C bus speed in conjunction with the clock frequency."];
+}

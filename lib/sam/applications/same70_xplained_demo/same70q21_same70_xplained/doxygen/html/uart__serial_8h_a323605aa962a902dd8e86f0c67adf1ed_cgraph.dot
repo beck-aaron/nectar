@@ -1,0 +1,13 @@
+digraph "usart_serial_is_rx_ready"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [label="usart_serial_is_rx\l_ready",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Check if Received data is ready."];
+  Node1 -> Node2 [color="steelblue1",style="solid"];
+  Node2 [label="uart_is_rx_ready",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__uart__group.html#gac4285ce740c5627d0fec04d52a299565",tooltip="Check if Received data is ready."];
+  Node1 -> Node3 [color="steelblue1",style="solid"];
+  Node3 [label="usart_is_rx_ready",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__usart__group.html#ga9f88f9b3e78b92b53016420c3594fcf6",tooltip="Check if the received data are ready."];
+}

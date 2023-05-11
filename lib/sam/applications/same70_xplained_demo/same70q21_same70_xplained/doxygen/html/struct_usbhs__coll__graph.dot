@@ -1,0 +1,12 @@
+digraph "Usbhs"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{Usbhs\n|+ Reserved1\l+ Reserved10\l+ Reserved11\l+ Reserved12\l+ Reserved13\l+ Reserved14\l+ Reserved15\l+ Reserved16\l+ Reserved17\l+ Reserved18\land 56 more...\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node2 -> Node1 [color="grey25",style="solid",label=" +USBHS_DEVDMA" ,arrowhead="odiamond"];
+  Node2 [shape=record,label="{UsbhsDevdma\n|+ USBHS_DEVDMAADDRESS\l+ USBHS_DEVDMACONTROL\l+ USBHS_DEVDMANXTDSC\l+ USBHS_DEVDMASTATUS\l|}",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$struct_usbhs_devdma.html",tooltip="UsbhsDevdma hardware registers."];
+  Node3 -> Node1 [color="grey25",style="solid",label=" +USBHS_HSTDMA" ,arrowhead="odiamond"];
+  Node3 [shape=record,label="{UsbhsHstdma\n|+ USBHS_HSTDMAADDRESS\l+ USBHS_HSTDMACONTROL\l+ USBHS_HSTDMANXTDSC\l+ USBHS_HSTDMASTATUS\l|}",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$struct_usbhs_hstdma.html",tooltip="UsbhsHstdma hardware registers."];
+}

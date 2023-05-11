@@ -1,0 +1,13 @@
+digraph "sysclk_set_prescalers"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [label="sysclk_set_prescalers",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Set system clock prescaler configuration."];
+  Node1 -> Node2 [color="steelblue1",style="solid"];
+  Node2 [label="pmc_mck_set_prescaler",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__pmc__group.html#ga9f1d415fc4e96a8ac144e6ea44c426eb",tooltip="Set the prescaler of the MCK."];
+  Node1 -> Node3 [color="steelblue1",style="solid"];
+  Node3 [label="SystemCoreClockUpdate",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$system__same70_8c.html#ae0c36a9591fe6e9c45ecb21a794f0f0f",tooltip="Updates the SystemCoreClock with current core Clock retrieved from cpu registers."];
+}

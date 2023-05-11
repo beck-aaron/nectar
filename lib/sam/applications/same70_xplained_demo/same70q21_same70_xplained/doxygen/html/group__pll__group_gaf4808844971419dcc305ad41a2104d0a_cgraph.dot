@@ -1,0 +1,25 @@
+digraph "pll_enable_source"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [label="pll_enable_source",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Enable the source of the pll."];
+  Node1 -> Node2 [color="steelblue1",style="solid"];
+  Node2 [label="osc_enable",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__osc__group.html#ga13db594de6701e5e235a88597e348e3a",tooltip=" "];
+  Node2 -> Node3 [color="steelblue1",style="solid"];
+  Node3 [label="pmc_switch_mainck_to\l_fastrc",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__pmc__group.html#ga99fe80ceb242a783b01fa3e68d75f4e6",tooltip="Switch main clock source selection to internal fast RC."];
+  Node2 -> Node4 [color="steelblue1",style="solid"];
+  Node4 [label="pmc_switch_mainck_to_xtal",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__pmc__group.html#ga14a6910f902d5838ac1efdb29d933c45",tooltip="Switch main clock source selection to external Xtal/Bypass."];
+  Node2 -> Node5 [color="steelblue1",style="solid"];
+  Node5 [label="pmc_switch_sclk_to\l_32kxtal",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__pmc__group.html#gaf0bfe7345422ac59a95b4df85ed5c140",tooltip="Switch slow clock source selection to external 32k (Xtal or Bypass)."];
+  Node1 -> Node6 [color="steelblue1",style="solid"];
+  Node6 [label="osc_wait_ready",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__osc__group.html#gace890435e962b82472d3f918ea7b4c52",tooltip="Wait until the oscillator identified by id is ready."];
+  Node6 -> Node7 [color="steelblue1",style="solid"];
+  Node7 [label="osc_is_ready",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__osc__group.html#ga7a75970ad367896e32f9c44d75329cfc",tooltip=" "];
+  Node7 -> Node8 [color="steelblue1",style="solid"];
+  Node8 [label="pmc_osc_is_ready_32kxtal",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__pmc__group.html#ga62611f411b9ab2ad6d2f00f3a6386b40",tooltip="Check if the external 32k Xtal is ready."];
+  Node7 -> Node9 [color="steelblue1",style="solid"];
+  Node9 [label="pmc_osc_is_ready_mainck",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__pmc__group.html#ga44895850facd3429788967b68105d4fc",tooltip="Check if the MAINCK is ready."];
+}

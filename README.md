@@ -36,9 +36,18 @@ ___
 
 Download the release for your operating system:
 
-    https://www.microchip.com/en-us/tools-resources/develop/microchip-studio/gcc-compilers_
+    https://www.microchip.com/en-us/tools-resources/develop/microchip-studio/gcc-compilers
 
 Install by extracting to the directory of your choice.  This install directory is needed when building.
+
+---
+
+### Windows WSL2 Setup
+To connect to the logger using WSL2, some trickery is involved to access the usb device through WSL2.
+Install usbipd-win, then follow these instructions. After you have passed the bus through, the
+device in WSL2 should show up as /dev/ttyACM0
+
+    https://devblogs.microsoft.com/commandline/connecting-usb-devices-to-wsl/
 
 ---
 

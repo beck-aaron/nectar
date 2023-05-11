@@ -1,0 +1,12 @@
+digraph "tstrM2mWifiConnHdr"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{tstrM2mWifiConnHdr\n||}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Wi-Fi Connect Request (new format) for use with M2M_WIFI_REQ_CONN. This structure is sent across the ..."];
+  Node2 -> Node1 [color="grey25",style="solid",label=" +strConnCredHdr" ,arrowhead="odiamond"];
+  Node2 [shape=record,label="{tstrM2mConnCredHdr\n|+ u16CredSize\l+ u8Channel\l+ u8CredStoreFlags\l|}",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$structtstr_m2m_conn_cred_hdr.html",tooltip="Wi-Fi Connect Credentials Header."];
+  Node3 -> Node1 [color="grey25",style="solid",label=" +strConnCredCmn" ,arrowhead="odiamond"];
+  Node3 [shape=record,label="{tstrM2mConnCredCmn\n|+ au8Bssid\l+ au8Rsv\l+ au8Ssid\l+ u8AuthType\l+ u8Options\l+ u8SsidLen\l|}",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$structtstr_m2m_conn_cred_cmn.html",tooltip="Wi-Fi Connect Credentials Common section."];
+}

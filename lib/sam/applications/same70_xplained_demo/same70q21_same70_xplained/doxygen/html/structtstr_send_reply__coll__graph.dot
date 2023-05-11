@@ -1,0 +1,8 @@
+digraph "tstrSendReply"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{tstrSendReply\n|+ s16SentBytes\l+ sock\l+ u16SessionID\l+ u16Void\l+ u8Void\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Send Reply, contains socket number and number of sent bytes."];
+}

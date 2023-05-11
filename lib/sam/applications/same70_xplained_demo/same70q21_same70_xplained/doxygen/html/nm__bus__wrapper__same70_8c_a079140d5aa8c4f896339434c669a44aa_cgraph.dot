@@ -1,0 +1,23 @@
+digraph "nm_bus_deinit"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [label="nm_bus_deinit",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="De-initialize the bus wrapper."];
+  Node1 -> Node2 [color="steelblue1",style="solid"];
+  Node2 [label="ioport_set_pin_dir",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__ioport__group.html#ga2d3cad38c936cf010569927289262350",tooltip="Set direction for a single IOPORT pin."];
+  Node2 -> Node3 [color="steelblue1",style="solid"];
+  Node3 [label="arch_ioport_set_pin_dir",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$ioport__pio_8h.html#a5da8d7b9bd9d075d62e675a32af84aea",tooltip=" "];
+  Node3 -> Node4 [color="steelblue1",style="solid"];
+  Node4 [label="arch_ioport_pin_to_base",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$ioport__pio_8h.html#ae6ad3e99f2ec1f914a991ad6537637ef",tooltip=" "];
+  Node4 -> Node5 [color="steelblue1",style="solid"];
+  Node5 [label="arch_ioport_pin_to\l_port_id",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$ioport__pio_8h.html#a17ab9c7be3b9b2674e7668b6a083d191",tooltip=" "];
+  Node4 -> Node6 [color="steelblue1",style="solid"];
+  Node6 [label="arch_ioport_port_to_base",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$ioport__pio_8h.html#ac2b01a65bf5686910b77f6b606497df2",tooltip=" "];
+  Node3 -> Node7 [color="steelblue1",style="solid"];
+  Node7 [label="arch_ioport_pin_to_mask",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$ioport__pio_8h.html#a69fd7bdfb41664b749080e509798165e",tooltip=" "];
+  Node1 -> Node8 [color="steelblue1",style="solid"];
+  Node8 [label="spi_disable",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$drivers_2spi_2spi_8h.html#ae1923cf9736b951fa60a7404d4420812",tooltip="Disable SPI."];
+}

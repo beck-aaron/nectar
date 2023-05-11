@@ -1,0 +1,48 @@
+digraph "afec.h"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [label="afec.h",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Copyright (c) 2015-2018 Microchip Technology Inc."];
+  Node1 -> Node2 [dir="back",color="steelblue1",style="solid"];
+  Node2 [label="same70j19.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$same70j19_8h.html",tooltip="Copyright (c) 2015-2019 Microchip Technology Inc."];
+  Node1 -> Node3 [dir="back",color="steelblue1",style="solid"];
+  Node3 [label="same70j19b.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$same70j19b_8h.html",tooltip="Copyright (c) 2017-2019 Microchip Technology Inc."];
+  Node1 -> Node4 [dir="back",color="steelblue1",style="solid"];
+  Node4 [label="same70j20.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$same70j20_8h.html",tooltip="Copyright (c) 2015-2019 Microchip Technology Inc."];
+  Node1 -> Node5 [dir="back",color="steelblue1",style="solid"];
+  Node5 [label="same70j20b.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$same70j20b_8h.html",tooltip="Copyright (c) 2017-2019 Microchip Technology Inc."];
+  Node1 -> Node6 [dir="back",color="steelblue1",style="solid"];
+  Node6 [label="same70j21.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$same70j21_8h.html",tooltip="Copyright (c) 2015-2019 Microchip Technology Inc."];
+  Node1 -> Node7 [dir="back",color="steelblue1",style="solid"];
+  Node7 [label="same70j21b.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$same70j21b_8h.html",tooltip="Copyright (c) 2017-2019 Microchip Technology Inc."];
+  Node1 -> Node8 [dir="back",color="steelblue1",style="solid"];
+  Node8 [label="same70n19.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$same70n19_8h.html",tooltip="Copyright (c) 2015-2019 Microchip Technology Inc."];
+  Node1 -> Node9 [dir="back",color="steelblue1",style="solid"];
+  Node9 [label="same70n19b.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$same70n19b_8h.html",tooltip="Copyright (c) 2017-2019 Microchip Technology Inc."];
+  Node1 -> Node10 [dir="back",color="steelblue1",style="solid"];
+  Node10 [label="same70n20.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$same70n20_8h.html",tooltip="Copyright (c) 2015-2019 Microchip Technology Inc."];
+  Node1 -> Node11 [dir="back",color="steelblue1",style="solid"];
+  Node11 [label="same70n20b.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$same70n20b_8h.html",tooltip="Copyright (c) 2017-2019 Microchip Technology Inc."];
+  Node1 -> Node12 [dir="back",color="steelblue1",style="solid"];
+  Node12 [label="same70n21.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$same70n21_8h.html",tooltip="Copyright (c) 2015-2019 Microchip Technology Inc."];
+  Node1 -> Node13 [dir="back",color="steelblue1",style="solid"];
+  Node13 [label="same70n21b.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$same70n21b_8h.html",tooltip="Copyright (c) 2017-2019 Microchip Technology Inc."];
+  Node1 -> Node14 [dir="back",color="steelblue1",style="solid"];
+  Node14 [label="same70q19.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$same70q19_8h.html",tooltip="Copyright (c) 2015-2019 Microchip Technology Inc."];
+  Node1 -> Node15 [dir="back",color="steelblue1",style="solid"];
+  Node15 [label="same70q19b.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$same70q19b_8h.html",tooltip="Copyright (c) 2017-2019 Microchip Technology Inc."];
+  Node1 -> Node16 [dir="back",color="steelblue1",style="solid"];
+  Node16 [label="same70q20.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$same70q20_8h.html",tooltip="Copyright (c) 2015-2019 Microchip Technology Inc."];
+  Node1 -> Node17 [dir="back",color="steelblue1",style="solid"];
+  Node17 [label="same70q20b.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$same70q20b_8h.html",tooltip="Copyright (c) 2017-2019 Microchip Technology Inc."];
+  Node1 -> Node18 [dir="back",color="steelblue1",style="solid"];
+  Node18 [label="same70q21.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$same70q21_8h.html",tooltip="Copyright (c) 2015-2019 Microchip Technology Inc."];
+  Node1 -> Node19 [dir="back",color="steelblue1",style="solid"];
+  Node19 [label="same70q21b.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$same70q21b_8h.html",tooltip="Copyright (c) 2017-2019 Microchip Technology Inc."];
+  Node19 -> Node20 [dir="back",color="steelblue1",style="solid"];
+  Node20 [label="same70.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$same70_8h.html",tooltip="Copyright (c) 2015-2018 Microchip Technology Inc."];
+  Node20 -> Node21 [dir="back",color="steelblue1",style="solid"];
+  Node21 [label="system_same70.c",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$system__same70_8c.html",tooltip="Copyright (c) 2015-2018 Microchip Technology Inc."];
+}

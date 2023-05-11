@@ -1,0 +1,11 @@
+digraph "Deprecated interrupt definitions"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir=LR;
+  Node1 [label="Deprecated interrupt\l definitions",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node2 [label="Global interrupt management",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__interrupt__group.html",tooltip="This is a driver for global enabling and disabling of interrupts."];
+  Node2->Node1 [shape=plaintext, dir="back", style="solid"];
+}

@@ -1,0 +1,17 @@
+digraph "isr"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [label="isr",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="steelblue1",style="solid"];
+  Node2 [label="nm_bsp_interrupt_ctrl",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___nm_bsp_interrupt_ctrl.html#gad08e47a941e87d631200f990000323dc",tooltip="Enable/Disable interrupts from the WINC."];
+  Node2 -> Node3 [color="steelblue1",style="solid"];
+  Node3 [label="pio_disable_interrupt",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__pio__group.html#ga1cbfd57e295dd0582d1dc6dc5e79de40",tooltip="Disable a given interrupt source, with no added side effects."];
+  Node2 -> Node4 [color="steelblue1",style="solid"];
+  Node4 [label="pio_enable_interrupt",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__pio__group.html#ga3bc542609d9f1c7a439a264df86925f2",tooltip="Enable the given interrupt source."];
+  Node2 -> Node5 [color="steelblue1",style="solid"];
+  Node5 [label="pio_get_interrupt_status",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__pio__group.html#ga3f15513050ecf143c9e92f1daef155ed",tooltip="Read and clear PIO interrupt status."];
+}

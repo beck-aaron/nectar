@@ -1,0 +1,8 @@
+digraph "tstrM2mWifi1xHdr"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{tstrM2mWifi1xHdr\n|+ au81xAuthDetails\l+ au8TlsSpecificRootNameSha1\l+ u16CertificateLength\l+ u16CertificateOffset\l+ u16PrivateKeyLength\l+ u16PrivateKeyOffset\l+ u32Rsv1\l+ u32Rsv2\l+ u32TlsHsFlags\l+ u8DomainLength\l+ u8Flags\l+ u8HdrLength\l+ u8UserNameLength\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Wi-Fi Authentication 802.1x header for parameters. The parameters (Domain, UserName,..."];
+}

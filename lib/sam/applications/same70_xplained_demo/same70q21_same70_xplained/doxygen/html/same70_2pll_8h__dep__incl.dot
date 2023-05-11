@@ -1,0 +1,15 @@
+digraph "pll.h"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [label="pll.h",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Chip-specific PLL definitions."];
+  Node1 -> Node2 [dir="back",color="steelblue1",style="solid"];
+  Node2 [label="genclk.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$same70_2genclk_8h.html",tooltip="Chip-specific generic clock management."];
+  Node1 -> Node3 [dir="back",color="steelblue1",style="solid"];
+  Node3 [label="sysclk.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$same70_2sysclk_8h.html",tooltip="Chip-specific system clock management functions."];
+  Node3 -> Node2 [dir="back",color="steelblue1",style="solid"];
+  Node3 -> Node4 [dir="back",color="steelblue1",style="solid"];
+  Node4 [label="sysclk.c",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$sysclk_8c.html",tooltip="Chip-specific system clock management functions."];
+}

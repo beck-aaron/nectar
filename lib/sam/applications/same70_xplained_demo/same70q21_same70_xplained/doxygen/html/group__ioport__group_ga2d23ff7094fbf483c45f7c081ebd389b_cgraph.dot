@@ -1,0 +1,19 @@
+digraph "ioport_get_pin_level"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [label="ioport_get_pin_level",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Get current value of an IOPORT pin, which has been configured as an input."];
+  Node1 -> Node2 [color="steelblue1",style="solid"];
+  Node2 [label="arch_ioport_get_pin\l_level",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$ioport__pio_8h.html#ac0a9802426ded89c1b92cee9e3675077",tooltip=" "];
+  Node2 -> Node3 [color="steelblue1",style="solid"];
+  Node3 [label="arch_ioport_pin_to_base",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$ioport__pio_8h.html#ae6ad3e99f2ec1f914a991ad6537637ef",tooltip=" "];
+  Node3 -> Node4 [color="steelblue1",style="solid"];
+  Node4 [label="arch_ioport_pin_to\l_port_id",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$ioport__pio_8h.html#a17ab9c7be3b9b2674e7668b6a083d191",tooltip=" "];
+  Node3 -> Node5 [color="steelblue1",style="solid"];
+  Node5 [label="arch_ioport_port_to_base",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$ioport__pio_8h.html#ac2b01a65bf5686910b77f6b606497df2",tooltip=" "];
+  Node2 -> Node6 [color="steelblue1",style="solid"];
+  Node6 [label="arch_ioport_pin_to_mask",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$ioport__pio_8h.html#a69fd7bdfb41664b749080e509798165e",tooltip=" "];
+}

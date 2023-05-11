@@ -1,0 +1,23 @@
+digraph "pmc.h"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [label="pmc.h",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Power Management Controller (PMC) driver for SAM."];
+  Node1 -> Node2 [dir="back",color="steelblue1",style="solid"];
+  Node2 [label="osc.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$same70_2osc_8h.html",tooltip="Chip-specific oscillator management functions."];
+  Node2 -> Node3 [dir="back",color="steelblue1",style="solid"];
+  Node3 [label="genclk.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$same70_2genclk_8h.html",tooltip="Chip-specific generic clock management."];
+  Node2 -> Node4 [dir="back",color="steelblue1",style="solid"];
+  Node4 [label="pll.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$same70_2pll_8h.html",tooltip="Chip-specific PLL definitions."];
+  Node4 -> Node3 [dir="back",color="steelblue1",style="solid"];
+  Node4 -> Node5 [dir="back",color="steelblue1",style="solid"];
+  Node5 [label="sysclk.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$same70_2sysclk_8h.html",tooltip="Chip-specific system clock management functions."];
+  Node5 -> Node3 [dir="back",color="steelblue1",style="solid"];
+  Node5 -> Node6 [dir="back",color="steelblue1",style="solid"];
+  Node6 [label="sysclk.c",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$sysclk_8c.html",tooltip="Chip-specific system clock management functions."];
+  Node2 -> Node5 [dir="back",color="steelblue1",style="solid"];
+  Node1 -> Node7 [dir="back",color="steelblue1",style="solid"];
+  Node7 [label="pmc.c",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$pmc_8c.html",tooltip="Power Management Controller (PMC) driver for SAM."];
+}

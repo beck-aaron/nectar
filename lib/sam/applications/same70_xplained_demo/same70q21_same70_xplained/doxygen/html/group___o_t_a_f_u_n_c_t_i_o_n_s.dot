@@ -1,0 +1,17 @@
+digraph "Functions"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir=LR;
+  Node5 [label="HFD",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___h_f_d.html",tooltip=" "];
+  Node2 [label="OTA",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___o_t_a_a_p_i.html",tooltip="The WINC supports OTA (Over-The-Air) updates."];
+  Node3 [label="Common",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___o_t_a_c_o_m_m_o_n.html",tooltip=" "];
+  Node1 [label="Functions",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Lists the full set of available APIs to manage OTA updates and Host File Downloads."];
+  Node4 [label="WINC",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___w_i_n_c_o_t_a.html",tooltip=" "];
+  Node2->Node1 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node3 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node4 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node5 [shape=plaintext, dir="back", style="solid"];
+}

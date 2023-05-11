@@ -1,0 +1,8 @@
+digraph "Hsmci"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{Hsmci\n|+ HSMCI_ARGR\l+ HSMCI_BLKR\l+ HSMCI_CFG\l+ HSMCI_CMDR\l+ HSMCI_CR\l+ HSMCI_CSTOR\l+ HSMCI_DMA\l+ HSMCI_DTOR\l+ HSMCI_FIFO\l+ HSMCI_IDR\land 15 more...\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Hsmci hardware registers."];
+}

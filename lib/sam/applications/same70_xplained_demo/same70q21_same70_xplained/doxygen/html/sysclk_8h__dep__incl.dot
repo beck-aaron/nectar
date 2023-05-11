@@ -1,0 +1,22 @@
+digraph "sysclk.h"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [label="sysclk.h",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="System clock management."];
+  Node1 -> Node2 [dir="back",color="steelblue1",style="solid"];
+  Node2 [label="delay.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$delay_8h.html",tooltip="Common Delay Service."];
+  Node1 -> Node3 [dir="back",color="steelblue1",style="solid"];
+  Node3 [label="flash_efc.c",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$flash__efc_8c.html",tooltip="Embedded Flash service for SAM."];
+  Node1 -> Node4 [dir="back",color="steelblue1",style="solid"];
+  Node4 [label="ioport_pio.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$ioport__pio_8h.html",tooltip="SAM architecture specific IOPORT service implementation header file."];
+  Node1 -> Node5 [dir="back",color="steelblue1",style="solid"];
+  Node5 [label="spi.c",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$spi_8c.html",tooltip="Serial Peripheral Interface (SPI) driver for SAM."];
+  Node1 -> Node6 [dir="back",color="steelblue1",style="solid"];
+  Node6 [label="spi_master.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$sam__spi_2spi__master_8h.html",tooltip="SPI master common service for SAM."];
+  Node6 -> Node7 [dir="back",color="steelblue1",style="solid"];
+  Node7 [label="spi_master.c",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$spi__master_8c.html",tooltip="SPI master common service for SAM."];
+  Node1 -> Node8 [dir="back",color="steelblue1",style="solid"];
+  Node8 [label="uart_serial.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$uart__serial_8h.html",tooltip="Uart Serial for SAM."];
+}

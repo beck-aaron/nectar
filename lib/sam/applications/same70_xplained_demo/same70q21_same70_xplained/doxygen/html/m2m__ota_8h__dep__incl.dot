@@ -1,0 +1,10 @@
+digraph "m2m_ota.h"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [label="m2m_ota.h",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="WINC OTA Upgrade API Interface."];
+  Node1 -> Node2 [dir="back",color="steelblue1",style="solid"];
+  Node2 [label="m2m_ota.c",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$m2m__ota_8c.html",tooltip="NMC1500 IoT OTA Interface."];
+}

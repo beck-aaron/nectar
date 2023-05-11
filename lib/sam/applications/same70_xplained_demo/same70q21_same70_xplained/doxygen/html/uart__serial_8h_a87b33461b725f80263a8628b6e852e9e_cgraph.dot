@@ -1,0 +1,15 @@
+digraph "usart_serial_read_packet"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [label="usart_serial_read_packet",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Receive a sequence of bytes to a USART device."];
+  Node1 -> Node2 [color="steelblue1",style="solid"];
+  Node2 [label="usart_serial_getchar",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$uart__serial_8h.html#ac3d539ff8bb9e9d795a6ac83cf697092",tooltip="Waits until a character is received, and returns it."];
+  Node2 -> Node3 [color="steelblue1",style="solid"];
+  Node3 [label="uart_read",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__uart__group.html#ga46320ff37cbab704dd8aba10815a8f4f",tooltip="Read from UART Receive Holding Register."];
+  Node2 -> Node4 [color="steelblue1",style="solid"];
+  Node4 [label="usart_read",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__usart__group.html#gae2776f27eb9e4219bbc6245f41662fa9",tooltip="Read from USART Receive Holding Register."];
+}

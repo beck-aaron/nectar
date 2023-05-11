@@ -1,0 +1,15 @@
+digraph "usart_serial_write_packet"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [label="usart_serial_write\l_packet",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Send a sequence of bytes to USART device."];
+  Node1 -> Node2 [color="steelblue1",style="solid"];
+  Node2 [label="usart_serial_putchar",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$uart__serial_8h.html#a0d680ac290784fa93f42838262bd072f",tooltip="Sends a character with the USART."];
+  Node2 -> Node3 [color="steelblue1",style="solid"];
+  Node3 [label="uart_write",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__uart__group.html#ga6792c68ec5b460de59e2ee9cddc5e2ec",tooltip="Write to UART Transmit Holding Register Before writing user should check if tx is ready (or empty)."];
+  Node2 -> Node4 [color="steelblue1",style="solid"];
+  Node4 [label="usart_write",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__usart__group.html#gaa9593727b910df8c0e9c359c5d7004ec",tooltip="Write to USART Transmit Holding Register."];
+}

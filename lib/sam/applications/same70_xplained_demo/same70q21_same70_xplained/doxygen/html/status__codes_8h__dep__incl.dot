@@ -1,0 +1,18 @@
+digraph "status_codes.h"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [label="status_codes.h",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Status code definitions."];
+  Node1 -> Node2 [dir="back",color="steelblue1",style="solid"];
+  Node2 [label="serial.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$serial_8h.html",tooltip="Serial Mode management."];
+  Node2 -> Node3 [dir="back",color="steelblue1",style="solid"];
+  Node3 [label="stdio_serial.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$stdio__serial_8h.html",tooltip="Common Standard I/O Serial Management."];
+  Node2 -> Node4 [dir="back",color="steelblue1",style="solid"];
+  Node4 [label="usart_serial.c",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$usart__serial_8c.html",tooltip="USART Serial driver functions."];
+  Node1 -> Node5 [dir="back",color="steelblue1",style="solid"];
+  Node5 [label="spi_master.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$sam__spi_2spi__master_8h.html",tooltip="SPI master common service for SAM."];
+  Node5 -> Node6 [dir="back",color="steelblue1",style="solid"];
+  Node6 [label="spi_master.c",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$spi__master_8c.html",tooltip="SPI master common service for SAM."];
+}

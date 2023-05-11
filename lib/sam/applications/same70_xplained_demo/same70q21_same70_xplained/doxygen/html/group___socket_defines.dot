@@ -1,0 +1,13 @@
+digraph "Defines"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir=LR;
+  Node3 [label="TCP/IP Defines",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___i_p_defines.html",tooltip="The following list of macros are used to define constants used throughout the socket layer."];
+  Node1 [label="Defines",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node2 [label="Socket",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___socket_header.html",tooltip="BSD compatible socket interface between the host layer and the network protocol stacks in the firmwar..."];
+  Node2->Node1 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node3 [shape=plaintext, dir="back", style="solid"];
+}

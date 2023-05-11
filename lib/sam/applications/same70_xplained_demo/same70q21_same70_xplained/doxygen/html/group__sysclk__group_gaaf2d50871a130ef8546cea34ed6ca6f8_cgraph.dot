@@ -1,0 +1,13 @@
+digraph "sysclk_set_source"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [label="sysclk_set_source",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Change the source of the main system clock."];
+  Node1 -> Node2 [color="steelblue1",style="solid"];
+  Node2 [label="pmc_mck_set_source",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__pmc__group.html#ga5c765cb31e5915b5708079d7b59332b3",tooltip="Set the source of the MCK."];
+  Node1 -> Node3 [color="steelblue1",style="solid"];
+  Node3 [label="SystemCoreClockUpdate",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$system__same70_8c.html#ae0c36a9591fe6e9c45ecb21a794f0f0f",tooltip="Updates the SystemCoreClock with current core Clock retrieved from cpu registers."];
+}

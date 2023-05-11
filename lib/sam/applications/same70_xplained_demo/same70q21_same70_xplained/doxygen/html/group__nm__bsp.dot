@@ -1,0 +1,15 @@
+digraph "BSP"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir=LR;
+  Node4 [label="Functions",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___b_s_p_a_p_i.html",tooltip="Lists the available BSP (Board Support Package) APIs."];
+  Node3 [label="Defines",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___b_s_p_define.html",tooltip=" "];
+  Node2 [label="Data Types",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___data_t.html",tooltip=" "];
+  Node1 [label="BSP",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Description of the BSP (Board Support Package) module."];
+  Node1->Node2 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node3 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node4 [shape=plaintext, dir="back", style="solid"];
+}

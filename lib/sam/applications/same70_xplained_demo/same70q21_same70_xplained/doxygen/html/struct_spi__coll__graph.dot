@@ -1,0 +1,8 @@
+digraph "Spi"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{Spi\n|+ Reserved1\l+ Reserved2\l+ Reserved3\l+ SPI_CR\l+ SPI_CSR\l+ SPI_IDR\l+ SPI_IER\l+ SPI_IMR\l+ SPI_MR\l+ SPI_RDR\l+ SPI_SR\l+ SPI_TDR\l+ SPI_VERSION\l+ SPI_WPMR\l+ SPI_WPSR\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Spi hardware registers."];
+}

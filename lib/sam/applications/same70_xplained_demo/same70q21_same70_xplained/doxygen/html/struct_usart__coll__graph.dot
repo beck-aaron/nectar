@@ -1,0 +1,8 @@
+digraph "Usart"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{Usart\n|+ Reserved1\l+ Reserved2\l+ Reserved3\l+ Reserved4\l+ US_BRGR\l+ US_CR\l+ US_CSR\l+ US_FIDI\l+ US_ICDIFF\l+ US_IDR\land 26 more...\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Usart hardware registers."];
+}

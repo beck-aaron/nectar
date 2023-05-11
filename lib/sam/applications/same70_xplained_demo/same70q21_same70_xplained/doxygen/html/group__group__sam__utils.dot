@@ -1,0 +1,15 @@
+digraph "Compiler abstraction layer and code utilities"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir=LR;
+  Node1 [label="Compiler abstraction\l layer and code utilities",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Compiler abstraction layer and code utilities for AT91SAM."];
+  Node2 [label="Preprocessor - Macro\l Repeat",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__group__sam__utils__mrepeat.html",tooltip=" "];
+  Node3 [label="Preprocessor - Stringize",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__group__sam__utils__stringz.html",tooltip=" "];
+  Node4 [label="Preprocessor - Token\l Paste",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__group__sam__utils__tpaste.html",tooltip=" "];
+  Node1->Node2 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node3 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node4 [shape=plaintext, dir="back", style="solid"];
+}

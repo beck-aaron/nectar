@@ -1,0 +1,13 @@
+digraph "twihs_probe"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [label="twihs_probe",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Test if a chip answers a given I2C address."];
+  Node1 -> Node2 [color="steelblue1",style="solid"];
+  Node2 [label="twihs_master_write",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__twihs__group.html#ga6518c8674e646fbb67e8e91930e7f47a",tooltip="Write multiple bytes to a TWIHS compatible slave device."];
+  Node2 -> Node3 [color="steelblue1",style="solid"];
+  Node3 [label="twihs_mk_addr",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__twihs__group.html#gaca9e29e230ee2774cfc3dc7ed497f887",tooltip="Construct the TWIHS module address register field."];
+}

@@ -1,0 +1,15 @@
+digraph "spi_deselect_device"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [label="spi_deselect_device",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Deselect the given device on the SPI bus."];
+  Node1 -> Node2 [color="steelblue1",style="solid"];
+  Node2 [label="spi_is_tx_empty",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$drivers_2spi_2spi_8h.html#a6ffd41921b3092e4a73f659f8ee37cdf",tooltip="Check if all transmissions are complete."];
+  Node1 -> Node3 [color="steelblue1",style="solid"];
+  Node3 [label="spi_set_lastxfer",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$drivers_2spi_2spi_8h.html#af8ae490e10b990679cee4e6d39b775f6",tooltip="Issue a LASTXFER command."];
+  Node1 -> Node4 [color="steelblue1",style="solid"];
+  Node4 [label="spi_set_peripheral\l_chip_select_value",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__spi__group.html#ga71131f0a9772ac93eeb6af52a1101ecc",tooltip="Set Peripheral Chip Select (PCS) value."];
+}

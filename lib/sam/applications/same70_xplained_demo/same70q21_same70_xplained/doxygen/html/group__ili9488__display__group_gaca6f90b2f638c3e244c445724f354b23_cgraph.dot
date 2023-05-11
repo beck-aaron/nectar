@@ -1,0 +1,30 @@
+digraph "ili9488_set_scroll_address"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [label="ili9488_set_scroll\l_address",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Enable the scrolling feature."];
+  Node1 -> Node2 [color="steelblue1",style="solid"];
+  Node2 [label="ili9488_write_register",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__ili9488__display__group.html#ga004cc9b339c8d6bc83eab621d620e05f",tooltip="Write data to LCD Register."];
+  Node2 -> Node3 [color="steelblue1",style="solid"];
+  Node3 [label="pio_set_pin_high",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__pio__group.html#gaa8c613a0858311e6d684b1869d49dd77",tooltip="Drive a GPIO pin to 1."];
+  Node3 -> Node4 [color="steelblue1",style="solid"];
+  Node4 [label="pio_get_pin_group",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__pio__group.html#gaf37309a52c59d5e2116d649f6fdd98c9",tooltip="Return GPIO port for a GPIO pin."];
+  Node2 -> Node5 [color="steelblue1",style="solid"];
+  Node5 [label="pio_set_pin_low",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__pio__group.html#ga41f795f6deb585e82b913a959a4b076a",tooltip="Drive a GPIO pin to 0."];
+  Node5 -> Node4 [color="steelblue1",style="solid"];
+  Node2 -> Node6 [color="steelblue1",style="solid"];
+  Node6 [label="spi_write",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__spi__group.html#gaf0aef4a28c69c8ceb6e99b5d79e91e47",tooltip="Write the transmitted data with specified peripheral chip select value."];
+  Node6 -> Node7 [color="steelblue1",style="solid"];
+  Node7 [label="spi_get_peripheral\l_select_mode",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$drivers_2spi_2spi_8h.html#a7a7e9be615b3302403a32d57650138f2",tooltip="Get Peripheral Select mode."];
+  Node2 -> Node8 [color="steelblue1",style="solid"];
+  Node8 [label="spi_write_packet",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$spi__master_8c.html#a9d0996dc59ad7f2a593e27710c6cc727",tooltip="Send a sequence of bytes to an SPI device."];
+  Node8 -> Node9 [color="steelblue1",style="solid"];
+  Node9 [label="spi_is_tx_ready",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$drivers_2spi_2spi_8h.html#a3191ea9575f016d8c0a54b08920768d4",tooltip="Check if all transmissions are ready."];
+  Node8 -> Node10 [color="steelblue1",style="solid"];
+  Node10 [label="spi_write_single",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$sam__spi_2spi__master_8h.html#a65c32defa363bf60ee9820a231884b69",tooltip="Write one byte to an SPI device."];
+  Node10 -> Node11 [color="steelblue1",style="solid"];
+  Node11 [label="spi_put",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$drivers_2spi_2spi_8h.html#adf99875478cb13bb164e96c73c9666bb",tooltip="Put one data to a SPI peripheral."];
+}

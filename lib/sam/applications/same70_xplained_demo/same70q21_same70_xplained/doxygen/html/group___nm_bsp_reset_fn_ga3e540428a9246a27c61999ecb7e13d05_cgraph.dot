@@ -1,0 +1,23 @@
+digraph "nm_bsp_reset"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [label="nm_bsp_reset",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Reset WINC1500 SoC by setting CHIP_EN and RESET_N signals low, CHIP_EN high then RESET_N high."];
+  Node1 -> Node2 [color="steelblue1",style="solid"];
+  Node2 [label="ioport_set_pin_level",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__ioport__group.html#ga4a68c82ba7e071467418ced856559035",tooltip="Set an IOPORT pin to a specified logical value."];
+  Node2 -> Node3 [color="steelblue1",style="solid"];
+  Node3 [label="arch_ioport_set_pin\l_level",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$ioport__pio_8h.html#a0d1141e4ca10536f77e0a655cd99bf9e",tooltip=" "];
+  Node3 -> Node4 [color="steelblue1",style="solid"];
+  Node4 [label="arch_ioport_pin_to_base",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$ioport__pio_8h.html#ae6ad3e99f2ec1f914a991ad6537637ef",tooltip=" "];
+  Node4 -> Node5 [color="steelblue1",style="solid"];
+  Node5 [label="arch_ioport_pin_to\l_port_id",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$ioport__pio_8h.html#a17ab9c7be3b9b2674e7668b6a083d191",tooltip=" "];
+  Node4 -> Node6 [color="steelblue1",style="solid"];
+  Node6 [label="arch_ioport_port_to_base",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$ioport__pio_8h.html#ac2b01a65bf5686910b77f6b606497df2",tooltip=" "];
+  Node3 -> Node7 [color="steelblue1",style="solid"];
+  Node7 [label="arch_ioport_pin_to_mask",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$ioport__pio_8h.html#a69fd7bdfb41664b749080e509798165e",tooltip=" "];
+  Node1 -> Node8 [color="steelblue1",style="solid"];
+  Node8 [label="nm_bsp_sleep",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___nm_bsp_sleep_fn.html#gadbf38ddf0138d8e0a4e4720909a7b081",tooltip="Used to put the host to sleep for the specified duration (in milliseconds). Forcing the host to sleep..."];
+}

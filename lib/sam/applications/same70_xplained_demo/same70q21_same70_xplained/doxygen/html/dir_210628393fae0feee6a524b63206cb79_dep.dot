@@ -1,0 +1,22 @@
+digraph "gpio"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  compound=true
+  subgraph clusterdir_7cbf1cf0e17b7da5051405e51c36fab2 {
+    graph [ bgcolor="#edf0f7", pencolor="grey50", label="services", fontname=FreeSans,fontsize=10 style="filled,dashed", URL="dir_7cbf1cf0e17b7da5051405e51c36fab2.html",tooltip=""]
+  subgraph clusterdir_210628393fae0feee6a524b63206cb79 {
+    graph [ bgcolor="#edf0f7", pencolor="grey25", label="", fontname=FreeSans,fontsize=10 style="filled,bold", URL="dir_210628393fae0feee6a524b63206cb79.html",tooltip=""]
+    dir_210628393fae0feee6a524b63206cb79 [shape=plaintext, label="gpio"];
+  dir_744eb2320f843e8c38d8eb58411c7de1 [label="sam_gpio", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_744eb2320f843e8c38d8eb58411c7de1.html",tooltip=""];
+  }
+  }
+  dir_85effdddc426fd82e3610be0948fd413 [label="utils", fillcolor="#edf0f7", color="red", style="filled,dashed", URL="dir_85effdddc426fd82e3610be0948fd413.html",tooltip=""];
+  dir_7dbb3f8d9b3c7f1bbfe241818c433d10 [label="utils", fillcolor="#edf0f7", color="red", style="filled", URL="dir_7dbb3f8d9b3c7f1bbfe241818c433d10.html",tooltip=""];
+  dir_23452eaafd74a0dfcbccff24142d67ec [label="drivers", fillcolor="#edf0f7", color="red", style="filled", URL="dir_23452eaafd74a0dfcbccff24142d67ec.html",tooltip=""];
+  dir_210628393fae0feee6a524b63206cb79->dir_85effdddc426fd82e3610be0948fd413 [headlabel="1", labeldistance=1.5 headhref="dir_000018_000067.html" color="steelblue1" fontcolor="steelblue1"];
+  dir_744eb2320f843e8c38d8eb58411c7de1->dir_23452eaafd74a0dfcbccff24142d67ec [headlabel="1", labeldistance=1.5 headhref="dir_000041_000014.html" color="steelblue1" fontcolor="steelblue1"];
+  dir_744eb2320f843e8c38d8eb58411c7de1->dir_7dbb3f8d9b3c7f1bbfe241818c433d10 [headlabel="1", labeldistance=1.5 headhref="dir_000041_000068.html" color="steelblue1" fontcolor="steelblue1"];
+}

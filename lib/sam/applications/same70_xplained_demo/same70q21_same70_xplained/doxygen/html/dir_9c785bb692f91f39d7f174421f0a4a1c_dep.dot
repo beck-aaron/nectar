@@ -1,0 +1,22 @@
+digraph "display"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  compound=true
+  subgraph clusterdir_3effa1d71b9fa9a0cff12f8e225f95e1 {
+    graph [ bgcolor="#edf0f7", pencolor="grey25", label="components", fontname=FreeSans,fontsize=10 style="filled,dashed", URL="dir_3effa1d71b9fa9a0cff12f8e225f95e1.html",tooltip=""]
+  subgraph clusterdir_9c785bb692f91f39d7f174421f0a4a1c {
+    graph [ bgcolor="#edf0f7", pencolor="grey25", label="", fontname=FreeSans,fontsize=10 style="filled,bold", URL="dir_9c785bb692f91f39d7f174421f0a4a1c.html",tooltip=""]
+    dir_9c785bb692f91f39d7f174421f0a4a1c [shape=plaintext, label="display"];
+  dir_74749fb4e43c606f69a9c07c6e7a182e [label="ili9488", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_74749fb4e43c606f69a9c07c6e7a182e.html",tooltip=""];
+  }
+  }
+  dir_23452eaafd74a0dfcbccff24142d67ec [label="drivers", fillcolor="#edf0f7", color="red", style="filled", URL="dir_23452eaafd74a0dfcbccff24142d67ec.html",tooltip=""];
+  dir_bdd9a5d540de89e9fe90efdfc6973a4f [label="common", fillcolor="#edf0f7", color="red", style="filled", URL="dir_bdd9a5d540de89e9fe90efdfc6973a4f.html",tooltip=""];
+  dir_7dbb3f8d9b3c7f1bbfe241818c433d10 [label="utils", fillcolor="#edf0f7", color="red", style="filled", URL="dir_7dbb3f8d9b3c7f1bbfe241818c433d10.html",tooltip=""];
+  dir_74749fb4e43c606f69a9c07c6e7a182e->dir_23452eaafd74a0dfcbccff24142d67ec [headlabel="1", labeldistance=1.5 headhref="dir_000021_000014.html" color="steelblue1" fontcolor="steelblue1"];
+  dir_74749fb4e43c606f69a9c07c6e7a182e->dir_7dbb3f8d9b3c7f1bbfe241818c433d10 [headlabel="1", labeldistance=1.5 headhref="dir_000021_000068.html" color="steelblue1" fontcolor="steelblue1"];
+  dir_74749fb4e43c606f69a9c07c6e7a182e->dir_bdd9a5d540de89e9fe90efdfc6973a4f [headlabel="2", labeldistance=1.5 headhref="dir_000021_000006.html" color="steelblue1" fontcolor="steelblue1"];
+}

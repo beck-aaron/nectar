@@ -1,0 +1,27 @@
+digraph "flash_get_descriptor"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [label="flash_get_descriptor",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Get flash descriptor."];
+  Node1 -> Node2 [color="steelblue1",style="solid"];
+  Node2 [label="efc_get_result",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__efc__group.html#ga9d1b951eb5f4d3f280d25fa6ad01ff4c",tooltip="Get the result of the last executed command."];
+  Node1 -> Node3 [color="steelblue1",style="solid"];
+  Node3 [label="efc_perform_command",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__efc__group.html#ga48f3f38debde0c03c936f777aef6cc2e",tooltip="Perform the given command and wait until its completion (or an error)."];
+  Node3 -> Node4 [color="steelblue1",style="solid"];
+  Node4 [label="cpu_irq_restore",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__interrupt__group.html#ga428178bc346431936fddf52ad1ebd6fa",tooltip="Restore global interrupt flags."];
+  Node4 -> Node5 [color="steelblue1",style="solid"];
+  Node5 [label="cpu_irq_is_enabled\l_flags",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__interrupt__group.html#ga4dffd77dae2b3b3c5bce2612db656e48",tooltip="Check if interrupts are globally enabled in supplied flags."];
+  Node3 -> Node6 [color="steelblue1",style="solid"];
+  Node6 [label="cpu_irq_save",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__interrupt__group.html#ga5992cb015c55a0f4ed563e66a8793771",tooltip="Get and clear the global interrupt flags."];
+  Node3 -> Node7 [color="steelblue1",style="solid"];
+  Node7 [label="efc_perform_fcr",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__efc__group.html#gab1eca9d39607dadbaa19e33b0dd6097c",tooltip="Perform command."];
+  Node1 -> Node8 [color="steelblue1",style="solid"];
+  Node8 [label="translate_address",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__services__flash__efc__group.html#ga01b9af7beb63eff8c6074294928c96ba",tooltip="Translate the given flash address to page and offset values."];
+  Node8 -> Node9 [color="steelblue1",style="solid"];
+  Node9 [label="flash_is_gpnvm_set",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__services__flash__efc__group.html#gad38e5d6ab823006834087ee095d88f93",tooltip="Check if the given GPNVM bit is set or not."];
+  Node9 -> Node2 [color="steelblue1",style="solid"];
+  Node9 -> Node3 [color="steelblue1",style="solid"];
+}

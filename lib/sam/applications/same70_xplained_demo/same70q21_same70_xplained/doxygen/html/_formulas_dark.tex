@@ -1,0 +1,29 @@
+\documentclass{article}
+\usepackage{ifthen}
+\usepackage{epsfig}
+\usepackage[utf8]{inputenc}
+\usepackage{xcolor}
+\color{white}
+\pagecolor{black}
+\usepackage{newunicodechar}
+  \newunicodechar{⁻}{${}^{-}$}% Superscript minus
+  \newunicodechar{²}{${}^{2}$}% Superscript two
+  \newunicodechar{³}{${}^{3}$}% Superscript three
+
+\pagestyle{empty}
+\begin{document}
+$2^{mck\_pres}$
+\pagebreak
+
+$ Baudrate = \frac{SelectedClock}{CD} $
+\pagebreak
+
+$ \left\lceil \frac{a}{b} \right\rceil $
+\pagebreak
+
+\[
+  f_{MCK} = \frac{f_{sys}}{\mathrm{CONFIG\_SYSCLK\_PRES}}\,\mbox{Hz}
+\]
+\pagebreak
+
+\end{document}

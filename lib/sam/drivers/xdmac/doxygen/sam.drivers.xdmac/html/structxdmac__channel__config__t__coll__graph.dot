@@ -1,0 +1,8 @@
+digraph "xdmac_channel_config_t"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{xdmac_channel_config_t\n|+ mbr_bc\l+ mbr_cfg\l+ mbr_da\l+ mbr_ds\l+ mbr_dus\l+ mbr_sa\l+ mbr_sus\l+ mbr_ubc\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="XDMA config register for channel."];
+}

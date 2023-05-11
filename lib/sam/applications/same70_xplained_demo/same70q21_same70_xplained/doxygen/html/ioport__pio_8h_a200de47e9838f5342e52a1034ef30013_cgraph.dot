@@ -1,0 +1,17 @@
+digraph "arch_ioport_set_pin_sense_mode"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [label="arch_ioport_set_pin\l_sense_mode",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="steelblue1",style="solid"];
+  Node2 [label="arch_ioport_pin_to_mask",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$ioport__pio_8h.html#a69fd7bdfb41664b749080e509798165e",tooltip=" "];
+  Node1 -> Node3 [color="steelblue1",style="solid"];
+  Node3 [label="arch_ioport_pin_to\l_port_id",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$ioport__pio_8h.html#a17ab9c7be3b9b2674e7668b6a083d191",tooltip=" "];
+  Node1 -> Node4 [color="steelblue1",style="solid"];
+  Node4 [label="arch_ioport_set_port\l_sense_mode",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$ioport__pio_8h.html#a10d5e38f1bdf4c3c9e0896557510d5db",tooltip=" "];
+  Node4 -> Node5 [color="steelblue1",style="solid"];
+  Node5 [label="arch_ioport_port_to_base",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$ioport__pio_8h.html#ac2b01a65bf5686910b77f6b606497df2",tooltip=" "];
+}

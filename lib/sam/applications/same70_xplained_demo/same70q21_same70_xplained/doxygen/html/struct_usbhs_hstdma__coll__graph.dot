@@ -1,0 +1,8 @@
+digraph "UsbhsHstdma"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{UsbhsHstdma\n|+ USBHS_HSTDMAADDRESS\l+ USBHS_HSTDMACONTROL\l+ USBHS_HSTDMANXTDSC\l+ USBHS_HSTDMASTATUS\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="UsbhsHstdma hardware registers."];
+}

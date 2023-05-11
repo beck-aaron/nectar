@@ -39,6 +39,7 @@
 #include "conf_board.h"
 #include "ioport.h"
 #include "pio.h"
+#include "same70_xplained.h"
 #ifdef CONF_BOARD_CONFIG_MPU_AT_INIT
 #include "mpu.h"
 #endif
@@ -481,15 +482,26 @@ void board_init(void)
 	ioport_set_pin_peripheral_mode(PIN_PWM_LED1_GPIO, PIN_PWM_LED1_FLAGS);
 #endif
 
+#ifdef CONF_BOARD_UART_RXD
+    ioport_set_pin_peripheral_mode(UART3_RXD_GPIO, UART3_RXD_FLAGS);
+    ioport_set_pin_peripheral_mode(UART4_RXD_GPIO, UART4_RXD_FLAGS);
+#endif
+
+#ifdef CONF_BOARD_UART_TXD
+    ioport_set_pin_peripheral_mode(UART3_TXD_GPIO, UART3_TXD_FLAGS);
+    ioport_set_pin_peripheral_mode(UART4_TXD_GPIO, UART4_TXD_FLAGS);
+#endif
 
 #ifdef CONF_BOARD_USART_RXD
 	/* Configure USART RXD pin */
 	ioport_set_pin_peripheral_mode(USART0_RXD_GPIO, USART0_RXD_FLAGS);
+	ioport_set_pin_peripheral_mode(USART2_RXD_GPIO, USART2_RXD_FLAGS);
 #endif
 
 #ifdef CONF_BOARD_USART_TXD
 	/* Configure USART TXD pin */
 	ioport_set_pin_peripheral_mode(USART0_TXD_GPIO, USART0_TXD_FLAGS);
+	ioport_set_pin_peripheral_mode(USART2_TXD_GPIO, USART2_TXD_FLAGS);
 #endif
 
 #ifdef CONF_BOARD_USART_SCK

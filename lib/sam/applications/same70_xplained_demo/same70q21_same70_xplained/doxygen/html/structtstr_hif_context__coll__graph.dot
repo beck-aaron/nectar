@@ -1,0 +1,8 @@
+digraph "tstrHifContext"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{tstrHifContext\n|+ pfCryptoCb\l+ pfHifCb\l+ pfIpCb\l+ pfOtaCb\l+ pfSigmaCb\l+ pfSslCb\l+ pfWifiCb\l+ u32RxAddr\l+ u32RxSize\l+ u8ChipMode\l+ u8ChipSleep\l+ u8HifRXDone\l+ u8Interrupt\l+ u8Yield\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+}

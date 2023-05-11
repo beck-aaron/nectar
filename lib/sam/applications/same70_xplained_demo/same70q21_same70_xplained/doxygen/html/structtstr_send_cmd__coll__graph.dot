@@ -1,0 +1,10 @@
+digraph "tstrSendCmd"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{tstrSendCmd\n|+ sock\l+ u16DataSize\l+ u16SessionID\l+ u16Void\l+ u8Void\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node2 -> Node1 [color="grey25",style="solid",label=" +strAddr" ,arrowhead="odiamond"];
+  Node2 [shape=record,label="{tstrSockAddr\n|+ u16Family\l+ u16Port\l+ u32IPAddr\l|}",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$structtstr_sock_addr.html",tooltip=" "];
+}

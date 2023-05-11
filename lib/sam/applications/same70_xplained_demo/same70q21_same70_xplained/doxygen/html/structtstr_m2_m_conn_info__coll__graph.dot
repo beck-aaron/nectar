@@ -1,0 +1,8 @@
+digraph "tstrM2MConnInfo"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{tstrM2MConnInfo\n|+ __PAD16__\l+ acSSID\l+ au8IPAddr\l+ au8MACAddress\l+ s8RSSI\l+ u8CurrChannel\l+ u8SecType\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="M2M Provisioning Information obtained from the HTTP Provisioning server."];
+}

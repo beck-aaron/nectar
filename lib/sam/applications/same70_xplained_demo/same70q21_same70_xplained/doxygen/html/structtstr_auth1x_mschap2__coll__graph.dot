@@ -1,0 +1,8 @@
+digraph "tstrAuth1xMschap2"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{tstrAuth1xMschap2\n|+ bPrependDomain\l+ bUnencryptedUserName\l+ pu8Domain\l+ pu8Password\l+ pu8UserName\l+ u16DomainLen\l+ u16PasswordLen\l+ u16UserNameLen\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+}

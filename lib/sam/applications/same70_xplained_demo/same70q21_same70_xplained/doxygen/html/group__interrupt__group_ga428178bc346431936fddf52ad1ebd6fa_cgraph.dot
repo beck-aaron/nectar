@@ -1,0 +1,11 @@
+digraph "cpu_irq_restore"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [label="cpu_irq_restore",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Restore global interrupt flags."];
+  Node1 -> Node2 [color="steelblue1",style="solid"];
+  Node2 [label="cpu_irq_is_enabled\l_flags",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__interrupt__group.html#ga4dffd77dae2b3b3c5bce2612db656e48",tooltip="Check if interrupts are globally enabled in supplied flags."];
+}

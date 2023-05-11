@@ -1,0 +1,8 @@
+digraph "tstrTlsSrvChunkHdr"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{tstrTlsSrvChunkHdr\n|+ u16Offset32\l+ u16Sig\l+ u16Size32\l+ u16TotalSize32\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+}

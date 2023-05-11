@@ -1,0 +1,11 @@
+digraph "Oscillator Management"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir=LR;
+  Node2 [label="Clock Management",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__clk__group.html",tooltip=" "];
+  Node1 [label="Oscillator Management",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="This group contains functions and definitions related to configuring and enabling/disabling on-chip o..."];
+  Node2->Node1 [shape=plaintext, dir="back", style="solid"];
+}

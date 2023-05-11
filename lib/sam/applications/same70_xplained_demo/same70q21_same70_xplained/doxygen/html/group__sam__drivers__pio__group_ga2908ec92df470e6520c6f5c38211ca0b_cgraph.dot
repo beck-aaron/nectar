@@ -1,0 +1,13 @@
+digraph "pio_set_input"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [label="pio_set_input",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Configure one or more pin(s) or a PIO controller as inputs."];
+  Node1 -> Node2 [color="steelblue1",style="solid"];
+  Node2 [label="pio_disable_interrupt",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__pio__group.html#ga1cbfd57e295dd0582d1dc6dc5e79de40",tooltip="Disable a given interrupt source, with no added side effects."];
+  Node1 -> Node3 [color="steelblue1",style="solid"];
+  Node3 [label="pio_pull_up",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__pio__group.html#gaa9aa20867544ff93c6527b799b3dfcec",tooltip="Configure PIO internal pull-up."];
+}

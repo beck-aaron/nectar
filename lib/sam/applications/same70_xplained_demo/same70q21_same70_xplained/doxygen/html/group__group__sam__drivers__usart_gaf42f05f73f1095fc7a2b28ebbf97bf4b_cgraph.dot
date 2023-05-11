@@ -1,0 +1,23 @@
+digraph "usart_init_spi_slave"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [label="usart_init_spi_slave",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Configure USART to work in SPI mode and act as a slave."];
+  Node1 -> Node2 [color="steelblue1",style="solid"];
+  Node2 [label="usart_reset",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__usart__group.html#ga6cb84f0297ddca62d4077f616efa5c5b",tooltip="Reset the USART and disable TX and RX."];
+  Node2 -> Node3 [color="steelblue1",style="solid"];
+  Node3 [label="usart_disable_writeprotect",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__usart__group.html#gabdf1b8bf1b4da95d3a314c4916799e88",tooltip="Disable write protect of USART registers."];
+  Node2 -> Node4 [color="steelblue1",style="solid"];
+  Node4 [label="usart_drive_RTS_pin_high",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__usart__group.html#ga930438dce6fbe82394c706b775cf2f0a",tooltip="Drive the pin RTS to 1."];
+  Node2 -> Node5 [color="steelblue1",style="solid"];
+  Node5 [label="usart_reset_rx",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__usart__group.html#ga86ad3a57b19fb497ef2271d6dc87c359",tooltip="Immediately stop and disable USART receiver."];
+  Node2 -> Node6 [color="steelblue1",style="solid"];
+  Node6 [label="usart_reset_status",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__usart__group.html#ga4e19efeb524c1fba4b962e72283dcc11",tooltip="Reset status bits (PARE, OVER, MANERR, UNRE and PXBRK in US_CSR)."];
+  Node2 -> Node7 [color="steelblue1",style="solid"];
+  Node7 [label="usart_reset_tx",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__usart__group.html#ga123b84a0d5be1cbf1a3c5bac4af3d27d",tooltip="Immediately stop and disable USART transmitter."];
+  Node1 -> Node8 [color="steelblue1",style="solid"];
+  Node8 [label="usart_set_spi_slave\l_baudrate",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__sam__drivers__usart__group.html#ga4740fd3e308857e7d074802e08db1cbe",tooltip="Select the SCK pin as the source of baudrate for the USART SPI slave mode."];
+}

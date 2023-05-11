@@ -1,0 +1,12 @@
+digraph "tstrM2MAPModeConfig"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{tstrM2MAPModeConfig\n||}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="AP Configuration."];
+  Node2 -> Node1 [color="grey25",style="solid",label=" +strApConfig" ,arrowhead="odiamond"];
+  Node2 [shape=record,label="{tstrM2MAPConfig\n|+ __PAD16__\l+ au8DHCPServerIP\l+ au8Key\l+ au8SSID\l+ au8WepKey\l+ u8KeyIndx\l+ u8KeySz\l+ u8ListenChannel\l+ u8SecType\l+ u8SsidHide\l|}",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$structtstr_m2_m_a_p_config.html",tooltip="AP Configuration."];
+  Node3 -> Node1 [color="grey25",style="solid",label=" +strApConfigExt" ,arrowhead="odiamond"];
+  Node3 [shape=record,label="{tstrM2MAPConfigExt\n|+ au8DefRouterIP\l+ au8DNSServerIP\l+ au8SubnetMask\l|}",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$structtstr_m2_m_a_p_config_ext.html",tooltip="AP Configuration Extension."];
+}

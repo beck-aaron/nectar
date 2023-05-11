@@ -1,0 +1,8 @@
+digraph "_union_type"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=FreeSans,fontsize=10,labelfontname=FreeSans,labelfontsize=10];
+  node [fontname=FreeSans,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{_union_type\n|+ byte\l+ byte_24\l+ byte_32\l+ byte_8\l+ byte_l6\l+ half_word\l+ half_word_h\l+ half_word_l\l+ value\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+}

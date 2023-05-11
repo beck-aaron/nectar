@@ -82,40 +82,58 @@
 
 /*----------------------------------------------------------------------------*/
 
-#define CONSOLE_UART               USART1
-#define CONSOLE_UART_ID            ID_USART1
-/** USART1 pins definitions, PA21,PB4. */
-#define USART1_RXD_GPIO   PIO_PA21_IDX
-#define USART1_RXD_FLAGS  IOPORT_MODE_MUX_A
-#define USART1_TXD_GPIO   PIO_PB4_IDX
-#define USART1_TXD_FLAGS  IOPORT_MODE_MUX_D
+#define CONSOLE_UART            (USART1)
+#define CONSOLE_UART_ID         (ID_USART1)
 
 /** USART0 pins definitions, PB0,PB1. */
-#define USART0_RXD_GPIO   PIO_PB0_IDX
-#define USART0_RXD_FLAGS  IOPORT_MODE_MUX_C
-#define USART0_TXD_GPIO   PIO_PB1_IDX
-#define USART0_TXD_FLAGS  IOPORT_MODE_MUX_C
+#define USART0_RXD_GPIO         (PIO_PB0_IDX)
+#define USART0_RXD_FLAGS        (IOPORT_MODE_MUX_C)
+#define USART0_TXD_GPIO         (PIO_PB1_IDX)
+#define USART0_TXD_FLAGS        (IOPORT_MODE_MUX_C)
 
-#define PIN_USART0_SCK_IDX    (PIO_PB13_IDX)
-#define PIN_USART0_SCK_FLAGS  (IOPORT_MODE_MUX_C)
+#define PIN_USART0_SCK_IDX      (PIO_PB13_IDX)
+#define PIN_USART0_SCK_FLAGS    (IOPORT_MODE_MUX_C)
 
 /** USART0 pin CTS */
-#define PIN_USART0_CTS_IDX    (PIO_PB2_IDX)
-#define PIN_USART0_CTS_FLAGS  (IOPORT_MODE_MUX_C)
+#define PIN_USART0_CTS_IDX      (PIO_PB2_IDX)
+#define PIN_USART0_CTS_FLAGS    (IOPORT_MODE_MUX_C)
 
 /** USART0 pin RTS */
-#define PIN_USART0_RTS_IDX    (PIO_PB3_IDX)
-#define PIN_USART0_RTS_FLAGS  (IOPORT_MODE_MUX_C)
+#define PIN_USART0_RTS_IDX      (PIO_PB3_IDX)
+#define PIN_USART0_RTS_FLAGS    (IOPORT_MODE_MUX_C)
+
+/** USART1 pins definitions, PA21,PB4. */
+#define USART1_RXD_GPIO         (PIO_PA21_IDX)
+#define USART1_RXD_FLAGS        (IOPORT_MODE_MUX_A)
+#define USART1_TXD_GPIO         (PIO_PB4_IDX)
+#define USART1_TXD_FLAGS        (IOPORT_MODE_MUX_D)
+
+/** USART2 pins definitions, PD15, PD16 */
+#define USART2_RXD_GPIO         (PIO_PD15_IDX)
+#define USART2_RXD_FLAGS        (IOPORT_MODE_MUX_B)
+#define USART2_TXD_GPIO         (PIO_PD16_IDX)
+#define USART2_TXD_FLAGS        (IOPORT_MODE_MUX_B)
+
+/** UART3 pins definitions, PD28, PD30 */
+#define UART3_RXD_GPIO          (PIO_PD28_IDX)
+#define UART3_RXD_FLAGS         (IOPORT_MODE_MUX_A)
+#define UART3_TXD_GPIO          (PIO_PD30_IDX)
+#define UART3_TXD_FLAGS         (IOPORT_MODE_MUX_A)
+
+/** UART4 pins definitions, PD18, PD19 */
+#define UART4_RXD_GPIO          (PIO_PD18_IDX)
+#define UART4_RXD_FLAGS         (IOPORT_MODE_MUX_C)
+#define UART4_TXD_GPIO          (PIO_PD19_IDX)
+#define UART4_TXD_FLAGS         (IOPORT_MODE_MUX_C)
 
 
 //! \name LED definitions
 //@{
-#define LED0_GPIO            (PIO_PC8_IDX)
-#define LED0_FLAGS           (0)
-#define LED0_ACTIVE_LEVEL    (IOPORT_PIN_LEVEL_LOW)
-#define LED0_INACTIVE_LEVEL  (IOPORT_PIN_LEVEL_HIGH)
-
-#define	LED_COUNT			 (1)
+#define LED0_GPIO               (PIO_PC8_IDX)
+#define LED0_FLAGS              (0)
+#define LED0_ACTIVE_LEVEL       (IOPORT_PIN_LEVEL_LOW)
+#define LED0_INACTIVE_LEVEL     (IOPORT_PIN_LEVEL_HIGH)
+#define	LED_COUNT			    (1)
 //@}
 
 //! \name SW0 definitions
